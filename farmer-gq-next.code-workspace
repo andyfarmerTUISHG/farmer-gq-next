@@ -1,14 +1,17 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "../farmer.gq.sanity"
-		},
-		{
-			"path": "../farmer.gq"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": ".",
+    },
+    {
+      "path": "../farmer.gq.sanity",
+    },
+    {
+      "path": "../farmer.gq",
+    },
+    {
+      "path": "../nextjs-personal-website",
+    },
+  ],
+  "settings": {},
 }
