@@ -1,10 +1,11 @@
 // sanity.config.js
-import { defineConfig } from "sanity";
-import { structureTool } from 'sanity/structure'
-// import schemas from './schemas/schema'
-import schemas from "./schema/schema"
 import { codeInput } from "@sanity/code-input";
 import { visionTool } from "@sanity/vision";
+import { defineConfig } from "sanity";
+import { structureTool } from 'sanity/structure'
+
+// import schemas from './schemas/schema'
+import schemas from "./schema/schema"
 
 export default defineConfig({
   title: "farmer.gq",
@@ -16,14 +17,14 @@ export default defineConfig({
     codeInput(),
     visionTool()
   ],
-  tools: (prev) => {
-    // 👇 Uses environment variables set by Vite in development mode
-    console.log(import.meta.env.DEV)
-    if (import.meta.env.DEV) {
-      return prev
-    }
-    return prev.filter((tool) => tool.name !== 'vision')
-  },
+  // tools: (prev) => {
+  //   // 👇 Uses environment variables set by Vite in development mode
+  //   console.log(import.meta.env.DEV)
+  //   if (import.meta.env.DEV) {
+  //     return prev
+  //   }
+  //   return prev.filter((tool) => tool.name !== 'vision')
+  // },
   schema: {
     types: schemas,
   },
