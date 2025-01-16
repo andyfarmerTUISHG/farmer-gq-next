@@ -1,9 +1,28 @@
 {
-  "extends": "next",
-  "plugins": ["simple-import-sort"],
+  "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
+  "plugins": ["simple-import-sort", "check-file"],
   "rules": {
+    "prefer-arrow-callback": ["error"],
+    "prefer-template": ["error"],
+    "semi": ["error"],
+    "quotes": ["error", "double"],
     "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "warn",
-    "react-hooks/exhaustive-deps": "error"
+    "react-hooks/exhaustive-deps": "error",
+    "check-file/filename-naming-convention": [
+      "error",
+      {
+        "**/*.{js,jsx,ts,tsx}": "KEBAB_CASE"
+      },
+      {
+        "ignoreMiddleExtensions": true
+      }
+    ],
+    "check-file/folder-naming-convention": [
+      "error",
+      {
+        "**/!^[.*": "KEBAB_CASE"
+      }
+    ]
   }
 }
