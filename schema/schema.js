@@ -2,9 +2,11 @@
 import article from './articles';
 import tags from './tags';
 import person from './person';
+import profile from './profile';
 
 export default [
   article,
   tags,
-  person
+  person,
+  profile
 ]

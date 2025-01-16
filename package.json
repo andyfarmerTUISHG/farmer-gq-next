@@ -8,7 +8,9 @@
     "format": "npx prettier --write . --ignore-path .gitignore",
     "lint": "next lint",
     "start": "next start",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "sanity-build": "sanity build",
+    "sanity-deploy": "sanity deploy"
   },
   "dependencies": {
     "@next/env": "^15.1.4",
