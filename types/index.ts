@@ -6,3 +6,13 @@ export type ProfileType = {
     fullName: string;
     headline: PortableTextBlock[];
 };
+
+export type ArticleType = {
+	_id: string;
+  name: string;
+  slug: string;
+	createddate: string,
+	bodycopy :string,
+	author : string,
+
+}
