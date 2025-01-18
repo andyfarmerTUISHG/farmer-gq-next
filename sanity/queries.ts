@@ -14,14 +14,18 @@ export async function getProfile() {
   );
 }
 
-export async function getArticles() {
+export async function getArticles(start:number, finish:number) {
+	console.log(`start  - ${typeof start} ${start} - finish - ${typeof finish} ${finish}`);
 	return client.fetch(
-		groq`*[_type == "article"]{
+		groq`
+
+
+		*[_type == "article"] | order(_id) [${start}..${finish}] {
   _id,
   "slug": slug.current,
   name,
-  createdDate
-
+  createdDate,
+  "articleCount": count(*[_type == "article"])
 }`
 	);
 }
