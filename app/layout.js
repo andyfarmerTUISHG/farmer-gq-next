@@ -2,6 +2,8 @@ import "./globals.css";
 
 import localFont from "next/font/local";
 
+import Header from "@/app/components/header";
+
 import Providers from "./components/providers";
 
 const geistSans = localFont({
@@ -27,8 +29,10 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
 				<Providers>
-
-        {children}
+					<Header />
+					<main className="flex-grow">
+						{children}
+					</main>
 				</Providers>
       </body>
     </html>
