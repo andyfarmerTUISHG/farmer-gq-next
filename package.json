@@ -11,6 +11,7 @@
     "type-check": "tsc --noEmit",
     "sanity-build": "sanity build",
     "sanity-deploy": "sanity deploy",
+    "test": "echo \"Write tests!\" && exit 1",
     "prepare": "husky"
   },
   "dependencies": {
