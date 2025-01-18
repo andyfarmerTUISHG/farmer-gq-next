@@ -11,5 +11,15 @@ https://www.freecodecamp.org/news/how-to-build-a-portfolio-site-with-sanity-and-
 [Farmer.gq Studio](https://farmer-gq.sanity.studio/) - this supercedes the standalone version used with Gatsby [here](https://github.com/andyfarmerTUISHG/farmer.gq.sanity)
 
 To update Sanity Data Model
-- ```npm run build```
-- ```npm run deploy```
+
+- `npm run build`
+- `npm run deploy`
+
+## Recommended VS Code Extensions
+
+There are a few VS Code recommended extensions in the project
+
+- Prettier Formatter for Visual Studio Code
+- VS Code ESLint extension
+- vscode-sanity
+- Code Spell Checker
