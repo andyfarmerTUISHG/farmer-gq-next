@@ -56,13 +56,13 @@ export default function Header() {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
+          <Link color="foreground" href="/about">
+            About
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link aria-current="page" href="#">
-            Customers
+        <NavbarItem>
+          <Link aria-current="page" href="/article">
+            Articles
           </Link>
         </NavbarItem>
         <NavbarItem>
