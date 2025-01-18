@@ -1,5 +1,6 @@
 import Image from "next/image";
-import ProfileComponent from "../components/ProfileComponent";
+
+import ProfileComponent from "@/app/components/profile-component";
 
 export default function Home() {
   return (
