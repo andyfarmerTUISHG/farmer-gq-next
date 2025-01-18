@@ -1,0 +1,57 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    "source.organizeImports": "always"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/page.tsx": "${dirname} - Page",
+    "**/app/**/layout.tsx": "${dirname} - Layout",
+    "**/app/**/components/**": "${filename} - Component"
+  },
+  "workbench.sideBar.location": "right",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["[^\\s]*\\.[^\\s]*", "class"],
+    ["[^\\s]*:[^\\s]*", "pseudo-class"],
+    ["[^\\s]*\\[[^\\s]*\\]", "pseudo-class"],
+    ["[^\\s]*\\([^\\s]*\\)", "pseudo-class"],
+    ["[^\\s]*\\{[^\\s]*\\}", "pseudo-class"],
+    ["[^\\s]*\\([^\\s]*\\)", "pseudo-class"]
+  ],
+  "tailwindCSS.includeLanguages": {
+    "typescriptreact": "./**/*.{ts,tsx}",
+    "javascriptreact": "./**/*.{js,jsx}"
+  },
+  "tailwindCSS.configFile": "tailwind.config.js",
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "sanity-io.vscode-sanity",
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "cSpell.words": [
+    "groq",
+    "nextjs",
+    "firstname",
+    "fullname",
+    "getready",
+    "lastname",
+    "NEXTAUTH",
+    "nextjs",
+    "nextui",
+    "tabler",
+    "tailwindcss",
+    "trivago",
+    "turbopack"
+  ]
+}
