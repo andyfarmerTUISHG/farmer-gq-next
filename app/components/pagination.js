@@ -7,12 +7,12 @@ export default function Pagination({
   base,
 }) {
   // make some vars
-  const totalPages = Math.ceil(totalCount / pageSize);
+  const totalPages = Math.ceil(totalCount / pageSize) -1;
   const prevPage = currentPage - 1;
   const nextPage = currentPage + 1;
   const hasNextPage = nextPage <= totalPages;
   const hasPrevPage = prevPage >= 1;
-	console.log(hasPrevPage);
+
   return (
     <div>
 

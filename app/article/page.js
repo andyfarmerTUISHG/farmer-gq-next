@@ -4,14 +4,14 @@ import Pagination from "@/app/components/pagination";
 import { getArticles } from "@/sanity/queries";
 
 export default async function Article({searchParams}) {
-	const articles = await getArticles(parseInt((searchParams.page || 0)), parseInt(process.env.NEXT_PAGE_SIZE || 10));
+	const skip = parseInt((searchParams.page || 0)) * parseInt(process.env.NEXT_PAGE_SIZE || 10);
+
+	const articles = await getArticles(skip, parseInt(process.env.NEXT_PAGE_SIZE || 10 + skip - 1));
 
 	return (
 		<main>
-			<h1> Article List Page {articles && articles[0].articleCount}</h1>
-
-
-			<ul>
+			<h1> {articles && articles[0].articleCount} Articles Listing </h1>
+			<ol>
 			{articles && articles.map((article) => (
 				<li key={article._id}>
 					<h2>
@@ -25,13 +25,13 @@ export default async function Article({searchParams}) {
 				</li>
 
 			))}
-			</ul>
+			</ol>
 
 
 			<Pagination
 				pageSize={parseInt(process.env.NEXT_PAGE_SIZE || 10)}
 				totalCount={articles && articles[0].articleCount}
-				currentPage={searchParams.page || 0}
+				currentPage={parseInt(searchParams.page) || 1}
 				base="/article"
 			/>
 		</main>
