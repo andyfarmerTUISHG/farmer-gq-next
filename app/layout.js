@@ -2,6 +2,8 @@ import "./globals.css";
 
 import localFont from "next/font/local";
 
+import Providers from "./components/providers";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -14,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Andy Farmer - Geek & Quirky",
-  description: "A personal space, where it allows anything Geeky and Quirky",
+  title: "Andy Farmer - Growth Quotient",
+  description: "A personal space, where I write about personal development, business growth, software development learnings or self-improvement",
 };
 
 export default function RootLayout({ children }) {
@@ -24,7 +26,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+				<Providers>
+
         {children}
+				</Providers>
       </body>
     </html>
   );
