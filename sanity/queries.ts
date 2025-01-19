@@ -13,6 +13,18 @@ export async function getProfile() {
   );
 }
 
+export async function getAllArticles() {
+  return client.fetch(
+    groq`*[_type == "article"]  {
+				_id,
+				"slug": slug.current,
+				name,
+				createdDate,
+				"articleCount": count(*[_type == "article"])
+			}`
+  );
+}
+
 export async function getArticles(skip: number, finish: number) {
   return client.fetch(
     groq`*[_type == "article"] | order(_id) [${skip}..${finish}] {
