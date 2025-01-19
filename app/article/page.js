@@ -1,39 +1,40 @@
-import Link from "next/link";
+
 
 import Pagination from "@/app/components/pagination";
-import { getArticles } from "@/sanity/queries";
+import { getAllArticles, getArticles } from "@/sanity/queries";
 
 export default async function Article({searchParams}) {
-	const skip = parseInt((searchParams.page || 0)) * parseInt(process.env.NEXT_PAGE_SIZE || 10);
-
-	const articles = await getArticles(skip, parseInt(process.env.NEXT_PAGE_SIZE || 10 + skip - 1));
-
+	let skip = 0;
+	const pageSize = parseInt(process.env.NEXT_PAGE_SIZE || 10);
+	const page = searchParams?.page ? parseInt(searchParams.page, 10) : 0;
+	if(page === 1) {
+		skip = 0;
+	} else {
+		skip = parseInt((searchParams.page || 0)) * pageSize;
+	}
+	const finish = parseInt((skip + pageSize) - 1);
+	const articles = await getAllArticles();
+	const articlesPagination = await getArticles(skip, finish);
+	//Define some vars
+	const articleCount = articlesPagination && articlesPagination[0].articleCount;
 	return (
 		<main>
 			<h1> {articles && articles[0].articleCount} Articles Listing </h1>
-			<ol>
-			{articles && articles.map((article) => (
-				<li key={article._id}>
-					<h2>
-						<Link
-							href={`/article/${article.slug}`}
-							>
+			<div>
+				<ol>
+				{articlesPagination && articlesPagination.map((article) => (
+					<li key={`pag-${article._id}`}>{article.name}</li>
+				))}
+				</ol>
+				<Pagination
+					pageSize={pageSize}
+					totalCount={articleCount}
+					currentPage={page}
+					base="/article"
+				/>
 
-						{article.name}
-							</Link>
-						</h2>
-				</li>
+			</div>
 
-			))}
-			</ol>
-
-
-			<Pagination
-				pageSize={parseInt(process.env.NEXT_PAGE_SIZE || 10)}
-				totalCount={articles && articles[0].articleCount}
-				currentPage={parseInt(searchParams.page) || 1}
-				base="/article"
-			/>
 		</main>
 	);
 }

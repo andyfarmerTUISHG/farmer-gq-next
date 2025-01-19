@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 
 export default function Pagination({
@@ -7,15 +8,15 @@ export default function Pagination({
   base,
 }) {
   // make some vars
-  const totalPages = Math.ceil(totalCount / pageSize) -1;
+  const totalPages = Math.ceil(totalCount / pageSize) - 1;
   const prevPage = currentPage - 1;
   const nextPage = currentPage + 1;
   const hasNextPage = nextPage <= totalPages;
-  const hasPrevPage = prevPage >= 1;
+  const hasPrevPage = prevPage >= 0;
 
   return (
-    <div>
 
+    <div>
 			<div style={{margin: "0 auto",
 				border: "2px solid red",
 				width: "80%",
@@ -25,7 +26,8 @@ export default function Pagination({
         aria-disabled={!hasPrevPage}
         href={`${base}?page=${prevPage}`}
       >
-        &#8592; <span className="word"> Prev</span>
+        &#8592; <span className="word"> Prev
+				</span>
       </Link>
 			<ul>
 			{Array.from({ length: totalPages }).map((_, i) => (
