@@ -61,13 +61,13 @@ export default function Header() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link aria-current="page" href="/article">
+          <Link color="foreground" href="/article">
             Articles
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
+          <Link color="foreground" href="article/mac-setup/">
+            Mac Setup
           </Link>
         </NavbarItem>
       </NavbarContent>
