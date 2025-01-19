@@ -11,13 +11,16 @@
     "type-check": "tsc --noEmit",
     "sanity-build": "sanity build",
     "sanity-deploy": "sanity deploy",
+    "test": "echo \"Write tests!\" && exit 1",
     "prepare": "husky"
   },
   "dependencies": {
+    "@heroui/react": "^2.6.13",
     "@next/env": "^15.1.4",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/code-input": "^5.1.2",
     "@sanity/vision": "^3.70.0",
+    "framer-motion": "^11.18.1",
     "next": "14.2.23",
     "next-sanity": "^9.8.37",
     "react": "^18",
