@@ -6,7 +6,7 @@ import { getAllArticles, getArticles } from "@/sanity/queries";
 export default async function Article({searchParams}) {
 	let skip = 0;
 	const pageSize = parseInt(process.env.NEXT_PAGE_SIZE || 10);
-	const page = searchParams?.page ? parseInt(searchParams.page, 10) : 0;
+	const page = searchParams?.page ? parseInt(searchParams.page, 10) : 1;
 	if(page === 1) {
 		skip = 0;
 	} else {
