@@ -21,13 +21,12 @@ const PaginationStyles = styled.div`
       background: var(--purple);
       color: var(--yellow);
     }
-    &[aria-disabled] {
+    &[aria-disabled="true"] {
       pointer-events: none;
       color: var(--grey);
     }
   }
-  a {
-  }
+
   @media (max-width: 800px) {
     .word {
       display: none;
@@ -53,10 +52,7 @@ export default function Pagination({
   return (
 
     <div>
-			<div style={{margin: "0 auto",
-				border: "2px solid red",
-				width: "80%",
-				padding: "0.5rem",}}>
+
 					<PaginationStyles>
 
       <Link
@@ -91,7 +87,7 @@ export default function Pagination({
         <span className="word">Next </span>&#8594;
       </Link>
 					</PaginationStyles>
-			</div>
+
     </div>
   );
 }
