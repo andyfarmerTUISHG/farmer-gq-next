@@ -1,9 +1,9 @@
-import "./globals.css";
+import "../globals.css";
 
 import localFont from "next/font/local";
 
-import Footer from "@/app/components/footer";
-import Header from "@/app/components/header";
+import Footer from "@/app/(site)/components/footer";
+import Header from "@/app/(site)/components/header";
 
 import Providers from "./components/providers";
 
