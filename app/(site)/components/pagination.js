@@ -71,7 +71,6 @@ export default function Pagination({
 						href={`/article?page=${i + 1}`}
 						key={`page-${i+1}`}
 					>
-						Page
           {i + 1}
 
 					</Link>
