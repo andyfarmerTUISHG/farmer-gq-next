@@ -10,5 +10,7 @@
       "path": "../../node/next-starter-example",
     },
   ],
-  "settings": {},
+  "settings": {
+    ,
+  },
 }

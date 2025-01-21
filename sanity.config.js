@@ -9,8 +9,14 @@ import { structureTool } from "sanity/structure";
 
 import { dataset, projectId, studioUrl, title } from "@/sanity/lib/api";
 
-// import schemas from './schemas/schema'
+import { pageStructure, singletonPlugin } from "./sanity/plugin/settings";
+import article from "./schema/articles";
+import person from "./schema/person";
+import profile from "./schema/profile";
 import schemas from "./schema/schema";
+import settings from "./schema/singleton/settings";
+import tags from "./schema/tags";
+
 
 export default defineConfig({
   title,
@@ -18,12 +24,22 @@ export default defineConfig({
   projectId: projectId || "",
   dataset: dataset || "",
 	schema: {
-		types: schemas,
+		types: [
+			article,
+			tags,
+			person,
+			profile,
+			settings,
+		],
 	},
   plugins: [
-    structureTool(),
+    structureTool({
+			structure: pageStructure([settings]),
+		}),
     codeInput(),
-    visionTool()
+    visionTool(),
+		// Configures the global "new document" button, and document actions, to suit the Settings document singleton
+		singletonPlugin([ schemas.settings]),
   ],
   // tools: (prev) => {
   //   // 👇 Uses environment variables set by Vite in development mode
