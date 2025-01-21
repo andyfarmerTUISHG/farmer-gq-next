@@ -1,4 +1,7 @@
-// sanity.config.js
+/**
+ * This config is used to set up Sanity Studio that's mounted on the `app/studio/[[...index]]/page.tsx` route
+ */
+
 import { codeInput } from "@sanity/code-input";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
@@ -30,18 +33,18 @@ export default defineConfig({
   //   }
   //   return prev.filter((tool) => tool.name !== 'vision')
   // },
-  document: {
-    newDocumentOptions: (prev, { creationContext }) => {
-      if (creationContext.type === "global") {
-        return prev.filter((templateItem) => templateItem.templateId != "settings");
-      }
-      return prev;
-    },
-    actions: (prev, { schemaType }) => {
-      if (schemaType === "settings") {
-        return prev.filter(({ action }) => !["unpublish", "delete","duplicate"].includes(action));
-      }
-      return prev;
-    },
-  },
+  // document: {
+  //   newDocumentOptions: (prev, { creationContext }) => {
+  //     if (creationContext.type === "global") {
+  //       return prev.filter((templateItem) => templateItem.templateId != "settings");
+  //     }
+  //     return prev;
+  //   },
+  //   actions: (prev, { schemaType }) => {
+  //     if (schemaType === "settings") {
+  //       return prev.filter(({ action }) => !["unpublish", "delete","duplicate"].includes(action));
+  //     }
+  //     return prev;
+  //   },
+  // },
 });
