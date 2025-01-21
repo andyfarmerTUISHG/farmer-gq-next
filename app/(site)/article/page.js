@@ -1,6 +1,8 @@
 
 
-import Pagination from "@/app/components/pagination";
+import Link from "next/link";
+
+import Pagination from "@/app/(site)/components/pagination";
 import { getAllArticles, getArticles } from "@/sanity/queries";
 
 export default async function Article({searchParams}) {
@@ -23,7 +25,11 @@ export default async function Article({searchParams}) {
 			<div>
 				<ol>
 				{articlesPagination && articlesPagination.map((article) => (
-					<li key={`pag-${article._id}`}>{article.name}</li>
+					<li key={`pag-${article._id}`}>
+						<Link
+							href={`/article/${article.slug}`}
+						>{article.name}</Link>
+					</li>
 				))}
 				</ol>
 				<Pagination
