@@ -1,5 +1,5 @@
 
-import ProfileComponent from "@/app/components/profile-component";
+import ProfileComponent from "@/app/(site)/components/profile-component";
 
 export default function Home() {
   return (
