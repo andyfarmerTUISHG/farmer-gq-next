@@ -17,14 +17,14 @@
  * 11. API version: v2021-03-25
  * 12. Include drafts: No
  * 13. Secret: Set to the same value as SANITY_REVALIDATE_SECRET (create a random secret if you haven't yet, for example by running `Math.random().toString(36).slice(2)` in your console)
- * 14. Save the cofiguration
+ * 14. Save the configuration
  * 15. Add the secret to Vercel: `npx vercel env add SANITY_REVALIDATE_SECRET`
  * 16. Redeploy with `npx vercel --prod` to apply the new environment variable
  */
+// eslint-disable-next-line simple-import-sort/imports
+import { parseBody } from "next-sanity/webhook";
 import { revalidateTag } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
-
-import { parseBody } from "next-sanity/webhook";
 
 import { revalidateSecret } from "@/sanity/lib/api";
 
