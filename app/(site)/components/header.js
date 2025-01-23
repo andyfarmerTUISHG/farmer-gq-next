@@ -66,7 +66,7 @@ export default function Header() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="article/mac-setup/">
+          <Link color="foreground" href="/article/mac-setup/">
             Mac Setup
           </Link>
         </NavbarItem>
