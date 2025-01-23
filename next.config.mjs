@@ -27,6 +27,7 @@ const config = {
       taint: true,
 			typedRoutes: true,
     },
+
   };
 
   export default config;
