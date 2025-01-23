@@ -1,6 +1,12 @@
 // types/index.ts
 import type { PortableTextBlock } from "sanity";
 
+export interface MenuItem {
+  _type: string
+  slug?: string
+  title?: string
+}
+
 export type ProfileType = {
   _id: string;
   fullName: string;
@@ -18,5 +24,4 @@ export type ArticleType = {
 
 export interface SettingsPayload {
   menuItems?: MenuItem[];
-  ogImage?: Image;
 }
