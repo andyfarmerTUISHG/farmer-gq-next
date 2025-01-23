@@ -1,7 +1,6 @@
 /**
  * This config is used to set up Sanity Studio that's mounted on the `app/studio/[[...index]]/page.tsx` route
  */
-
 import { codeInput } from "@sanity/code-input";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
@@ -13,33 +12,25 @@ import { pageStructure, singletonPlugin } from "./sanity/plugin/settings";
 import article from "./schema/articles";
 import person from "./schema/person";
 import profile from "./schema/profile";
-import schemas from "./schema/schema";
 import settings from "./schema/singleton/settings";
 import tags from "./schema/tags";
 
-
 export default defineConfig({
   title,
-	basePath: studioUrl,
+  basePath: studioUrl,
   projectId: projectId || "",
   dataset: dataset || "",
-	schema: {
-		types: [
-			article,
-			tags,
-			person,
-			profile,
-			settings,
-		],
-	},
+  schema: {
+    types: [article, tags, person, profile, settings],
+  },
   plugins: [
     structureTool({
-			structure: pageStructure([settings]),
-		}),
+      structure: pageStructure([settings]),
+    }),
     codeInput(),
     visionTool(),
-		// Configures the global "new document" button, and document actions, to suit the Settings document singleton
-		singletonPlugin([ schemas.settings]),
+    // Configures the global "new document" button, and document actions, to suit the Settings document singleton
+    singletonPlugin([settings.name]),
   ],
   // tools: (prev) => {
   //   // 👇 Uses environment variables set by Vite in development mode
