@@ -1,10 +1,10 @@
-import { draftMode } from "next/headers";
-
-import * as queryStore from "@sanity/react-loader";
 import "server-only";
 
+import * as queryStore from "@sanity/react-loader";
+import { draftMode } from "next/headers";
+
 import { client } from "@/sanity/lib/client";
-import { articleBySlugQuery } from "@/sanity/lib/queries";
+import { articleBySlugQuery, settingsQuery } from "@/sanity/lib/queries";
 import { token } from "@/sanity/lib/token";
 import { ArticleType, SettingsPayload } from "@/types";
 
@@ -25,9 +25,9 @@ queryStore.setServerClient(serverClient);
 const usingCdn = serverClient.config().useCdn;
 
 // Automatically handle draft mode
-export const loadQuery = ((query, params = {}, options = {}) => {
+export const loadQuery = (async  (query, params = {}, options = {}) => {
   const {
-    perspective = draftMode().isEnabled ? "previewDrafts" : "published",
+    perspective = (await draftMode()).isEnabled ? "previewDrafts" : "published",
   } = options;
 
   //Don't cache by default
@@ -46,7 +46,7 @@ export const loadQuery = ((query, params = {}, options = {}) => {
     },
     perspective,
     // Enable stega if in Draft Mode, to enable overlays when outside Sanity Studio
-    stega: draftMode().isEnabled,
+    stega: (await draftMode()).isEnabled,
   });
 }) satisfies typeof queryStore.loadQuery;
 
