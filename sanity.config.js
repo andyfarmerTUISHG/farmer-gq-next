@@ -21,7 +21,17 @@ export default defineConfig({
   projectId: projectId || "",
   dataset: dataset || "",
   schema: {
-    types: [article, tags, person, profile, settings],
+    // If you want more content types, you can add them to this array
+    types: [
+      // Singletons
+      settings,
+      // Documents
+      article,
+      person,
+      profile,
+      // Objects
+      tags,
+    ],
   },
   plugins: [
     structureTool({
@@ -32,26 +42,4 @@ export default defineConfig({
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton
     singletonPlugin([settings.name]),
   ],
-  // tools: (prev) => {
-  //   // 👇 Uses environment variables set by Vite in development mode
-  //   console.log(import.meta.env.DEV)
-  //   if (import.meta.env.DEV) {
-  //     return prev
-  //   }
-  //   return prev.filter((tool) => tool.name !== 'vision')
-  // },
-  // document: {
-  //   newDocumentOptions: (prev, { creationContext }) => {
-  //     if (creationContext.type === "global") {
-  //       return prev.filter((templateItem) => templateItem.templateId != "settings");
-  //     }
-  //     return prev;
-  //   },
-  //   actions: (prev, { schemaType }) => {
-  //     if (schemaType === "settings") {
-  //       return prev.filter(({ action }) => !["unpublish", "delete","duplicate"].includes(action));
-  //     }
-  //     return prev;
-  //   },
-  // },
 });
