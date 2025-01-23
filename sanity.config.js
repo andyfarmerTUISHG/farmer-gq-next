@@ -4,9 +4,17 @@
 import { codeInput } from "@sanity/code-input";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
+import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 
-import { dataset, projectId, studioUrl, title } from "@/sanity/lib/api";
+import {
+  apiVersion,
+  dataset,
+  projectId,
+  studioUrl,
+  title,
+} from "@/sanity/lib/api";
+import * as resolve from "@/sanity/plugin/resolve";
 
 import { pageStructure, singletonPlugin } from "./sanity/plugin/settings";
 import article from "./schema/articles";
@@ -38,8 +46,16 @@ export default defineConfig({
       structure: pageStructure([settings]),
     }),
     codeInput(),
-    visionTool(),
+    visionTool({ defaultApiVersion: apiVersion }),
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton
     singletonPlugin([settings.name]),
+    presentationTool({
+      previewUrl: {
+        resolve,
+        previewMode: {
+          enable: "/api/draft-mode/enable",
+        },
+      },
+    }),
   ],
 });

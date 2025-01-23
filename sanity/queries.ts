@@ -37,6 +37,7 @@ export async function getArticles(skip: number, finish: number) {
   );
 }
 
+// TODO: Depractuact for lib queries
 export async function getSingleArticle(slug: string) {
   return client.fetch(
     groq`*[_type == "article" && slug.current == "${slug}"][0]{
