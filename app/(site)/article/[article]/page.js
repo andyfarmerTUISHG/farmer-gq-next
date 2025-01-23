@@ -9,10 +9,11 @@ const ArticlePreview = dynamic(
   () => import("@/app/(site)/article/[article]/component/article-preview")
 );
 
-export default async function ArticleSlugRoute({ params }) {
+export default async function ArticleSlugRoute(props) {
+  const params = await props.params;
   const initial = await loadArticle(params.article);
 
-  if (draftMode().isEnabled) {
+  if ((await draftMode()).isEnabled) {
     return <ArticlePreview params={params} initial={initial} />;
   }
   if (!initial.data) {

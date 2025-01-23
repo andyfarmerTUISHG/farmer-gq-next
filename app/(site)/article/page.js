@@ -5,21 +5,22 @@ import Link from "next/link";
 import Pagination from "@/app/(site)/components/pagination";
 import { getAllArticles, getArticles } from "@/sanity/queries";
 
-export default async function Article({searchParams}) {
-	let skip = 0;
-	const pageSize = parseInt(process.env.NEXT_PAGE_SIZE || 10);
-	const page = searchParams?.page ? parseInt(searchParams.page, 10) : 1;
-	if(page === 1) {
+export default async function Article(props) {
+    const searchParams = await props.searchParams;
+    let skip = 0;
+    const pageSize = parseInt(process.env.NEXT_PAGE_SIZE || 10);
+    const page = searchParams?.page ? parseInt(searchParams.page, 10) : 1;
+    if(page === 1) {
 		skip = 0;
 	} else {
 		skip = parseInt((searchParams.page || 0)) * pageSize;
 	}
-	const finish = parseInt((skip + pageSize) - 1);
-	const articles = await getAllArticles();
-	const articlesPagination = await getArticles(skip, finish);
-	//Define some vars
-	const articleCount = articlesPagination && articlesPagination[0].articleCount;
-	return (
+    const finish = parseInt((skip + pageSize) - 1);
+    const articles = await getAllArticles();
+    const articlesPagination = await getArticles(skip, finish);
+    //Define some vars
+    const articleCount = articlesPagination && articlesPagination[0].articleCount;
+    return (
 		<main>
 			<h1> {articles && articles[0].articleCount} Articles Listing </h1>
 			<div>
