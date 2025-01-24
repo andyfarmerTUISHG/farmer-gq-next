@@ -41,7 +41,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <Header />
           {/* Dynamic NavBar from Sanity.io */}
-          <Suspense>
+          <Suspense fallback={<div className="h-16 bg-gray-100 animate-pulse" />}>
             <Navbar />
           </Suspense>
           <main className="flex-grow">

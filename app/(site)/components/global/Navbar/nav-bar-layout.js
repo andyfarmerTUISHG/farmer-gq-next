@@ -8,10 +8,6 @@ export default function NavbarLayout(props) {
     const menuItems = data?.menuItems || [];
   return (
     <div>
-      NewLinks below????
-      <pre>
-        {JSON.stringify(menuItems, null, 2)}
-      </pre>
       {menuItems &&
         menuItems.map((menuItem, key) => {
           const href = resolveHref(menuItem?._type, menuItem?.slug);
