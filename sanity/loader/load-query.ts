@@ -4,9 +4,9 @@ import * as queryStore from "@sanity/react-loader";
 import { draftMode } from "next/headers";
 
 import { client } from "@/sanity/lib/client";
-import { articleBySlugQuery, paginatedArticlesQuery, settingsQuery } from "@/sanity/lib/queries";
+import { articleBySlugQuery, paginatedArticlesQuery, profileQuery, settingsQuery } from "@/sanity/lib/queries";
 import { token } from "@/sanity/lib/token";
-import { ArticleType, SettingsPayload } from "@/types";
+import { ArticleType, ProfileType, SettingsPayload } from "@/types";
 
 const serverClient = client.withConfig({
   token,
@@ -70,5 +70,13 @@ export function loadPaginatedArticle(skip: number, pageSize: number) {
     paginatedArticlesQuery,
     { skip, pageSize },
     { next: { tags: ["article"] } }
+  );
+}
+
+export function loadProfile() {
+  return loadQuery<ProfileType | null>(
+    profileQuery,
+    {},
+    { next: { tags: ["profile"] } }
   );
 }

@@ -43,3 +43,11 @@ export const settingsQuery = groq`
     },
   }
 `;
+
+export const profileQuery = groq`
+  *[_type == "profile"]{
+    _id,
+    fullName,
+    headline,
+  }
+`;
