@@ -39,7 +39,7 @@ export const settingsQuery = groq`
     menuItems[]->{
       _type,
       "slug": slug.current,
-      title
+      name
     },
   }
 `;
