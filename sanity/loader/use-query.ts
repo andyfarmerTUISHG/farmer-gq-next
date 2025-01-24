@@ -2,6 +2,10 @@ import * as queryStore from "@sanity/react-loader";
 
 import { settingsQuery } from "../lib/queries";
 
+/**
+ * Exports to be used in client-only or components that render both server and client
+ * TODO: Add types
+ */
 export const useQuery = (query, params, options) => {
   const snapshot = queryStore.useQuery(query, params, options);
 
