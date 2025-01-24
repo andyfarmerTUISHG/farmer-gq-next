@@ -4,7 +4,7 @@ import * as queryStore from "@sanity/react-loader";
 import { draftMode } from "next/headers";
 
 import { client } from "@/sanity/lib/client";
-import { articleBySlugQuery, settingsQuery } from "@/sanity/lib/queries";
+import { articleBySlugQuery, paginatedArticlesQuery, settingsQuery } from "@/sanity/lib/queries";
 import { token } from "@/sanity/lib/token";
 import { ArticleType, SettingsPayload } from "@/types";
 
@@ -23,9 +23,8 @@ const serverClient = client.withConfig({
 queryStore.setServerClient(serverClient);
 
 const usingCdn = serverClient.config().useCdn;
-
 // Automatically handle draft mode
-export const loadQuery = (async  (query, params = {}, options = {}) => {
+export const loadQuery = (async (query, params = {}, options = {}) => {
   const {
     perspective = (await draftMode()).isEnabled ? "previewDrafts" : "published",
   } = options;
@@ -63,5 +62,13 @@ export function loadArticle(slug: string) {
     articleBySlugQuery,
     { slug },
     { next: { tags: [`article:${slug}`] } }
+  );
+}
+
+export function loadPaginatedArticle(skip: number, pageSize: number) {
+  return loadQuery<ArticleType | null>(
+    paginatedArticlesQuery,
+    { skip, pageSize },
+    { next: { tags: ["article"] } }
   );
 }
