@@ -49,7 +49,15 @@ const article = {
       title: "Content",
       name: "bodycopy",
       type: "array",
-      of: [{ type: "block" }, { type: "code" }],
+      of: [{ 
+        type: "block" 
+      }, 
+      { 
+        type: "code" 
+      },
+    { 
+      type: "image" 
+    }],
     },
     {
       title: "Original Source Material",
@@ -74,16 +82,13 @@ const article = {
         {
           name: "caption",
           type: "string",
-          title: "Caption",
-          options: {
-            isHighlighted: true, // <-- make this field easily accessible
-          },
+          title: "Caption"
         },
         {
           // Editing this field will be hidden behind an "Edit"-button
           name: "attribution",
           type: "string",
-          title: "Attribution",
+          title: "Attribution"
         },
       ],
     },
