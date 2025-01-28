@@ -10,7 +10,9 @@ loadEnvConfig(__dirname, dev, { info: () => null, error: console.error });
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID;
 const dataset = process.env.SANITY_STUDIO_DATASET;
 
-export default defineCliConfig({ api: { projectId, dataset },vite: {
+export default defineCliConfig({ api: { projectId, dataset },
+	studioHost: "farmer-gq",
+	vite: {
 	resolve: {
 		alias: {
 			"@": __dirname,
