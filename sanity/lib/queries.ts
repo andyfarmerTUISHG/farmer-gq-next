@@ -26,6 +26,7 @@ export const allArticlesQuery = groq`
 export const articleBySlugQuery = groq`
     *[_type == "article" && slug.current == $slug][0] {
         _id,
+        "authorName": author[0]->name,
         "slug": slug.current,
         name,
         createdDate,
