@@ -1,6 +1,8 @@
 import "../globals.css";
 
+import dynamic from "next/dynamic";
 import localFont from "next/font/local";
+import { draftMode } from "next/headers";
 import { Suspense } from "react";
 
 import Footer from "@/app/(site)/components/footer";
@@ -26,7 +28,11 @@ export const metadata = {
     "A personal space, where I write about personal development, business growth, software development learnings or self-improvement",
 };
 
-export default function RootLayout({ children }) {
+const LiveVisualEditing = dynamic(
+  () => import("@/sanity/loader/live-visual-editing")
+);
+
+export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
@@ -41,13 +47,16 @@ export default function RootLayout({ children }) {
         <Providers>
           <Header />
           {/* Dynamic NavBar from Sanity.io */}
-          <Suspense fallback={<div className="h-16 bg-gray-100 animate-pulse" />}>
+          <Suspense
+            fallback={<div className="h-16 animate-pulse bg-gray-100" />}
+          >
             <Navbar />
           </Suspense>
           <main className="flex-grow">
             <div className="md:max-w-960px container mx-auto">{children}</div>
           </main>
           <Footer />
+          {(await draftMode()).isEnabled && <LiveVisualEditing />}
         </Providers>
       </body>
     </html>
