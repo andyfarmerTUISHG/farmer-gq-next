@@ -2,6 +2,7 @@
   "name": "farmer.gq-next15.js",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "next build",
     "clean": "rm -rf .next",
