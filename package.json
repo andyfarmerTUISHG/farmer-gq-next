@@ -35,6 +35,8 @@
     "styled-components": "^6.1.16"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.23.0",
     "@tailwindcss/postcss": "^4.0.17",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/react": "^19.0.12",
@@ -43,10 +45,10 @@
     "autoprefixer": "10.4.21",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^15.1.5",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-check-file": "^2.8.0",
+    "eslint": "^9.23.0",
+    "eslint-config-next": "^15.2.4",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-check-file": "^3.1.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "husky": "^9.1.7",
     "postcss": "^8",
