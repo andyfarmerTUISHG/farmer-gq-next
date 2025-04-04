@@ -26,13 +26,24 @@ const serializers = {
 
 export default function ArticlePage({ data }) {
   // Default to an empty object to allow previews on non-existent documents
-  const { name, slug, createddate, bodycopy, author } = data ?? {};
+  const { name, slug, createddate, bodycopy, authors } = data ?? {};
 
   return (
     <div className={slug}>
       <h1>{name}</h1>
       <p>{createddate}</p>
-      <p>Author: {author}</p>
+      <ul>
+
+        {authors &&authors.map((author) => (
+          <li key={author._id}>
+            <a href={`/person/${author.slug}`}>
+
+              <span>{author.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      {/* <p>Author: {author}</p> */}
       <PortableText value={bodycopy} components={serializers} />
     </div>
   );

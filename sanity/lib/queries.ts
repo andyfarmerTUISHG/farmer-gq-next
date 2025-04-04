@@ -8,7 +8,7 @@ export const paginatedArticlesQuery = groq`
     name,
     createdDate,
     bodycopy,
-    author,
+    "authors": author[]->{ name, "slug": slug.current},
     "articleCount": count(*[_type == "article"])
   }
 `;
@@ -19,7 +19,7 @@ export const allArticlesQuery = groq`
     name,
     createdDate,
     bodycopy,
-    author,
+    "authors": author[]->{ name, "slug": slug.current},
   }
 `;
 
@@ -30,8 +30,18 @@ export const articleBySlugQuery = groq`
         name,
         createdDate,
         bodycopy,
-		    author,
+        "authors": author[]->{ name, "slug": slug.current, image},
     }
+`;
+
+export const articlesWithNoAuthorsQuery = groq`
+  *[_type == "article" && (!defined(author) || count(author) == 0)] {
+    _id,
+    "slug": slug.current,
+    name,
+    createdDate,
+    bodycopy
+  }
 `;
 
 export const settingsQuery = groq`
