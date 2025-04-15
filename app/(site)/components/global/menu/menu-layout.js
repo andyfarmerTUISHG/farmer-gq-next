@@ -6,17 +6,7 @@ import { IoClose, IoMenu } from "react-icons/io5";
 
 import { resolveHref } from "@/sanity/lib/utils";
 
-interface MenuProps {
-  data?: {
-    menuItems?: Array<{
-      _type: string;
-      slug?: string;
-      name: string;
-    }>;
-  };
-}
-
-export default function MenuLayout({ data }: MenuProps) {
+export default function MenuLayout({ data }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuItems = data?.menuItems || [];
 

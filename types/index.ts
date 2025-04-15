@@ -2,9 +2,9 @@
 import type { PortableTextBlock } from "sanity";
 
 export interface MenuItem {
-  _type: string
-  slug?: string
-  title?: string
+  _type: string;
+  slug?: string;
+  title?: string;
 }
 
 export type ProfileType = {
