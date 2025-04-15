@@ -9,7 +9,7 @@ export default function About() {
     {
       id: "facebook",
       icon: "bx bxl-facebook-square",
-      url: "https://facebook.com",
+      url: "https://www.facebook.com/andyfarmer76/",
     },
     {
       id: "twitter",
@@ -20,7 +20,7 @@ export default function About() {
     {
       id: "instagram",
       icon: "bx bxl-instagram",
-      url: "https://instagram.com/",
+      url: "https://www.instagram.com/akf0676/",
     },
   ];
 
