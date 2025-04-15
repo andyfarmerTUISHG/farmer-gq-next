@@ -4,7 +4,12 @@ import * as queryStore from "@sanity/react-loader";
 import { draftMode } from "next/headers";
 
 import { client } from "@/sanity/lib/client";
-import { articleBySlugQuery, paginatedArticlesQuery, profileQuery, settingsQuery } from "@/sanity/lib/queries";
+import {
+  articleBySlugQuery,
+  paginatedArticlesQuery,
+  profileQuery,
+  settingsQuery,
+} from "@/sanity/lib/queries";
 import { token } from "@/sanity/lib/token";
 import { ArticleType, ProfileType, SettingsPayload } from "@/types";
 
@@ -26,7 +31,7 @@ const usingCdn = serverClient.config().useCdn;
 // Automatically handle draft mode
 export const loadQuery = (async (query, params = {}, options = {}) => {
   const {
-    perspective = (await draftMode()).isEnabled ? "previewDrafts" : "published",
+    perspective = (await draftMode()).isEnabled ? "drafts" : "published",
   } = options;
 
   //Don't cache by default
@@ -73,7 +78,9 @@ export function loadPaginatedArticle(skip: number, pageSize: number) {
   );
 }
 
-export function loadProfile() {
+export async function loadProfile() {
+  // Add artificial delay to test loading state
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   return loadQuery<ProfileType | null>(
     profileQuery,
     {},
