@@ -1,35 +1,34 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { IoClose, IoMenu } from "react-icons/io5";
 
-import {
-  useMenu,
-  useMobileNavigation,
-} from "@/app/(site)/components/provider/menu-context";
+import { resolveHref } from "@/sanity/lib/utils";
 
-export default function Menu() {
-  const { isMenuOpen, toggleMenu } = useMenu();
-  const { triggerMobileNavItem } = useMobileNavigation();
+interface MenuProps {
+  data?: {
+    menuItems?: Array<{
+      _type: string;
+      slug?: string;
+      name: string;
+    }>;
+  };
+}
 
-  const navItems = [
-    { id: "about", label: "About" },
-    { id: "services", label: "Services" },
-    { id: "portfolio", label: "Portfolio" },
-    { id: "clients", label: "Clients" },
-    { id: "work", label: "Work" },
-    { id: "statistics", label: "Statistics" },
-    { id: "blog", label: "Blog" },
-    { id: "contact", label: "Contact" },
-  ];
+export default function MenuLayout({ data }: MenuProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuItems = data?.menuItems || [];
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <>
-      <div className="absolute top-0 z-50 w-full py-3 text-white sm:py-5">
+    <div className="bg-primary hover:fill-primrary-400 top-0 z-50 w-full py-0 text-white">
+      <div className=" ">
         <div className="container flex items-center justify-between">
           <div>
             <Link href="/" className="block w-24 lg:w-48">
-              <div className="fill-white transition-colors hover:fill-yellow-400">
+              <div className="hover:fill-primrary-400 fill-white transition-colors">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0.352 -0.187 1280 600"
@@ -43,29 +42,38 @@ export default function Menu() {
           </div>
           <div className="hidden lg:block">
             <ul className="flex items-center">
-              {navItems.map((item) => (
-                <li key={item.id} className="group pl-6">
-                  <span
-                    onClick={() => triggerMobileNavItem(item.id)}
-                    className="font-header cursor-pointer pt-0.5 font-semibold uppercase"
-                  >
-                    {item.label}
-                  </span>
-                  <span className="group-hover:bg-yellow block h-0.5 w-full bg-transparent"></span>
-                </li>
-              ))}
+              {menuItems.map((item, key) => {
+                const href = resolveHref(item._type, item.slug);
+                if (!href) return null;
+
+                return (
+                  <li key={key} className="group pl-6">
+                    <Link
+                      href={href}
+                      className={`font-header cursor-pointer pt-0.5 font-semibold uppercase ${
+                        item._type === "home"
+                          ? "text-white"
+                          : "text-white/90 hover:text-white"
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                    <span className="group-hover:bg-yellow block h-0.5 w-full bg-transparent"></span>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div className="block lg:hidden">
             <button onClick={toggleMenu}>
-              <i className="bx bx-menu text-4xl text-white"></i>
+              <IoMenu size={40} color="white" />
             </button>
           </div>
         </div>
       </div>
       {/* SideBar Menu */}
       <div
-        className={`bg-opacity-70 fixed inset-0 z-70 min-h-screen bg-black transition-opacity lg:hidden ${
+        className={`bg-payne/90 fixed inset-0 z-70 min-h-screen transition-opacity lg:hidden ${
           isMenuOpen
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -74,44 +82,34 @@ export default function Menu() {
         <div className="bg-primary absolute right-0 min-h-screen w-2/3 px-8 py-4 shadow md:w-1/3">
           <button
             onClick={toggleMenu}
-            className="absolute top-0 right-0 mt-4 mr-4 bg-red-200"
+            className="absolute top-0 right-0 mt-4 mr-4 cursor-pointer"
           >
-            <Image
-              src="/assets/img/icon-close.svg"
-              className="h-10 w-auto"
-              alt="CLOSE"
-              width={40}
-              height={40}
-            />
+            <IoClose size={40} color="white" />
           </button>
           <ul className="mt-8 flex flex-col">
-            {navItems.map((item) => (
-              <li key={item.id} className="py-2">
-                <span
-                  onClick={() => triggerMobileNavItem(item.id)}
-                  className="font-header block w-full cursor-pointer pt-0.5 font-semibold text-white uppercase"
-                >
-                  {item.label}
-                </span>
-              </li>
-            ))}
+            {menuItems.map((item, key) => {
+              const href = resolveHref(item._type, item.slug);
+              if (!href) return null;
+
+              return (
+                <li key={key} className="py-2">
+                  <Link
+                    href={href}
+                    className={`font-header block w-full cursor-pointer pt-0.5 font-semibold uppercase ${
+                      item._type === "home"
+                        ? "text-white"
+                        : "text-white/90 hover:text-white"
+                    }`}
+                    onClick={toggleMenu}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
-
-      {false && (
-        <div>
-          <hr />
-          <p>Menu Context Provider</p>
-          <p>Is Menu Open: {isMenuOpen ? "Yes" : "No"}</p>
-          <button
-            onClick={toggleMenu}
-            className="me-2 mb-2 rounded-full bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Toggle Menu
-          </button>
-        </div>
-      )}
-    </>
+    </div>
   );
 }

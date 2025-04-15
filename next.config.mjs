@@ -25,7 +25,6 @@ const config = {
   },
   experimental: {
     taint: true,
-    typedRoutes: true,
   },
 };
 
