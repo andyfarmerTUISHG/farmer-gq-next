@@ -1,5 +1,6 @@
 import {
   TiSocialFacebook,
+  TiSocialGithub,
   TiSocialInstagram,
   TiSocialLinkedin,
   TiSocialTwitter,
@@ -15,10 +16,17 @@ interface SocialMediaItem {
 }
 
 const socialMedia: SocialMediaItem[] = [
-  { name: "TiSocialFacebook", url: "https://facebook.com/andyfarmer" },
-  { name: "TiSocialTwitter", url: "https://twitter.com/andyfarmer" },
-  { name: "TiSocialInstagram", url: "https://instagram.com/andyfarmer" },
-  { name: "TiSocialLinkedin", url: "https://linkedin.com/in/andyfarmer" },
+  {
+    name: "TiSocialLinkedin",
+    url: "https://www.linkedin.com/in/andyfarmer0676/",
+  },
+  {
+    name: "TiSocialGithub",
+    url: "https://github.com/andyfarmerTUISHG",
+  },
+  { name: "TiSocialFacebook", url: "https://www.facebook.com/andyfarmer76/" },
+  { name: "TiSocialTwitter", url: "https://x.com/andyfarmer0676" },
+  { name: "TiSocialInstagram", url: "https://www.instagram.com/akf0676/" },
 ];
 
 const iconComponents = {
@@ -26,6 +34,7 @@ const iconComponents = {
   TiSocialTwitter,
   TiSocialInstagram,
   TiSocialLinkedin,
+  TiSocialGithub,
 };
 
 export default async function ProfileComponent() {
