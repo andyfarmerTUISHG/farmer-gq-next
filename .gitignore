@@ -40,3 +40,5 @@ next-env.d.ts
 # Env files created by scripts for working locally
 .env
 studio/.env.development
+app/(design-progress)
+public/assets/

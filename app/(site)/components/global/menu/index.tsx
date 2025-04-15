@@ -4,22 +4,20 @@ import { notFound } from "next/navigation";
 
 import { loadSettings } from "@/sanity/loader/load-query";
 
-import NavbarLayout from "./nav-bar-layout";
+import MenuLayout from "./menu-layout";
 
-const NavbarPreview = dynamic(
-  () => import("@/app/(site)/components/global/Navbar/nav-bar-preview")
+const MenuPreview = dynamic(
+  () => import("@/app/(site)/components/global/menu/menu-preview")
 );
 
-export default async function Navbar() {
+export default async function Menu() {
   const initial = await loadSettings();
 
   if ((await draftMode()).isEnabled) {
-    return <NavbarPreview initial={initial} />;
+    return <MenuPreview initial={initial} />;
   }
-
   if (!initial.data) {
     notFound();
   }
-
-  return <NavbarLayout data={initial.data} />;
+  return <MenuLayout data={initial.data} />;
 }
