@@ -20,6 +20,7 @@ import * as resolve from "@/sanity/plugin/resolve";
 
 import { pageStructure, singletonPlugin } from "./sanity/plugin/settings";
 import article from "./schema/articles";
+import siteLinks from "./schema/documents/siteLinks";
 import person from "./schema/person";
 import profile from "./schema/profile";
 import settings from "./schema/singleton/settings";
@@ -39,6 +40,7 @@ export default defineConfig({
       article,
       person,
       profile,
+      siteLinks,
       // Objects
       tags,
     ],

@@ -1,6 +1,5 @@
 import { groq } from "next-sanity";
 
-
 export const paginatedArticlesQuery = groq`
   *[_type == "article"] | order(_id) [$skip...$pageSize] {
     _id,
@@ -49,7 +48,9 @@ export const settingsQuery = groq`
     menuItems[]->{
       _type,
       "slug": slug.current,
-      name
+      name,
+      url,
+      title
     },
   }
 `;

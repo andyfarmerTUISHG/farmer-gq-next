@@ -33,7 +33,13 @@ export default function MenuLayout({ data }) {
           <div className="hidden lg:block">
             <ul className="flex items-center">
               {menuItems.map((item, key) => {
-                const href = resolveHref(item._type, item.slug);
+                // destructring values of menuItem
+                let { _type, slug, title, url } = item;
+                if (_type === "sitelinks") {
+                  slug = url;
+                }
+                let link = item.name ? item.name : title;
+                const href = resolveHref(_type, slug);
                 if (!href) return null;
 
                 return (
@@ -46,7 +52,7 @@ export default function MenuLayout({ data }) {
                           : "text-white/90 hover:text-white"
                       }`}
                     >
-                      {item.name}
+                      {link}
                     </Link>
                     <span className="group-hover:bg-yellow block h-0.5 w-full bg-transparent"></span>
                   </li>
@@ -78,7 +84,13 @@ export default function MenuLayout({ data }) {
           </button>
           <ul className="mt-8 flex flex-col">
             {menuItems.map((item, key) => {
-              const href = resolveHref(item._type, item.slug);
+              // destructring values of menuItem
+              let { _type, slug, title, url } = item;
+              if (_type === "sitelinks") {
+                slug = url;
+              }
+              let link = item.name ? item.name : title;
+              const href = resolveHref(_type, slug);
               if (!href) return null;
 
               return (
@@ -92,7 +104,7 @@ export default function MenuLayout({ data }) {
                     }`}
                     onClick={toggleMenu}
                   >
-                    {item.name}
+                    {link}
                   </Link>
                 </li>
               );
