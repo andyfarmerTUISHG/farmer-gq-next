@@ -1,62 +1,38 @@
-"use client";
-import Image from "next/image";
+import {
+  TiSocialFacebook,
+  TiSocialInstagram,
+  TiSocialLinkedin,
+  TiSocialTwitter,
+} from "react-icons/ti";
 
-import About from "@/app/(site)/components/about";
-import Blog from "@/app/(site)/components/blog";
-import Clients from "@/app/(site)/components/clients";
-import Contact from "@/app/(site)/components/contact";
-import Footer from "@/app/(site)/components/footer";
-import Menu from "@/app/(site)/components/global/menu";
-import Portfolio from "@/app/(site)/components/portfolio";
-import Services from "@/app/(site)/components/services";
-import Statistics from "@/app/(site)/components/statistics";
-import Work from "@/app/(site)/components/work";
+import { loadProfile } from "@/sanity/loader/load-query";
 
-export default function page() {
-  return (
-    <div id="tbd-delete">
-      <Menu />
-      <div>
-        <Hero />
-        <About />
-        <Services />
-        <Portfolio />
-        <Clients />
-        <Work />
-        <Statistics />
-        <Blog />
-        <Contact />
-      </div>
-      <Footer />
-    </div>
-  );
-}
+import ProfileImage from "./profile-image";
 
 interface SocialMediaItem {
-  id: string;
-  icon: string;
+  name: string;
   url: string;
 }
 
-function Hero() {
-  const socialMedia: SocialMediaItem[] = [
-    {
-      id: "facebook",
-      icon: "bx bxl-facebook-square",
-      url: "https://facebook.com",
-    },
-    {
-      id: "twitter",
-      icon: "bx bxl-twitter",
-      url: "https://x.com/andyfarmer0676",
-    },
-    { id: "linkedin", icon: "bx bxl-linkedin", url: "https://linkedin.com" },
-    {
-      id: "instagram",
-      icon: "bx bxl-instagram",
-      url: "https://instagram.com/",
-    },
-  ];
+const socialMedia: SocialMediaItem[] = [
+  { name: "TiSocialFacebook", url: "https://facebook.com/andyfarmer" },
+  { name: "TiSocialTwitter", url: "https://twitter.com/andyfarmer" },
+  { name: "TiSocialInstagram", url: "https://instagram.com/andyfarmer" },
+  { name: "TiSocialLinkedin", url: "https://linkedin.com/in/andyfarmer" },
+];
+
+const iconComponents = {
+  TiSocialFacebook,
+  TiSocialTwitter,
+  TiSocialInstagram,
+  TiSocialLinkedin,
+};
+
+export default async function ProfileComponent() {
+  const { data: profile } = await loadProfile();
+
+  if (!profile) return null;
+
   return (
     <div>
       <div
@@ -67,7 +43,7 @@ function Hero() {
         <div className="relative z-30 container pt-20 pb-12 sm:pt-56 sm:pb-48 lg:pt-64 lg:pb-48">
           <div className="flex flex-col items-center justify-center lg:flex-row">
             <div className="border-primary rounded-full border-8 shadow-xl">
-              <Image
+              <ProfileImage
                 src="/static/gravatar/DSC02400sml.jpg"
                 className="rounded-full"
                 alt="author"
@@ -77,8 +53,7 @@ function Hero() {
             </div>
             <div className="pt-8 sm:pt-10 lg:pt-0 lg:pl-8">
               <h1 className="font-header text-center text-4xl text-white sm:text-left sm:text-5xl md:text-6xl">
-                {" "}
-                Hey I am Andy Farmer!
+                Hey I am {profile?.[0]?.fullName}
               </h1>
               <div className="flex flex-col justify-center pt-3 sm:flex-row sm:pt-5 lg:justify-start">
                 <div className="flex items-center justify-center pl-0 sm:justify-start md:pl-1">
@@ -89,22 +64,21 @@ function Hero() {
                     <i className="bx bx-chevron-right text-yellow text-3xl"></i>
                   </div>
                 </div>
-                {/* looop through socialMedia */}
                 <div className="flex items-center justify-center pt-5 pl-2 sm:justify-start sm:pt-0">
-                  {socialMedia &&
-                    socialMedia.map((socail, key) => (
+                  {socialMedia?.map((social, key) => {
+                    const Icon = iconComponents[social.name];
+                    return (
                       <a
                         key={key}
-                        href={socail.url}
+                        href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="pl-4"
                       >
-                        <i
-                          className={`hover:text-yellow text-2xl ${socail.icon}`}
-                        ></i>
+                        <Icon className="hover:text-yellow text-2xl" />
                       </a>
-                    ))}
+                    );
+                  })}
                 </div>
               </div>
             </div>

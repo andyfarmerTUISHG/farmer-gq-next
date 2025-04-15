@@ -29,22 +29,23 @@ export default function ArticlePage({ data }) {
   const { name, slug, createddate, bodycopy, authors } = data ?? {};
 
   return (
-    <div className={slug}>
-      <h1>{name}</h1>
-      <p>{createddate}</p>
-      <ul>
-
-        {authors &&authors.map((author) => (
-          <li key={author._id}>
-            <a href={`/person/${author.slug}`}>
-
-              <span>{author.name}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-      {/* <p>Author: {author}</p> */}
-      <PortableText value={bodycopy} components={serializers} />
-    </div>
+    <main className="container flex flex-col items-center py-16 md:py-20 lg:flex-row">
+      <div className={slug}>
+        <h1>{name}</h1>
+        <p>{createddate}</p>
+        <ul>
+          {authors &&
+            authors.map((author) => (
+              <li key={author._id}>
+                <a href={`/person/${author.slug}`}>
+                  <span>{author.name}</span>
+                </a>
+              </li>
+            ))}
+        </ul>
+        {/* <p>Author: {author}</p> */}
+        <PortableText value={bodycopy} components={serializers} />
+      </div>
+    </main>
   );
 }

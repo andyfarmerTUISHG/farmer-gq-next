@@ -15,32 +15,29 @@ export default async function Article(props) {
   }
   const finish = parseInt(skip + pageSize - 1);
   const { data: articlesPagination } = await loadPaginatedArticle(skip, finish);
-  
+
   //Define some vars
   const articleCount = articlesPagination && articlesPagination[0].articleCount;
   return (
-    <main>
-  
+    <main className="container flex flex-col items-center py-16 md:py-20 lg:flex-row">
       <h1> {articleCount} Articles Listing </h1>
 
-			<div>
-				<ol>
-				{articlesPagination && articlesPagination.map((article) => (
-					<li key={`pag-${article._id}`}>
-						<Link
-							href={`/article/${article.slug}`}
-						>{article.name}</Link>
-					</li>
-				))}
-				</ol>
-				<Pagination
-					pageSize={pageSize}
-					totalCount={articleCount}
-					currentPage={page}
-					base="/article"
-				/>
-
-			</div> 
+      <div>
+        <ol>
+          {articlesPagination &&
+            articlesPagination.map((article) => (
+              <li key={`pag-${article._id}`}>
+                <Link href={`/articles/${article.slug}`}>{article.name}</Link>
+              </li>
+            ))}
+        </ol>
+        <Pagination
+          pageSize={pageSize}
+          totalCount={articleCount}
+          currentPage={page}
+          base="/articles"
+        />
+      </div>
     </main>
   );
 }

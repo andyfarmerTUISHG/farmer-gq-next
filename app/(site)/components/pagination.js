@@ -8,7 +8,7 @@ const PaginationStyles = styled.div`
   align-items: center;
   justify-items: center;
   border: 1px solid var(--grey);
-	margin: 1em 0px;
+  margin: 1em 0px;
   border-radius: 5px;
   text-align: center;
   & > * {
@@ -16,7 +16,7 @@ const PaginationStyles = styled.div`
     flex: 1;
     border-right: 1px solid var(--grey);
     text-decoration: none;
-    &[aria-current='page'],
+    &[aria-current="page"],
     &.current {
       background: var(--purple);
       color: var(--yellow);
@@ -35,7 +35,6 @@ const PaginationStyles = styled.div`
   }
 `;
 
-
 export default function Pagination({
   pageSize,
   totalCount,
@@ -50,43 +49,30 @@ export default function Pagination({
   const hasPrevPage = prevPage >= 1;
 
   return (
-
     <div>
+      <PaginationStyles>
+        <Link
+          title="Previous Page"
+          aria-disabled={!hasPrevPage}
+          href={`${base}?page=${prevPage}`}
+        >
+          &#8592; <span className="word"> Prev</span>
+        </Link>
 
-					<PaginationStyles>
+        {Array.from({ length: totalPages }).map((_, i) => (
+          <Link href={`${base}?page=${i + 1}`} key={`page-${i + 1}`}>
+            {i + 1}
+          </Link>
+        ))}
 
-      <Link
-        title="Previous Page"
-        aria-disabled={!hasPrevPage}
-        href={`${base}?page=${prevPage}`}
-      >
-        &#8592; <span className="word"> Prev
-				</span>
-      </Link>
-
-			{Array.from({ length: totalPages }).map((_, i) => (
-
-
-      		<Link
-						href={`/article?page=${i + 1}`}
-						key={`page-${i+1}`}
-					>
-          {i + 1}
-
-					</Link>
-
-
-			))}
-
-      <Link
-        title="Next Page"
-        aria-disabled={!hasNextPage}
-        href={`${base}?page=${nextPage}`}
-      >
-        <span className="word">Next </span>&#8594;
-      </Link>
-					</PaginationStyles>
-
+        <Link
+          title="Next Page"
+          aria-disabled={!hasNextPage}
+          href={`${base}?page=${nextPage}`}
+        >
+          <span className="word">Next </span>&#8594;
+        </Link>
+      </PaginationStyles>
     </div>
   );
 }
