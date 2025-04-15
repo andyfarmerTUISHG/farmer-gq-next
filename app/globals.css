@@ -8,17 +8,35 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-	*,
-	::after,
-	::before,
-	::backdrop,
-	::file-selector-button {
-	  border-color: var(--color-gray-200, currentColor);
-	}
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
   }
+}
+
+/* https://coolors.co/536271-62bbc1-b2b2b2-d00000-2f0601 */
+@theme {
+  --color-hero-gradient-from: rgba(83, 98, 113, 0.95);
+  --color-hero-gradient-to: rgba(183, 192, 202, 0.93);
+  --color-blog-gradient-from: #8f9098;
+  --color-blog-gradient-to: #222222;
+  --color-yellow: #d00000;
+  --color-lila: #e6e5ec;
+  --color-primary: #62bbc1;
+  --color-secondary: #b2b2b2;
+  --color-payne: #536271;
+}
+
+@utility container {
+  margin-inline: auto;
+  padding: 1rem;
+}
 
 body ol {
-	padding-left: 2em;
-	margin: 1em;
-	list-style: decimal;
+  padding-left: 2em;
+  margin: 1em;
+  list-style: decimal;
 }
