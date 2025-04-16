@@ -1,5 +1,5 @@
 import { CogIcon } from "@sanity/icons";
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export default defineType({
   name: "settings",
@@ -26,6 +26,18 @@ export default defineType({
             { type: "sitelinks" },
           ],
         },
+      ],
+    }),
+    defineField({
+      name: "showcaseArticles",
+      title: "Showcase Article",
+      type: "array",
+      description: "Articles to display on the showcase page.",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "article" }],
+        }),
       ],
     }),
   ],
