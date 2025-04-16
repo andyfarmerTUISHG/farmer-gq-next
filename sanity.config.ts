@@ -54,12 +54,8 @@ export default defineConfig({
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton
     singletonPlugin([settings.name]),
     presentationTool({
-      previewUrl: {
-        resolve,
-        previewMode: {
-          enable: "/api/draft-mode/enable",
-        },
-      },
+      resolve,
+      previewUrl: { previewMode: { enable: "/api/draft-mode/enable" } },
     }),
   ],
 });
