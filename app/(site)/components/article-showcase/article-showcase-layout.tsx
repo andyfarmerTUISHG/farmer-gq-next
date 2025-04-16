@@ -5,7 +5,6 @@ export default function ArticleShowcaseLayout({
 }: {
   data: SettingsPayload;
 }) {
-  console.log(`data ${JSON.stringify(data, null, 2)}`);
   return (
     <>
       <div className="bg-grey-50" id="blog">
@@ -39,9 +38,7 @@ export default function ArticleShowcaseLayout({
                     <span className="font-body block text-lg font-semibold text-black">
                       {article.name}
                     </span>
-                    <span className="font-body text-grey-20 block pt-2">
-                      <pre>{JSON.stringify(article, null, 2)}</pre>
-                    </span>
+                    <span className="font-body text-grey-20 block pt-2"></span>
                   </div>
                 </a>
               ))}
