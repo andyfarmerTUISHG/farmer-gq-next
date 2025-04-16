@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { SettingsPayload } from "@/types";
 
 export default function ArticleShowcaseLayout({
@@ -43,6 +45,9 @@ export default function ArticleShowcaseLayout({
                 </a>
               ))}
           </div>
+          <h5>
+            <Link href="/articles">See all posts</Link>
+          </h5>
         </div>
       </div>
     </>
