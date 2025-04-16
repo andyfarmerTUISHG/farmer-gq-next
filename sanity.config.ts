@@ -17,8 +17,8 @@ import {
   title,
 } from "@/sanity/lib/api";
 import * as resolve from "@/sanity/plugin/resolve";
+import { pageStructure, singletonPlugin } from "@/sanity/plugin/settings";
 
-import { pageStructure, singletonPlugin } from "./sanity/plugin/settings";
 import article from "./schema/articles";
 import siteLinks from "./schema/documents/siteLinks";
 import person from "./schema/person";
