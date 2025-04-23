@@ -11,7 +11,7 @@ const ArticleShowcasePreview = dynamic(
 );
 export default async function ArticleShowcase() {
   const initial = await loadArticleShowcase();
-  console.log(JSON.stringify(initial, null, 2));
+  // console.log(JSON.stringify(initial, null, 2));
   if ((await draftMode()).isEnabled) {
     return <ArticleShowcasePreview initial={initial} />;
   }

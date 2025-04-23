@@ -1,3 +1,5 @@
+"use client";
+
 import { articleShowcaseQuery } from "@/sanity/lib/queries";
 import { useQuery } from "@/sanity/loader/use-query";
 
