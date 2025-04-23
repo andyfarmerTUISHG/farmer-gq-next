@@ -55,6 +55,18 @@ export const settingsQuery = groq`
   }
 `;
 
+export const articleShowcaseQuery = groq`
+  *[_type == "settings"][0]{
+    showcaseArticles[]->{
+      _type,
+      "slug": slug.current,
+      name,
+      url,
+      title
+    },
+  }
+`;
+
 export const profileQuery = groq`
   *[_type == "profile"]{
     _id,

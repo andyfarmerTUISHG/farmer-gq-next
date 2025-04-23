@@ -24,4 +24,5 @@ export type ArticleType = {
 
 export interface SettingsPayload {
   menuItems?: MenuItem[];
+  showcaseArticles?: ArticleType[];
 }
