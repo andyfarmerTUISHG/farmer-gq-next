@@ -6,6 +6,7 @@ import { draftMode } from "next/headers";
 import { client } from "@/sanity/lib/client";
 import {
   articleBySlugQuery,
+  articleShowcaseQuery,
   paginatedArticlesQuery,
   profileQuery,
   settingsQuery,
@@ -58,7 +59,15 @@ export function loadSettings() {
   return loadQuery<SettingsPayload>(
     settingsQuery,
     {},
-    { next: { tags: ["settings", "article"] } }
+    { next: { tags: ["settings", "article", "articleShowcase", "siteLinks"] } }
+  );
+}
+
+export function loadArticleShowcase() {
+  return loadQuery<SettingsPayload>(
+    articleShowcaseQuery,
+    {},
+    { next: { tags: ["settings", "article", "articleShowcase"] } }
   );
 }
 

@@ -1,3 +1,4 @@
+"use client";
 import { settingsQuery } from "@/sanity/lib/queries";
 import { useQuery } from "@/sanity/loader/use-query";
 
