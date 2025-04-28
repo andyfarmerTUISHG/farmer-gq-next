@@ -20,7 +20,6 @@ export default function ArticlePage({ data }) {
               </li>
             ))}
         </ul>
-        {/* <p>Author: {author}</p> */}
         {bodycopy && (
           <>
             <CustomPortableText
