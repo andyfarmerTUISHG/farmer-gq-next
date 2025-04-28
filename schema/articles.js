@@ -1,6 +1,7 @@
-import { GrArticle as icon } from "react-icons/gr";
+import { GrArticle as icon, GrImage as ImageIcon } from "react-icons/gr";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
-const article = {
+export default defineType({
   // Computer Name
   name: "article",
   // Display name
@@ -45,12 +46,68 @@ const article = {
         },
       ],
     },
-    {
+    defineField({
       title: "Content",
       name: "bodycopy",
       type: "array",
-      of: [{ type: "block" }, { type: "code" }],
-    },
+      of: [
+        defineArrayMember({
+          type: "block",
+          marks: {
+            annotations: [
+              {
+                name: "link",
+                type: "object",
+                title: "Link",
+                fields: [
+                  {
+                    name: "href",
+                    type: "url",
+                    title: "Url",
+                  },
+                ],
+              },
+            ],
+          },
+          styles: [],
+        }),
+        {
+          type: "code",
+        },
+        defineField({
+          type: "image",
+          icon: ImageIcon,
+          name: "image",
+          title: "Image",
+          options: {
+            hotspot: true,
+          },
+          preview: {
+            select: {
+              media: "asset",
+              title: "caption",
+            },
+          },
+          fields: [
+            defineField({
+              title: "Caption",
+              name: "caption",
+              type: "string",
+              options: {
+                isHighlighted: true, // <-- make this field easily accessible
+              },
+            }),
+            defineField({
+              name: "alt",
+              type: "string",
+              title: "Alt text",
+              description:
+                "Alternative text for screenreaders. Falls back on caption if not set",
+            }),
+          ],
+        }),
+      ],
+    }),
     {
       title: "Original Source Material",
       name: "origurl",
@@ -75,9 +132,6 @@ const article = {
           name: "caption",
           type: "string",
           title: "Caption",
-          options: {
-            isHighlighted: true, // <-- make this field easily accessible
-          },
         },
         {
           // Editing this field will be hidden behind an "Edit"-button
@@ -88,6 +142,4 @@ const article = {
       ],
     },
   ],
-};
-
-export default article;
+});

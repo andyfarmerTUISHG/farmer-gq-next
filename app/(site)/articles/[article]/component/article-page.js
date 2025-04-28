@@ -1,31 +1,8 @@
-import { PortableText } from "@portabletext/react";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/hljs";
-
-const serializers = {
-  types: {
-    code: (props) => (
-      <div className="my-2">
-        <SyntaxHighlighter
-          // language={language}
-          style={nightOwl}
-          showLineNumbers={true}
-          customStyle={{
-            width: "80%",
-            margin: "0 auto",
-            padding: "0.5rem",
-            borderRadius: "0.5rem",
-          }}
-        >
-          {props.value?.code}
-        </SyntaxHighlighter>
-      </div>
-    ),
-  },
-};
+import { CustomPortableText } from "@/app/(site)/components/global/custom-portable-text";
 
 export default function ArticlePage({ data }) {
   // Default to an empty object to allow previews on non-existent documents
+
   const { name, slug, createddate, bodycopy, authors } = data ?? {};
 
   return (
@@ -36,15 +13,25 @@ export default function ArticlePage({ data }) {
         <ul>
           {authors &&
             authors.map((author) => (
-              <li key={author._id}>
+              <li key={author.name}>
                 <a href={`/person/${author.slug}`}>
                   <span>{author.name}</span>
                 </a>
               </li>
             ))}
         </ul>
-        {/* <p>Author: {author}</p> */}
-        <PortableText value={bodycopy} components={serializers} />
+        {bodycopy && (
+          <>
+            <CustomPortableText
+              id={data?._id || null}
+              type={data?._type || null}
+              path={["bodycopy"]}
+              paragraphClasses="font-serif max-w-3xl text-gray-600 text-xl"
+              // value={bodycopy as unknown as PortableTextBlock[]}
+              value={bodycopy}
+            />
+          </>
+        )}
       </div>
     </main>
   );
