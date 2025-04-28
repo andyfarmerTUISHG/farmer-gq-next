@@ -1,9 +1,10 @@
 import Image from "next/image";
+import type { Image as SanityImage } from "sanity";
 
 import { urlForImage } from "@/sanity/lib/utils";
 
 interface ImageBoxProps {
-  image?: { asset: { _ref: string } };
+  image?: SanityImage & { alt?: string; caption?: string };
   alt?: string;
   width?: number;
   height?: number;
@@ -11,6 +12,7 @@ interface ImageBoxProps {
   classesWrapper?: string;
   "data-sanity"?: string;
 }
+
 export default function ImageBox({
   image,
   alt = "Cover image",
