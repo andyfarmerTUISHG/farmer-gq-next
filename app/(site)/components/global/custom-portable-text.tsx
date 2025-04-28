@@ -10,9 +10,6 @@ import type { Image } from "sanity";
 
 import ImageBox from "../image-box";
 export function CustomPortableText({
-  id,
-  type,
-  path,
   paragraphClasses,
   value,
 }: {

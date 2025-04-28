@@ -3,7 +3,7 @@ import Image from "next/image";
 import { urlForImage } from "@/sanity/lib/utils";
 
 interface ImageBoxProps {
-  image?: { asset?: any };
+  image?: { asset?: unknown };
   alt?: string;
   width?: number;
   height?: number;
