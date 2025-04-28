@@ -93,6 +93,9 @@ export default defineType({
               title: "Caption",
               name: "caption",
               type: "string",
+              options: {
+                isHighlighted: true, // <-- make this field easily accessible
+              },
             }),
             defineField({
               name: "alt",
