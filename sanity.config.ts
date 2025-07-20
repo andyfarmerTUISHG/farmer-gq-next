@@ -6,6 +6,7 @@
 import { codeInput } from "@sanity/code-input";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
+import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 
@@ -53,6 +54,8 @@ export default defineConfig({
     visionTool({ defaultApiVersion: apiVersion }),
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton
     singletonPlugin([settings.name]),
+    // Add an image asset source for Unsplash
+    unsplashImageAsset(),
     presentationTool({
       resolve,
       previewUrl: { previewMode: { enable: "/api/draft-mode/enable" } },
