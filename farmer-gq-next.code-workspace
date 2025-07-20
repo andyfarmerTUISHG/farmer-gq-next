@@ -1,14 +1,17 @@
 {
   "folders": [
     {
-      "path": ".",
+      "path": "."
     },
     {
-      "path": "../nextjs-personal-website",
+      "path": "../nextjs-personal-website"
     },
     {
-      "path": "../../node/next-starter-example",
+      "path": "../../node/next-starter-example"
     },
+    {
+      "path": "../BTB-website"
+    }
   ],
   "settings": {
     "editor.formatOnSave": false,
