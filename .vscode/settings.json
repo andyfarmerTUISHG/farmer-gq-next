@@ -38,6 +38,7 @@
     "[css]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.formatOnSave": true
-    }
+    },
+    "kiroAgent.configureMCP": "Disabled"
   }
   
