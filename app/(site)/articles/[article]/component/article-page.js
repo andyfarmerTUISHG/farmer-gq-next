@@ -6,7 +6,7 @@ export default function ArticlePage({ data }) {
   const { name, slug, createddate, bodycopy, authors } = data ?? {};
 
   return (
-    <main className="container flex flex-col items-center py-16 md:py-20 lg:flex-row">
+    <main className="container items-center">
       <div className={slug}>
         <h1>{name}</h1>
         <p>{createddate}</p>
