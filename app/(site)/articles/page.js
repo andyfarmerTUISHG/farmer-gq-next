@@ -19,7 +19,7 @@ export default async function Article(props) {
   //Define some vars
   const articleCount = articlesPagination && articlesPagination[0].articleCount;
   return (
-    <main className="container flex flex-col items-center py-16 lg:flex-row">
+    <main className="container flex flex-col items-center py-16 md:py-20 lg:flex-row">
       <h1> {articleCount} Articles Listing </h1>
 
       <div>
