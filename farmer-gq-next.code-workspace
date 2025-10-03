@@ -70,5 +70,6 @@
       "trivago",
       "turbopack",
     ],
+    "kiroAgent.configureMCP": "Disabled",
   },
 }
