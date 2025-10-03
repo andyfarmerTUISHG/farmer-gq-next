@@ -1,7 +1,5 @@
 import Image from "next/image";
-
 import type { Image as SanityImage } from "sanity";
-
 
 import { urlForImage } from "@/sanity/lib/utils";
 
