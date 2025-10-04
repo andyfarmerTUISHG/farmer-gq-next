@@ -9,13 +9,9 @@ const imageBuilder = createImageUrlBuilder({
 });
 
 export const urlForImage = (source: Image) => {
-
   if (!source?.asset?._ref) {
     return undefined;
   }
 
-  return imageBuilder
-    .image(source)
-    .auto("format")
-    .fit("max");
+  return imageBuilder.image(source).auto("format").fit("max");
 };
