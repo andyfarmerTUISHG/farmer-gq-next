@@ -3,9 +3,9 @@ import { fileURLToPath } from "node:url";
 
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import checkFile from "eslint-plugin-check-file";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
-import { defineConfig } from "eslint/config";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,12 +17,16 @@ const compat = new FlatCompat({
 
 export default defineConfig([
   {
-    extends: compat.extends(
-      "next/core-web-vitals",
-      "next/typescript",
-      "prettier"
-    ),
-
+    ignores: [
+      ".next/**",
+      "dist/**",
+      "node_modules/**",
+      "public/studio/**",
+      "*.d.ts",
+    ],
+  },
+  ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
+  {
     plugins: {
       "simple-import-sort": simpleImportSort,
       "check-file": checkFile,

@@ -5,10 +5,4 @@ import profile from "./profile";
 import settings from "./singleton/settings";
 import tags from "./tags";
 
-export default [
-  article,
-  tags,
-  person,
-  profile,
-	settings
-];
+export default [article, tags, person, profile, settings];

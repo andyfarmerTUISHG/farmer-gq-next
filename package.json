@@ -10,7 +10,7 @@
     "dev-old": "next dev",
     "dev": "next dev --turbopack",
     "format": "npx prettier --write . --ignore-path .gitignore",
-    "lint": "next lint .",
+    "lint": "eslint .",
     "lint:fix": "npm run format && npm run lint -- --fix",
     "start": "next start",
     "type-check": "tsc --noEmit",
