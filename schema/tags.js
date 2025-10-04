@@ -1,18 +1,18 @@
-import { TiTags as icon } from 'react-icons/ti';
+import { TiTags as icon } from "react-icons/ti";
 
 export default {
   // Computer Name
-  name: 'tags',
+  name: "tags",
   // Display name
-  title: 'Tags',
-  type: 'document',
+  title: "Tags",
+  type: "document",
   icon,
   fields: [
     {
-      name: 'name',
-      title: 'Tag  Name',
-      type: 'string',
-      description: 'Name of the Tag',
+      name: "name",
+      title: "Tag  Name",
+      type: "string",
+      description: "Name of the Tag",
     },
   ],
 };

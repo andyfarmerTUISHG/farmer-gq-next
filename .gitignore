@@ -42,3 +42,8 @@ next-env.d.ts
 studio/.env.development
 app/(design-progress)
 public/assets/
+
+# Sanity Studio build artifacts
+public/studio/static/create-manifest.json
+public/studio/static/*.create-schema.json
+public/studio/static/*.create-tools.json

@@ -1,12 +1,9 @@
 import Image from "next/image";
-
 import type { Image as SanityImage } from "sanity";
-
 
 import { urlForImage } from "@/sanity/lib/utils";
 
 interface ImageBoxProps {
-
   image?: SanityImage & { alt?: string; caption?: string };
 
   alt?: string;
