@@ -574,12 +574,12 @@ export type ProfileQueryResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "\n  *[_type == \"article\"] | order(_id) [$skip...$pageSize] {\n    _id,\n    \"slug\": slug.current,\n    name,\n    createdDate,\n    bodycopy,\n    \"authors\": author[]->{ name, \"slug\": slug.current},\n    \"articleCount\": count(*[_type == \"article\"])\n  }\n": PaginatedArticlesQueryResult;
-    "\n  *[_type == \"article\"] {\n    _id,\n    \"slug\": slug.current,\n    name,\n    createdDate,\n    bodycopy,\n    \"authors\": author[]->{ name, \"slug\": slug.current},\n  }\n": AllArticlesQueryResult;
-    "\n    *[_type == \"article\" && slug.current == $slug][0] {\n        _id,\n        \"authorName\": author[0]->name,\n        \"slug\": slug.current,\n        name,\n        createdDate,\n        bodycopy,\n        \"authors\": author[]->{ name, \"slug\": slug.current, image},\n    }\n": ArticleBySlugQueryResult;
-    "\n  *[_type == \"article\" && (!defined(author) || count(author) == 0)] {\n    _id,\n    \"slug\": slug.current,\n    name,\n    createdDate,\n    bodycopy\n  }\n": ArticlesWithNoAuthorsQueryResult;
-    "\n  *[_type == \"settings\"][0]{\n    menuItems[]->{\n      _type,\n      \"slug\": slug.current,\n      name,\n      url,\n      title\n    },\n  }\n": SettingsQueryResult;
-    "\n  *[_type == \"settings\"][0]{\n    showcaseArticles[]->{\n      _type,\n      \"slug\": slug.current,\n      name,\n      url,\n      title\n    },\n  }\n": ArticleShowcaseQueryResult;
-    "\n  *[_type == \"profile\"]{\n    _id,\n    fullName,\n    headline,\n  }\n": ProfileQueryResult;
+    '\n  *[_type == "article"] | order(_id) [$skip...$pageSize] {\n    _id,\n    "slug": slug.current,\n    name,\n    createdDate,\n    bodycopy,\n    "authors": author[]->{ name, "slug": slug.current},\n    "articleCount": count(*[_type == "article"])\n  }\n': PaginatedArticlesQueryResult;
+    '\n  *[_type == "article"] {\n    _id,\n    "slug": slug.current,\n    name,\n    createdDate,\n    bodycopy,\n    "authors": author[]->{ name, "slug": slug.current},\n  }\n': AllArticlesQueryResult;
+    '\n    *[_type == "article" && slug.current == $slug][0] {\n        _id,\n        "authorName": author[0]->name,\n        "slug": slug.current,\n        name,\n        createdDate,\n        bodycopy,\n        "authors": author[]->{ name, "slug": slug.current, image},\n    }\n': ArticleBySlugQueryResult;
+    '\n  *[_type == "article" && (!defined(author) || count(author) == 0)] {\n    _id,\n    "slug": slug.current,\n    name,\n    createdDate,\n    bodycopy\n  }\n': ArticlesWithNoAuthorsQueryResult;
+    '\n  *[_type == "settings"][0]{\n    menuItems[]->{\n      _type,\n      "slug": slug.current,\n      name,\n      url,\n      title\n    },\n  }\n': SettingsQueryResult;
+    '\n  *[_type == "settings"][0]{\n    showcaseArticles[]->{\n      _type,\n      "slug": slug.current,\n      name,\n      url,\n      title\n    },\n  }\n': ArticleShowcaseQueryResult;
+    '\n  *[_type == "profile"]{\n    _id,\n    fullName,\n    headline,\n  }\n': ProfileQueryResult;
   }
 }

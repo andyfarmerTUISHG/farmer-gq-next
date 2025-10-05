@@ -47,3 +47,4 @@ public/assets/
 public/studio/static/create-manifest.json
 public/studio/static/*.create-schema.json
 public/studio/static/*.create-tools.json
+sanity.types.ts
