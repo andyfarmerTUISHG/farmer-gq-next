@@ -21,7 +21,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@heroui/react": "^2.8.4",
+    "@heroui/react": "^2.8.5",
     "@next/env": "^15.5.4",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^7.12.0",
