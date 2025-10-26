@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import styled from "styled-components";
+
 import About from "../components/about";
 
 const ProfileStyles = styled.div`
@@ -329,7 +330,7 @@ export default function page() {
       </ProfileStyles>
       <div className="profile-content pl-10">
         <About />
-          </div>
+      </div>
     </main>
   );
 }

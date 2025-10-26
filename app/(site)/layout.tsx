@@ -1,9 +1,13 @@
 import "../globals.css";
 
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity";
+
 import BodyClassManager from "./components/body-class-manager";
 import Footer from "./components/footer";
 import Menu from "./components/global/menu";
 import { MenuProvider } from "./context/menu-context";
+import { DraftModeToast } from "./draft-mode-toast";
 
 export const metadata = {
   title: "Andy Farmer - Growth Quotient",
@@ -30,8 +34,13 @@ export default async function RootLayout({ children }) {
               <Footer />
             </div>
           </MenuProvider>
-          
         </div>
+        {(await draftMode()).isEnabled && (
+        <>
+          <DraftModeToast />
+          <VisualEditing />
+        </>
+      )}
       </body>
     </html>
   );

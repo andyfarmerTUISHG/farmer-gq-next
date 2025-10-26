@@ -1,7 +1,5 @@
-
-import { sanityFetch } from "@/sanity/lib/live";
-
 import Pagination from "@/app/(site)/components/pagination";
+import { sanityFetch } from "@/sanity/lib/live";
 import { paginatedArticlesQuery } from "@/sanity/lib/queries";
 
 export default async function ArticleListRoute({
@@ -16,16 +14,16 @@ export default async function ArticleListRoute({
     : 1;
   const skip = (page - 1) * pageSize;
 
-  const {data} = await sanityFetch({
+  const { data } = await sanityFetch({
     query: paginatedArticlesQuery,
     params: {
       skip: Math.floor(skip),
       pageSize: Math.floor(skip + pageSize), // Calculate the end of the range
     },
-  })
+  });
 
-  const articles = data || []
-  const articleCount = articles.length > 0 ? articles[0]?.articleCount || 0 : 0
+  const articles = data || [];
+  const articleCount = articles.length > 0 ? articles[0]?.articleCount || 0 : 0;
   // const { data: articlesPagination } = await loadPaginatedArticle(skip, finish);
 
   //Define some vars
@@ -43,7 +41,7 @@ export default async function ArticleListRoute({
               </li>
             ))}
         </ol>
-        
+
         <Pagination
           pageSize={pageSize}
           totalCount={articleCount}
