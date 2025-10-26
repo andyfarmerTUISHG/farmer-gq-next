@@ -24,6 +24,7 @@
     "@heroui/react": "2.8.5",
     "@next/env": "15.5.4",
     "@sanity/block-content-to-react": "3.0.0",
+    "@sanity/client": "^6.29.1",
     "@sanity/code-input": "6.0.3",
     "@sanity/image-url": "1.1.0",
     "@sanity/react-loader": "1.9.12",
