@@ -14,61 +14,58 @@
     },
   ],
   "settings": {
-    "editor.formatOnSave": false,
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always",
-      "source.organizeImports": "always",
-    },
-    "files.associations": {
-      "*.css": "tailwindcss",
-    },
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "[typescriptreact]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode",
-    },
-    "workbench.editor.limit": 5,
-    "workbench.editor.customLabels.patterns": {
-      "**/app/**/page.tsx": "${dirname} - Page",
-      "**/app/**/layout.tsx": "${dirname} - Layout",
-      "**/app/**/components/**": "${filename} - Component",
-    },
-    "workbench.sideBar.location": "right",
-    "editor.quickSuggestions": {
-      "strings": true,
-    },
-    "tailwindCSS.experimental.classRegex": [
-      ["[^\\s]*\\.[^\\s]*", "class"],
-      ["[^\\s]*:[^\\s]*", "pseudo-class"],
-      ["[^\\s]*\\[[^\\s]*\\]", "pseudo-class"],
-      ["[^\\s]*\\([^\\s]*\\)", "pseudo-class"],
-      ["[^\\s]*\\{[^\\s]*\\}", "pseudo-class"],
-      ["[^\\s]*\\([^\\s]*\\)", "pseudo-class"],
-    ],
-    "tailwindCSS.includeLanguages": {
-      "typescriptreact": "./**/*.{ts,tsx}",
-      "javascriptreact": "./**/*.{js,jsx}",
-    },
-    "tailwindCSS.configFile": "tailwind.config.js",
-    "recommendations": [
-      "dbaeumer.vscode-eslint",
-      "esbenp.prettier-vscode",
-      "sanity-io.vscode-sanity",
-      "streetsidesoftware.code-spell-checker",
-    ],
-    "cSpell.words": [
-      "firstname",
-      "fullname",
-      "getready",
-      "groq",
-      "heroui",
-      "lastname",
-      "NEXTAUTH",
-      "nextjs",
-      "nextui",
-      "tabler",
-      "tailwindcss",
-      "trivago",
-      "turbopack",
-    ],
+  // Disable the default formatter, use eslint instead
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+
+  // Auto fix
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
   },
+
+  // Silent the stylistic rules in your IDE, but still auto fix them
+  "eslint.rules.customizations": [
+    { "rule": "style/*", "severity": "off", "fixable": true },
+    { "rule": "format/*", "severity": "off", "fixable": true },
+    { "rule": "*-indent", "severity": "off", "fixable": true },
+    { "rule": "*-spacing", "severity": "off", "fixable": true },
+    { "rule": "*-spaces", "severity": "off", "fixable": true },
+    { "rule": "*-order", "severity": "off", "fixable": true },
+    { "rule": "*-dangle", "severity": "off", "fixable": true },
+    { "rule": "*-newline", "severity": "off", "fixable": true },
+    { "rule": "*quotes", "severity": "off", "fixable": true },
+    { "rule": "*semi", "severity": "off", "fixable": true }
+  ],
+
+  // Enable eslint for all supported languages
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml",
+    "toml",
+    "xml",
+    "gql",
+    "graphql",
+    "astro",
+    "svelte",
+    "css",
+    "less",
+    "scss",
+    "pcss",
+    "postcss"
+  ],
+
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.inlineSuggest.enabled": true,
+  "workbench.sideBar.location": "right"
+}
+,
 }
