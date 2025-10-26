@@ -1,22 +1,19 @@
 import "../globals.css";
 
-import dynamic from "next/dynamic";
 import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity";
 
 import BodyClassManager from "./components/body-class-manager";
 import Footer from "./components/footer";
 import Menu from "./components/global/menu";
 import { MenuProvider } from "./context/menu-context";
+import { DraftModeToast } from "./draft-mode-toast";
 
 export const metadata = {
   title: "Andy Farmer - Growth Quotient",
   description:
     "A personal space, where I write about personal development, business growth, software development learnings or self-improvement",
 };
-
-const LiveVisualEditing = dynamic(
-  () => import("@/sanity/loader/live-visual-editing")
-);
 
 export default async function RootLayout({ children }) {
   return (
@@ -34,11 +31,16 @@ export default async function RootLayout({ children }) {
               <BodyClassManager />
               <Menu />
               {children}
-              {(await draftMode()).isEnabled && <LiveVisualEditing />}
               <Footer />
             </div>
           </MenuProvider>
         </div>
+        {(await draftMode()).isEnabled && (
+        <>
+          <DraftModeToast />
+          <VisualEditing />
+        </>
+      )}
       </body>
     </html>
   );
