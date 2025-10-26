@@ -23,9 +23,10 @@ export default defineConfig([
       "node_modules/**",
       "public/studio/**",
       "*.d.ts",
+      "sanity.types.ts",
     ],
   },
-  ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
+  ...compat.extends("next/core-web-vitals", "next/typescript" ),
   {
     plugins: {
       "simple-import-sort": simpleImportSort,
