@@ -24,6 +24,7 @@ export default defineConfig([
       "public/studio/**",
       "*.d.ts",
       "sanity.types.ts",
+      "sanity/loader/load-query.ts",
     ],
   },
   ...compat.extends("next/core-web-vitals", "next/typescript" ),

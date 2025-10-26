@@ -26,7 +26,7 @@ const serverClient = client.withConfig({
  * Live mode in `sanity/presentation` still works, as it uses the `useLiveMode` hook to update `useQuery` instances with
  * live draft content using `postMessage`.
  */
-queryStore.setServerClient(serverClient);
+queryStore.setServerClient(serverClient as any);
 
 const usingCdn = serverClient.config().useCdn;
 // Automatically handle draft mode
