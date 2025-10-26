@@ -1,6 +1,6 @@
-import { defineLive } from "next-sanity/live";
+import { defineLive } from "next-sanity";
 
-import { client } from "./sanity.client";
+import { client } from "./client";
 
 const token = process.env.SANITY_API_READ_TOKEN;
 if (!token) {

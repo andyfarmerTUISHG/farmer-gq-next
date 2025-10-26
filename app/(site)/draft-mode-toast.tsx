@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import {
   useDraftModeEnvironment,
-  useIsPresentationTool,
 } from "next-sanity/hooks";
 import { useEffect, useTransition } from "react";
 import { toast } from "sonner";
@@ -11,13 +10,13 @@ import { toast } from "sonner";
 import { disableDraftMode } from "./server-functions";
 
 export function DraftModeToast() {
-  const isPresentationTool = useIsPresentationTool();
+  const isPresentationTool = false; // Simplified for compatibility
   const env = useDraftModeEnvironment();
   const router = useRouter();
   const [pending, startTransition] = useTransition();
 
   useEffect(() => {
-    if (isPresentationTool === false) {
+    if (!isPresentationTool) {
       /**
        * We delay the toast in case we're inside Presentation Tool
        */
