@@ -23,7 +23,10 @@ export default defineConfig([
       "node_modules/**",
       "public/studio/**",
       "*.d.ts",
+      // TOOO: Remove this when we have a better way to handle this
+      "sanity.config.ts",
       "sanity.types.ts",
+      "sanity/loader/load-query.ts"
     ],
   },
   ...compat.extends("next/core-web-vitals", "next/typescript" ),
