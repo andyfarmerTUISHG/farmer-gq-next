@@ -19,7 +19,6 @@ To update Sanity Data Model
 
 There are a few VS Code recommended extensions in the project
 
-- Prettier Formatter for Visual Studio Code
 - VS Code ESLint extension
 - vscode-sanity
 - Code Spell Checker
