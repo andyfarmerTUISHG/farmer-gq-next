@@ -19,6 +19,9 @@ import {
 } from "@/sanity/lib/api";
 import * as resolve from "@/sanity/plugin/resolve";
 import { pageStructure, singletonPlugin } from "@/sanity/plugin/settings";
+import { updateTimestampAction, fixNullDatesAction, publishWithTimestamp } from "@/sanity/actions/updateTimestamp.js";
+
+
 
 import article from "./schema/articles";
 import siteLinks from "./schema/documents/site-links";
@@ -32,6 +35,16 @@ export default defineConfig({
   basePath: studioUrl,
   projectId: projectId || "",
   dataset: dataset || "",
+  document: {
+    actions: (prev, context) => {
+      if (context.schemaType === 'article') {
+        return [...prev, updateTimestampAction, fixNullDatesAction, publishWithTimestamp]
+      }
+      return prev
+    }
+  },
+
+
   schema: {
     // If you want more content types, you can add them to this array
     types: [

@@ -8,6 +8,7 @@ export default defineType({
   title: "Articles",
   type: "document",
   icon,
+
   fields: [
     {
       name: "name",
@@ -74,6 +75,7 @@ export default defineType({
             { title: "H2", value: "h2" },
             { title: "H3", value: "h3" },
             { title: "H4", value: "h4" },
+            { title: "H5", value: "h5" },
             { title: "Quote", value: "blockquote" },
           ],
         }),
@@ -123,11 +125,14 @@ export default defineType({
       title: "Date Added",
       name: "createddate",
       type: "datetime",
+      initialValue: () => new Date().toISOString(),
+      readOnly: true
     },
     {
       title: "Last Updated",
       name: "updateddate",
       type: "datetime",
+      initialValue: () => new Date().toISOString()
     },
     {
       title: "Asset",
