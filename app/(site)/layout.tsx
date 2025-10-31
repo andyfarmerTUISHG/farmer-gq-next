@@ -1,7 +1,7 @@
 import "../globals.css";
 
+import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
-import {VisualEditing} from "next-sanity/visual-editing";
 
 import BodyClassManager from "./components/body-class-manager";
 import Footer from "./components/footer";
@@ -25,7 +25,7 @@ export default async function RootLayout({ children }) {
         />
       </head>
       <body className="relative">
-        <div id="main" className={"relative"}>
+        <div id="main" className="relative">
           <MenuProvider>
             <div>
               <BodyClassManager />
@@ -36,11 +36,11 @@ export default async function RootLayout({ children }) {
           </MenuProvider>
         </div>
         {(await draftMode()).isEnabled && (
-        <>
-          <DraftModeToast />
-          <VisualEditing />
-        </>
-      )}
+          <>
+            <DraftModeToast />
+            <VisualEditing />
+          </>
+        )}
       </body>
     </html>
   );

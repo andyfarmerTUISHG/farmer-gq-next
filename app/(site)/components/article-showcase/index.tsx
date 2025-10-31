@@ -5,9 +5,10 @@ import { notFound } from "next/navigation";
 import { loadArticleShowcase } from "@/sanity/loader/load-query";
 
 import ArticleShowcaseLayout from "./article-showcase-layout";
+
 const ArticleShowcasePreview = dynamic(
   () =>
-    import("@/app/(site)/components/article-showcase/article-showcase-preview")
+    import("@/app/(site)/components/article-showcase/article-showcase-preview"),
 );
 export default async function ArticleShowcase() {
   const initial = await loadArticleShowcase();

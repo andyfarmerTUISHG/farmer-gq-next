@@ -5,11 +5,12 @@ import {
   TiSocialLinkedin,
   TiSocialTwitter,
 } from "react-icons/ti";
+
 export default function Footer() {
-  interface SocialMediaItem {
+  type SocialMediaItem = {
     name: string;
     url: string;
-  }
+  };
 
   const socialMedia: SocialMediaItem[] = [
     {
@@ -38,11 +39,17 @@ export default function Footer() {
       <div className="container flex flex-col justify-between py-6 sm:flex-row">
         <p className="font-body text-center text-white md:text-left">
           {" "}
-          © Copyright {new Date().getFullYear()} Built with{" "}
+          © Copyright
+          {" "}
+          {new Date().getFullYear()}
+          {" "}
+          Built with
+          {" "}
           <a href="https://nextjs.org/" target="_blank">
             Next.Js
           </a>
-          . All right reserved, Andy Farmer.{" "}
+          . All right reserved, Andy Farmer.
+          {" "}
         </p>
         <div className="flex items-center justify-center pt-5 sm:justify-start sm:pt-0">
           {socialMedia?.map((social, key) => {

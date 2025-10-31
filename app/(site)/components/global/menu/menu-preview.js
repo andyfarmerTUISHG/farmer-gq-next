@@ -10,7 +10,7 @@ export default function MenuPreview({ initial }) {
     {},
     {
       initial,
-    }
+    },
   );
   return <MenuLayout data={data} encodeDataAttribute={encodeDataAttribute} />;
 }

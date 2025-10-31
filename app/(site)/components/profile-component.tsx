@@ -10,10 +10,10 @@ import { loadProfile } from "@/sanity/loader/load-query";
 
 import ProfileImage from "./profile-image";
 
-interface SocialMediaItem {
+type SocialMediaItem = {
   name: string;
   url: string;
-}
+};
 
 const socialMedia: SocialMediaItem[] = [
   {
@@ -40,7 +40,8 @@ const iconComponents = {
 export default async function ProfileComponent() {
   const { data: profile } = await loadProfile();
 
-  if (!profile) return null;
+  if (!profile)
+    return null;
 
   return (
     <div>
@@ -62,7 +63,9 @@ export default async function ProfileComponent() {
             </div>
             <div className="pt-8 sm:pt-10 lg:pt-0 lg:pl-8">
               <h1 className="font-header text-center text-4xl text-white sm:text-left sm:text-5xl md:text-6xl">
-                Hey I am {profile?.[0]?.fullName}
+                Hey I am
+                {" "}
+                {profile?.[0]?.fullName}
               </h1>
               <div className="flex flex-col justify-center pt-3 sm:flex-row sm:pt-5 lg:justify-start">
                 <div className="flex items-center justify-center pl-0 sm:justify-start md:pl-1">

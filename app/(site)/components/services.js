@@ -5,11 +5,13 @@ export default function Services() {
     <div className="container py-16 md:py-20" id="services">
       <h2 className="font-header text-primary text-center text-4xl font-semibold uppercase sm:text-5xl lg:text-6xl">
         {" "}
-        Here&apos;s what I&apos;m good at{" "}
+        Here&apos;s what I&apos;m good at
+        {" "}
       </h2>
       <h3 className="font-header pt-6 text-center text-xl font-medium text-black sm:text-2xl lg:text-3xl">
         {" "}
-        These are the services Ioffer{" "}
+        These are the services Ioffer
+        {" "}
       </h3>
       <div className="grid grid-cols-1 gap-6 pt-10 sm:grid-cols-2 md:gap-10 md:pt-12 lg:grid-cols-3">
         <div className="group hover:bg-primary rounded px-8 py-12 shadow">
@@ -34,11 +36,13 @@ export default function Services() {
           <div className="text-center">
             <h3 className="text-primary group-hover:text-yellow pt-8 text-lg font-semibold uppercase lg:text-xl">
               {" "}
-              WEB DEVELOPMENT{" "}
+              WEB DEVELOPMENT
+              {" "}
             </h3>
             <p className="text-grey pt-4 text-sm group-hover:text-white md:text-base">
               {" "}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.{" "}
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              {" "}
             </p>
           </div>
         </div>
@@ -64,11 +68,13 @@ export default function Services() {
           <div className="text-center">
             <h3 className="text-primary group-hover:text-yellow pt-8 text-lg font-semibold uppercase lg:text-xl">
               {" "}
-              Technical Writing{" "}
+              Technical Writing
+              {" "}
             </h3>
             <p className="text-grey pt-4 text-sm group-hover:text-white md:text-base">
               {" "}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.{" "}
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              {" "}
             </p>
           </div>
         </div>
@@ -94,11 +100,13 @@ export default function Services() {
           <div className="text-center">
             <h3 className="text-primary group-hover:text-yellow pt-8 text-lg font-semibold uppercase lg:text-xl">
               {" "}
-              Mobile Development{" "}
+              Mobile Development
+              {" "}
             </h3>
             <p className="text-grey pt-4 text-sm group-hover:text-white md:text-base">
               {" "}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.{" "}
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              {" "}
             </p>
           </div>
         </div>
@@ -124,11 +132,13 @@ export default function Services() {
           <div className="text-center">
             <h3 className="text-primary group-hover:text-yellow pt-8 text-lg font-semibold uppercase lg:text-xl">
               {" "}
-              Email Development{" "}
+              Email Development
+              {" "}
             </h3>
             <p className="text-grey pt-4 text-sm group-hover:text-white md:text-base">
               {" "}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.{" "}
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              {" "}
             </p>
           </div>
         </div>
@@ -154,11 +164,13 @@ export default function Services() {
           <div className="text-center">
             <h3 className="text-primary group-hover:text-yellow pt-8 text-lg font-semibold uppercase lg:text-xl">
               {" "}
-              Graphic Design{" "}
+              Graphic Design
+              {" "}
             </h3>
             <p className="text-grey pt-4 text-sm group-hover:text-white md:text-base">
               {" "}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.{" "}
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              {" "}
             </p>
           </div>
         </div>
@@ -184,11 +196,13 @@ export default function Services() {
           <div className="text-center">
             <h3 className="text-primary group-hover:text-yellow pt-8 text-lg font-semibold uppercase lg:text-xl">
               {" "}
-              Web Design{" "}
+              Web Design
+              {" "}
             </h3>
             <p className="text-grey pt-4 text-sm group-hover:text-white md:text-base">
               {" "}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.{" "}
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              {" "}
             </p>
           </div>
         </div>

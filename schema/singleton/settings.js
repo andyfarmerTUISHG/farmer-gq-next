@@ -8,7 +8,7 @@ export default defineType({
   icon: CogIcon,
   // Uncomment below to have edits publish automatically as you type
   // liveEdit: true,
-  //TODO - need more fields for settings
+  // TODO - need more fields for settings
   fields: [
     defineField({
       name: "menuItems",

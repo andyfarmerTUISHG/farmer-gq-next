@@ -1,15 +1,6 @@
-import { NextConfig } from "next";
-import path from "path";
+import type { NextConfig } from "next";
 
 const config: NextConfig = {
-  // webpack: (config) => {
-  //   config.resolve.alias = {
-  //     ...config.resolve.alias,
-  //     "@": path.resolve(__dirname),
-  //     "@/sanity": path.resolve(__dirname, "sanity"),
-  //   };
-  //   return config;
-  // },
   images: {
     remotePatterns: [
       { hostname: "cdn.sanity.io" },

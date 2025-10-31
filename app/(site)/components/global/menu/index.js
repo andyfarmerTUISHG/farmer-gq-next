@@ -7,7 +7,7 @@ import { loadSettings } from "@/sanity/loader/load-query";
 import MenuLayout from "./menu-layout";
 
 const MenuPreview = dynamic(
-  () => import("@/app/(site)/components/global/menu/menu-preview")
+  () => import("@/app/(site)/components/global/menu/menu-preview"),
 );
 
 export default async function Menu() {

@@ -38,9 +38,10 @@ export default function MenuLayout({ data }) {
                 if (_type === "sitelinks") {
                   slug = url;
                 }
-                let link = item.name ? item.name : title;
+                const link = item.name ? item.name : title;
                 const href = resolveHref(_type, slug);
-                if (!href) return null;
+                if (!href)
+                  return null;
 
                 return (
                   <li key={key} className="group pl-6">
@@ -89,9 +90,10 @@ export default function MenuLayout({ data }) {
               if (_type === "sitelinks") {
                 slug = url;
               }
-              let link = item.name ? item.name : title;
+              const link = item.name ? item.name : title;
               const href = resolveHref(_type, slug);
-              if (!href) return null;
+              if (!href)
+                return null;
 
               return (
                 <li key={key} className="py-2">

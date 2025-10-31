@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 
-interface ProfileImageProps {
+type ProfileImageProps = {
   src: string;
   className: string;
   alt: string;
   width: number;
   height: number;
-}
+};
 
 export default function ProfileImage({
   src,

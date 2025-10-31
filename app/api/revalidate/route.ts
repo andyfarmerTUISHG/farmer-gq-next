@@ -1,3 +1,5 @@
+import type { NextRequest } from "next/server";
+
 /**
  * This code is responsible for revalidating queries as the dataset is updated.
  *
@@ -24,7 +26,7 @@
 // eslint-disable-next-line simple-import-sort/imports
 import { parseBody } from "next-sanity/webhook";
 import { revalidateTag } from "next/cache";
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 import { revalidateSecret } from "@/sanity/lib/api";
 
@@ -54,7 +56,8 @@ export async function POST(req: NextRequest) {
       body,
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
+  }
+  catch (err: any) {
     console.error(err);
     return new Response(err.message, { status: 500 });
   }

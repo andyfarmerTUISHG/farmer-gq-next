@@ -1,18 +1,20 @@
 // import { notFound } from "next/navigation";
 import type { EncodeDataAttributeCallback } from "@sanity/react-loader";
+
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 
+import type { ArticleType } from "@/types";
+
 import { sanityFetch } from "@/sanity/lib/live";
 import { articleBySlugQuery } from "@/sanity/lib/queries";
-import type { ArticleType } from "@/types";
 
 import { CustomPortableText } from "../../components/global/custom-portable-text";
 
-export interface ArticlePageProps {
+export type ArticlePageProps = {
   data: ArticleType | null;
   encodeDataAttribute?: EncodeDataAttributeCallback;
-}
+};
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -45,8 +47,8 @@ export default async function ArticlePage({ params }: Props) {
             </div>
           )}
           <ul>
-            {authors &&
-              authors.map((author) => (
+            {authors
+              && authors.map(author => (
                 <li key={author.name}>
                   <a href={`/person/${author.slug}`}>
                     <span>{author.name}</span>
