@@ -1,6 +1,11 @@
-import type { NextConfig } from "next";
+import createJiti from "jiti";
+import { fileURLToPath } from "node:url";
 
-const config: NextConfig = {
+const jiti = createJiti(fileURLToPath(import.meta.url));
+
+const { env } = jiti("./app/(site)/env/index.ts");
+
+const NextConfig = {
   images: {
     remotePatterns: [
       { hostname: "cdn.sanity.io" },
@@ -9,7 +14,7 @@ const config: NextConfig = {
   },
   typescript: {
     // Set this to false if you want production builds to abort if there's type errors
-    ignoreBuildErrors: process.env.VERCEL_ENV === "production",
+    ignoreBuildErrors: env.VERCEL_ENV === "production",
   },
   logging: {
     fetches: {
@@ -25,4 +30,4 @@ const config: NextConfig = {
   },
 };
 
-export default config;
+export default NextConfig;

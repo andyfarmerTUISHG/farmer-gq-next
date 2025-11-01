@@ -23,7 +23,6 @@ import type { NextRequest } from "next/server";
  * 15. Add the secret to Vercel: `npx vercel env add SANITY_REVALIDATE_SECRET`
  * 16. Redeploy with `npx vercel --prod` to apply the new environment variable
  */
-// eslint-disable-next-line simple-import-sort/imports
 import { parseBody } from "next-sanity/webhook";
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
@@ -55,7 +54,6 @@ export async function POST(req: NextRequest) {
       now: Date.now(),
       body,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   }
   catch (err: any) {
     console.error(err);

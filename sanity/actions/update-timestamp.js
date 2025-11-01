@@ -1,6 +1,7 @@
 import { useDocumentOperation } from "sanity";
 
 // Fix null dates action
+/* eslint-disable react-hooks/rules-of-hooks */
 export function fixNullDatesAction(props) {
   const { type, id, draft, published } = props;
   const { patch } = useDocumentOperation(id, type);
@@ -67,3 +68,4 @@ export function publishWithTimestamp(props) {
     disabled: publish.disabled,
   };
 }
+/* eslint-enable react-hooks/rules-of-hooks */

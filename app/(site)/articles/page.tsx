@@ -1,4 +1,5 @@
 import Pagination from "@/app/(site)/components/pagination";
+import { env } from "@/app/(site)/env";
 import { formatDate } from "@/app/utils/functions";
 import { sanityFetch } from "@/sanity/lib/live";
 import { paginatedArticlesQuery } from "@/sanity/lib/queries";
@@ -8,7 +9,7 @@ export default async function ArticleListRoute({
 }: {
   searchParams: Promise<{ page?: string }>;
 }) {
-  const pageSize = Number.parseInt(process.env.NEXT_PAGE_SIZE || "15");
+  const pageSize = Number.parseInt(env.NEXT_PAGE_SIZE);
   const resolvedSearchParams = await searchParams;
   const page = resolvedSearchParams?.page
     ? Number.parseInt(resolvedSearchParams.page, 10)
