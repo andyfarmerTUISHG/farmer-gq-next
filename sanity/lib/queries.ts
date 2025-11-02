@@ -1,12 +1,14 @@
 import { groq } from "next-sanity";
 
 export const paginatedArticlesQuery = groq`
-  *[_type == "article"] | order(_id) [$skip...$pageSize] {
+  *[_type == "article"] | order(_updatedAt desc, _createdAt desc) [$skip...$pageSize] {
     _id,
     "slug": slug.current,
     name,
     createdDate,
     bodycopy,
+    _createdAt,
+    _updatedAt,
     "authors": author[]->{ name, "slug": slug.current},
     "articleCount": count(*[_type == "article"])
   }
