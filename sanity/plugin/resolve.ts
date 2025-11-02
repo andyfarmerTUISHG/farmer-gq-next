@@ -9,7 +9,7 @@ import { resolveHref } from "@/sanity/lib/utils";
 export const mainDocuments = defineDocuments([
   {
     route: "/articles/:slug",
-    filter: '_type == "article" && slug.current == $slug',
+    filter: "_type == \"article\" && slug.current == $slug",
   },
 ]);
 

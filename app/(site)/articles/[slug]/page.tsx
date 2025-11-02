@@ -1,15 +1,15 @@
 // import { notFound } from "next/navigation";
 import type { EncodeDataAttributeCallback } from "@sanity/react-loader";
+import { createDataAttribute } from "next-sanity";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import { createDataAttribute } from "next-sanity";
-
-import { sanityFetch } from "@/sanity/lib/live";
-import { articleBySlugQuery } from "@/sanity/lib/queries";
-import { studioUrl } from "@/sanity/lib/api";
-import type { ArticleType } from "@/types";
 
 import { CustomPortableText } from "../../components/global/custom-portable-text";
+
+import { studioUrl } from "@/sanity/lib/api";
+import { sanityFetch } from "@/sanity/lib/live";
+import { articleBySlugQuery } from "@/sanity/lib/queries";
+import type { ArticleType } from "@/types";
 
 export interface ArticlePageProps {
   data: ArticleType | null;
@@ -49,7 +49,7 @@ export default async function ArticlePage({ params }: Props) {
         <div>
           {/* Title */}
           {name && (
-            <div className="text-4xl" data-sanity={dataAttribute?.('name')}>
+            <div className="text-4xl" data-sanity={dataAttribute?.("name")}>
               {name}
               <br />
               <span className="text-sm">{createddate}</span>
