@@ -3,8 +3,9 @@ import "../globals.css";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 
-import BodyClassManager from "./components/body-class-manager";
 import { SanityLive } from "@/sanity/lib/live";
+
+import BodyClassManager from "./components/body-class-manager";
 import Footer from "./components/footer";
 import Menu from "./components/global/menu";
 import { MenuProvider } from "./context/menu-context";

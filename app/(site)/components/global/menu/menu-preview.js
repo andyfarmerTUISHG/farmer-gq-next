@@ -7,5 +7,4 @@ import MenuLayout from "./menu-layout";
 export default function MenuPreview({ initial }) {
   const { data } = useLiveQuery(settingsQuery, {}, { initial });
   return <MenuLayout data={data} />;
-
 }
