@@ -14,7 +14,7 @@ export default defineCliConfig({
   api: { projectId, dataset },
   studioHost: "farmer-gq",
   deployment: {
-    appId: '8a5832434ec7e7e69ddee5b4',
+    appId: "8a5832434ec7e7e69ddee5b4",
   },
   vite: {
     resolve: {
