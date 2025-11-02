@@ -33,7 +33,7 @@ export default defineType({
 
       return {
         title,
-        subtitle: `Created: ${writtenDate} | Updated: ${formattedDate}`,
+        subtitle: `📅: ${writtenDate}  ✏️: ${formattedDate}`,
       };
     },
   },
