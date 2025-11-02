@@ -11,19 +11,39 @@ export default function SimplePagination({
       is 20 to 29
       <ul>
         <li>
-          Page Size: {typeof pageSize} {pageSize}
+          Page Size:
+          {" "}
+          {typeof pageSize}
+          {" "}
+          {pageSize}
         </li>
         <li>
-          Total Count: {typeof totalCount} {totalCount}
+          Total Count:
+          {" "}
+          {typeof totalCount}
+          {" "}
+          {totalCount}
         </li>
         <li>
-          Current Page: {typeof currentPage} {currentPage}
+          Current Page:
+          {" "}
+          {typeof currentPage}
+          {" "}
+          {currentPage}
         </li>
         <li>
-          Base: {typeof base} {base}
+          Base:
+          {" "}
+          {typeof base}
+          {" "}
+          {base}
         </li>
         <li>
-          Skip: {typeof skip} {skip}
+          Skip:
+          {" "}
+          {typeof skip}
+          {" "}
+          {skip}
         </li>
       </ul>
     </div>

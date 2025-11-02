@@ -56,7 +56,9 @@ export default function Pagination({
           aria-disabled={!hasPrevPage}
           href={`${base}?page=${prevPage}`}
         >
-          &#8592; <span className="word"> Prev</span>
+          &#8592;
+          {" "}
+          <span className="word"> Prev</span>
         </Link>
 
         {Array.from({ length: totalPages }).map((_, i) => (
@@ -70,7 +72,8 @@ export default function Pagination({
           aria-disabled={!hasNextPage}
           href={`${base}?page=${nextPage}`}
         >
-          <span className="word">Next </span>&#8594;
+          <span className="word">Next </span>
+          &#8594;
         </Link>
       </PaginationStyles>
     </div>

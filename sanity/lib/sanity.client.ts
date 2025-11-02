@@ -1,8 +1,10 @@
-import {defineLive} from "next-sanity/live";
+import { defineLive } from "next-sanity/live";
+
+import { env } from "@/app/(site)/env/index";
 
 import { client } from "./client";
 
-const token = process.env.SANITY_API_READ_TOKEN;
+const token = env.SANITY_API_READ_TOKEN;
 if (!token) {
   throw new Error("Missing SANITY_API_READ_TOKEN");
 }

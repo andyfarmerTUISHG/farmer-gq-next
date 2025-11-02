@@ -1,11 +1,11 @@
 // types/index.ts
 import type { PortableTextBlock } from "sanity";
 
-export interface MenuItem {
+export type MenuItem = {
   _type: string;
   slug?: string;
   title?: string;
-}
+};
 
 export type ProfileType = {
   _id: string;
@@ -22,7 +22,7 @@ export type ArticleType = {
   author: string;
 };
 
-export interface SettingsPayload {
+export type SettingsPayload = {
   menuItems?: MenuItem[];
   showcaseArticles?: ArticleType[];
-}
+};

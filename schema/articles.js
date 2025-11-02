@@ -154,11 +154,14 @@ export default defineType({
       title: "Date Added",
       name: "createddate",
       type: "datetime",
+      initialValue: () => new Date().toISOString(),
+      readOnly: true,
     },
     {
       title: "Last Updated",
       name: "updateddate",
       type: "datetime",
+      initialValue: () => new Date().toISOString(),
     },
     {
       title: "Asset",

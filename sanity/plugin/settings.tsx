@@ -1,10 +1,10 @@
 /**
  * This plugin contains all the logic for setting up the singletons
  */
-import { type DocumentDefinition } from "sanity";
-import { type StructureResolver } from "sanity/structure";
+import type { DocumentDefinition } from "sanity";
+import type { StructureResolver } from "sanity/structure";
 
-export const singletonPlugin = (types: string[]) => {
+export function singletonPlugin(types: string[]) {
   return {
     name: "singletonPlugin",
     document: {
@@ -13,7 +13,7 @@ export const singletonPlugin = (types: string[]) => {
       newDocumentOptions: (prev, { creationContext }) => {
         if (creationContext.type === "global") {
           return prev.filter(
-            (templateItem) => !types.includes(templateItem.templateId)
+            templateItem => !types.includes(templateItem.templateId),
           );
         }
 
@@ -29,13 +29,11 @@ export const singletonPlugin = (types: string[]) => {
       },
     },
   };
-};
+}
 
 // The StructureResolver is how we're changing the DeskTool structure to linking to document (named Singleton)
 // like how "Home" is handled.
-export const pageStructure = (
-  typeDefArray: DocumentDefinition[]
-): StructureResolver => {
+export function pageStructure(typeDefArray: DocumentDefinition[]): StructureResolver {
   return (S) => {
     // Goes through all of the singletons that were provided and translates them into something the
     // Desktool can understand
@@ -48,18 +46,36 @@ export const pageStructure = (
           S.editor()
             .id(typeDef.name)
             .schemaType(typeDef.name)
-            .documentId(typeDef.name)
+            .documentId(typeDef.name),
         );
     });
 
+    // Custom article list with updated date
+    const articleListItem = S.listItem()
+      .title("Articles")
+      .id("article")
+      .child(
+        S.documentList()
+          .title("Articles")
+          .filter("_type == \"article\"")
+          .defaultOrdering([{ field: "updateddate", direction: "desc" }])
+          .child(documentId =>
+            S.document()
+              .documentId(documentId)
+              .schemaType("article"),
+          ),
+      );
+
     // The default root list items (except custom ones)
     const defaultListItems = S.documentTypeListItems().filter(
-      (listItem) =>
-        !typeDefArray.find((singleton) => singleton.name === listItem.getId())
+      (listItem) => {
+        const id = listItem.getId();
+        return !typeDefArray.find(singleton => singleton.name === id) && id !== "article";
+      },
     );
 
     return S.list()
       .title("Content")
-      .items([...singletonItems, S.divider(), ...defaultListItems]);
+      .items([...singletonItems, S.divider(), articleListItem, ...defaultListItems]);
   };
-};
+}

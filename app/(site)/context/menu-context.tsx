@@ -1,11 +1,13 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useState } from "react";
+import type { ReactNode } from "react";
 
-interface MenuContextType {
+import { createContext, use, useState } from "react";
+
+type MenuContextType = {
   isMenuOpen: boolean;
   toggleMenu: () => void;
-}
+};
 
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
 
@@ -17,14 +19,14 @@ export function MenuProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <MenuContext.Provider value={{ isMenuOpen, toggleMenu }}>
+    <MenuContext value={{ isMenuOpen, toggleMenu }}>
       {children}
-    </MenuContext.Provider>
+    </MenuContext>
   );
 }
 
 export function useMenu() {
-  const context = useContext(MenuContext);
+  const context = use(MenuContext);
   if (context === undefined) {
     throw new Error("useMenu must be used within a MenuProvider");
   }

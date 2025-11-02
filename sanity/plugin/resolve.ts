@@ -9,6 +9,7 @@ import { resolveHref } from "@/sanity/lib/utils";
 export const mainDocuments = defineDocuments([
   {
     route: "/articles/:slug",
+
     filter: "_type == \"article\" && slug.current == $slug",
   },
 ]);
@@ -21,6 +22,7 @@ export const locations = {
   article: defineLocations({
     select: { name: "name", slug: "slug.current" },
     resolve: (doc) => ({
+
       locations: [
         {
           title: doc?.name || "Untitled",

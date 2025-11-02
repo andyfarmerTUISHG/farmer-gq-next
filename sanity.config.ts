@@ -19,6 +19,9 @@ import {
 } from "@/sanity/lib/api";
 import * as resolve from "@/sanity/plugin/resolve";
 import { pageStructure, singletonPlugin } from "@/sanity/plugin/settings";
+import { fixNullDatesAction, publishWithTimestamp } from "@/sanity/actions/update-timestamp.js";
+
+
 
 import article from "./schema/articles";
 import siteLinks from "./schema/documents/site-links";
@@ -32,6 +35,20 @@ export default defineConfig({
   basePath: studioUrl,
   projectId: projectId || "",
   dataset: dataset || "",
+  document: {
+    actions: (prev, context) => {
+      if (context.schemaType === 'article') {
+        // Remove default publish action and replace with our timestamp version
+        const filteredActions = prev.filter(action => {
+          return action.name !== 'PublishAction'
+        })
+        return [...filteredActions, publishWithTimestamp, fixNullDatesAction]
+      }
+      return prev
+    }
+  },
+
+
   schema: {
     // If you want more content types, you can add them to this array
     types: [
