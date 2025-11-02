@@ -21,7 +21,7 @@ export const locations = {
   }),
   article: defineLocations({
     select: { name: "name", slug: "slug.current" },
-    resolve: (doc) => ({
+    resolve: doc => ({
 
       locations: [
         {
