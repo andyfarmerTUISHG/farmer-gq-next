@@ -1,23 +1,15 @@
-import dynamic from "next/dynamic";
-import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 
-import { loadSettings } from "@/sanity/loader/load-query";
+import { sanityFetch } from "@/sanity/lib/live";
+import { settingsQuery } from "@/sanity/lib/queries";
 
 import MenuLayout from "./menu-layout";
 
-const MenuPreview = dynamic(
-  () => import("@/app/(site)/components/global/menu/menu-preview")
-);
-
 export default async function Menu() {
-  const initial = await loadSettings();
+  const { data } = await sanityFetch({ query: settingsQuery });
 
-  if ((await draftMode()).isEnabled) {
-    return <MenuPreview initial={initial} />;
-  }
-  if (!initial.data) {
+  if (!data) {
     notFound();
   }
-  return <MenuLayout data={initial.data} />;
+  return <MenuLayout data={data} />;
 }

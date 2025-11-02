@@ -4,6 +4,7 @@ import { draftMode } from "next/headers";
 import {VisualEditing} from "next-sanity/visual-editing";
 
 import BodyClassManager from "./components/body-class-manager";
+import { SanityLive } from "@/sanity/lib/live";
 import Footer from "./components/footer";
 import Menu from "./components/global/menu";
 import { MenuProvider } from "./context/menu-context";
@@ -35,6 +36,7 @@ export default async function RootLayout({ children }) {
             </div>
           </MenuProvider>
         </div>
+        <SanityLive />
         {(await draftMode()).isEnabled && (
         <>
           <DraftModeToast />
