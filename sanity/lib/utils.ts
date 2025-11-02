@@ -5,7 +5,7 @@ import { dataset, projectId } from "@/sanity/lib/api";
 
 export function resolveHref(
   documentType?: string,
-  slug?: string
+  slug?: string,
 ): string | undefined {
   switch (documentType) {
     case "home":
