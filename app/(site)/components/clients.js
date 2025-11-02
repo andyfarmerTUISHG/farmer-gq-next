@@ -7,7 +7,8 @@ export default function Clients() {
         <div className="mx-auto w-full sm:w-3/4 lg:w-full">
           <h2 className="font-header text-primary text-center text-4xl font-semibold uppercase sm:text-5xl lg:text-6xl">
             {" "}
-            My latest clients{" "}
+            My latest clients
+            {" "}
           </h2>
           <div className="flex flex-wrap items-center justify-center pt-4 sm:pt-4">
             <span className="m-8 block">

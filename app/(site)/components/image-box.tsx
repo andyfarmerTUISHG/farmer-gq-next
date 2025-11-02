@@ -1,18 +1,19 @@
-import Image from "next/image";
 import type { Image as SanityImage } from "sanity";
+
+import Image from "next/image";
 
 import { urlForImage } from "@/sanity/lib/utils";
 
-interface ImageBoxProps {
-  image?: SanityImage & { alt?: string; caption?: string };
+type ImageBoxProps = {
+  "image"?: SanityImage & { alt?: string; caption?: string };
 
-  alt?: string;
-  width?: number;
-  height?: number;
-  size?: string;
-  classesWrapper?: string;
+  "alt"?: string;
+  "width"?: number;
+  "height"?: number;
+  "size"?: string;
+  "classesWrapper"?: string;
   "data-sanity"?: string;
-}
+};
 
 export default function ImageBox({
   image,
@@ -23,8 +24,8 @@ export default function ImageBox({
   classesWrapper,
   ...props
 }: ImageBoxProps) {
-  const imageUrl =
-    image && urlForImage(image)?.height(height).width(width).fit("crop").url();
+  const imageUrl
+    = image && urlForImage(image)?.height(height).width(width).fit("crop").url();
   return (
     <div
       className={`w-full overflow-hidden rounded-[3px] bg-gray-50 ${classesWrapper}`}

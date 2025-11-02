@@ -5,11 +5,13 @@ export default function Work() {
     <div className="container py-16 md:py-20" id="work">
       <h2 className="font-header text-primary text-center text-4xl font-semibold uppercase sm:text-5xl lg:text-6xl">
         {" "}
-        My work experience{" "}
+        My work experience
+        {" "}
       </h2>
       <h3 className="font-header pt-6 text-center text-xl font-medium text-black sm:text-2xl lg:text-3xl">
         {" "}
-        Here&apos;s what I did before freelancing{" "}
+        Here&apos;s what I did before freelancing
+        {" "}
       </h3>
       <div className="relative mx-auto mt-12 flex w-full flex-col lg:w-2/3">
         <span className="bg-grey-40 absolute inset-y-0 left-2/5 ml-10 hidden w-0.5 md:block"></span>

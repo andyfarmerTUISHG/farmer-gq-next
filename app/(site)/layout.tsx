@@ -1,10 +1,11 @@
 import "../globals.css";
 
+import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
-import {VisualEditing} from "next-sanity/visual-editing";
+
+import { SanityLive } from "@/sanity/lib/live";
 
 import BodyClassManager from "./components/body-class-manager";
-import { SanityLive } from "@/sanity/lib/live";
 import Footer from "./components/footer";
 import Menu from "./components/global/menu";
 import { MenuProvider } from "./context/menu-context";
@@ -26,7 +27,7 @@ export default async function RootLayout({ children }) {
         />
       </head>
       <body className="relative">
-        <div id="main" className={"relative"}>
+        <div id="main" className="relative">
           <MenuProvider>
             <div>
               <BodyClassManager />
@@ -38,11 +39,11 @@ export default async function RootLayout({ children }) {
         </div>
         <SanityLive />
         {(await draftMode()).isEnabled && (
-        <>
-          <DraftModeToast />
-          <VisualEditing />
-        </>
-      )}
+          <>
+            <DraftModeToast />
+            <VisualEditing />
+          </>
+        )}
       </body>
     </html>
   );

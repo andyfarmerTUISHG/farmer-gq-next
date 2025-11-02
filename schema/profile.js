@@ -11,14 +11,14 @@ const profile = {
       name: "fullName",
       title: "Full Name",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "headline",
       title: "Headline",
       type: "string",
       description: "A short description of what you do?",
-      validation: (Rule) => Rule.required().min(40).max(100),
+      validation: Rule => Rule.required().min(40).max(100),
     }),
   ],
 };

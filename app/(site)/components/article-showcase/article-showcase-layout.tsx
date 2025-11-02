@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { SettingsPayload } from "@/types";
+import type { SettingsPayload } from "@/types";
 
 export default function ArticleShowcaseLayout({
   data,
@@ -13,17 +13,19 @@ export default function ArticleShowcaseLayout({
         <div className="container py-16 md:py-20">
           <h2 className="font-header text-primary text-center text-4xl font-semibold uppercase sm:text-5xl lg:text-6xl">
             {" "}
-            I also like to share my thoughts{" "}
+            I also like to share my thoughts
+            {" "}
           </h2>
           <h4 className="font-header pt-6 text-center text-xl font-medium text-black sm:text-2xl lg:text-3xl">
             {" "}
-            Check out my favourite posts!{" "}
+            Check out my favourite posts!
+            {" "}
           </h4>
           <div className="mx-auto grid w-full grid-cols-1 gap-6 pt-12 sm:w-3/4 lg:w-full lg:grid-cols-3 xl:gap-10">
-            {data?.showcaseArticles &&
-              data.showcaseArticles.map((article, key) => (
+            {data?.showcaseArticles
+              && data.showcaseArticles.map(article => (
                 <a
-                  key={key}
+                  key={article._id}
                   href={`/articles/${article.slug}`}
                   className="shadow"
                 >

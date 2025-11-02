@@ -1,14 +1,19 @@
 import type { PathSegment } from "@sanity/client/csm";
+import type {
+  PortableTextBlock,
+  PortableTextComponents,
+} from "next-sanity";
+import type { Image } from "sanity";
+
 import {
   PortableText,
-  type PortableTextBlock,
-  PortableTextComponents,
+
 } from "next-sanity";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import type { Image } from "sanity";
 
 import ImageBox from "../image-box";
+
 export function CustomPortableText({
   paragraphClasses,
   value,
@@ -59,7 +64,7 @@ export function CustomPortableText({
           </div>
         );
       },
-      code: (props) => (
+      code: props => (
         <div className="my-2">
           <SyntaxHighlighter
             // language={language}
