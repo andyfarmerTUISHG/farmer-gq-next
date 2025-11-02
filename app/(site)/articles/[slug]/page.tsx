@@ -3,12 +3,14 @@ import type { EncodeDataAttributeCallback } from "@sanity/react-loader";
 import { createDataAttribute } from "next-sanity";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { createDataAttribute } from "next-sanity";
 
 import { CustomPortableText } from "../../components/global/custom-portable-text";
 
 import { studioUrl } from "@/sanity/lib/api";
 import { sanityFetch } from "@/sanity/lib/live";
 import { articleBySlugQuery } from "@/sanity/lib/queries";
+import { studioUrl } from "@/sanity/lib/api";
 import type { ArticleType } from "@/types";
 
 export interface ArticlePageProps {
