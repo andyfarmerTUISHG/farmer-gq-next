@@ -14,9 +14,10 @@ import { studioUrl } from "@/sanity/lib/api";
 import type { ArticleType } from "@/types";
 
 export interface ArticlePageProps {
+
   data: ArticleType | null;
   encodeDataAttribute?: EncodeDataAttributeCallback;
-}
+};
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -58,8 +59,8 @@ export default async function ArticlePage({ params }: Props) {
             </div>
           )}
           <ul>
-            {authors &&
-              authors.map((author) => (
+            {authors
+              && authors.map(author => (
                 <li key={author.name}>
                   <a href={`/person/${author.slug}`}>
                     <span>{author.name}</span>

@@ -8,6 +8,36 @@ export default defineType({
   title: "Articles",
   type: "document",
   icon,
+  preview: {
+    select: {
+      title: "name",
+      createddate: "_createdAt",
+      updateddate: "_updatedAt",
+    },
+    prepare(selection) {
+      const { title, createddate, updateddate } = selection;
+      const writtenDate = createddate
+        ? new Date(createddate).toLocaleDateString("en-GB", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })
+        : "No date";
+      const formattedDate = updateddate
+        ? new Date(updateddate).toLocaleDateString("en-GB", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })
+        : "No date";
+
+      return {
+        title,
+        subtitle: `Created: ${writtenDate} | Updated: ${formattedDate}`,
+      };
+    },
+  },
+
   fields: [
     {
       name: "name",
@@ -74,6 +104,7 @@ export default defineType({
             { title: "H2", value: "h2" },
             { title: "H3", value: "h3" },
             { title: "H4", value: "h4" },
+            { title: "H5", value: "h5" },
             { title: "Quote", value: "blockquote" },
           ],
         }),
@@ -123,11 +154,14 @@ export default defineType({
       title: "Date Added",
       name: "createddate",
       type: "datetime",
+      initialValue: () => new Date().toISOString(),
+      readOnly: true,
     },
     {
       title: "Last Updated",
       name: "updateddate",
       type: "datetime",
+      initialValue: () => new Date().toISOString(),
     },
     {
       title: "Asset",

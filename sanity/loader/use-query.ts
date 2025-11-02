@@ -6,7 +6,7 @@ import { settingsQuery } from "../lib/queries";
  * Exports to be used in client-only or components that render both server and client
  * TODO: Add types
  */
-export const useQuery = (query, params, options) => {
+export function useQuery(query, params, options) {
   const snapshot = queryStore.useQuery(query, params, options);
 
   // Always throw errors if there are any
@@ -15,7 +15,7 @@ export const useQuery = (query, params, options) => {
   }
 
   return snapshot;
-};
+}
 
 /**
  * Loaders that are used in more than one place are declared here, otherwise they're colocated with the component

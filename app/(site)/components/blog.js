@@ -4,11 +4,13 @@ export default function Blog() {
       <div className="container py-16 md:py-20">
         <h2 className="font-header text-primary text-center text-4xl font-semibold uppercase sm:text-5xl lg:text-6xl">
           {" "}
-          I also like to write{" "}
+          I also like to write
+          {" "}
         </h2>
         <h4 className="font-header pt-6 text-center text-xl font-medium text-black sm:text-2xl lg:text-3xl">
           {" "}
-          Check out my latest posts!{" "}
+          Check out my latest posts!
+          {" "}
         </h4>
         <div className="mx-auto grid w-full grid-cols-1 gap-6 pt-12 sm:w-3/4 lg:w-full lg:grid-cols-3 xl:gap-10">
           <a href="/post" className="shadow">

@@ -10,7 +10,8 @@ export default function BodyClassManager() {
   useEffect(() => {
     if (isMenuOpen) {
       document.body.classList.add("menu-open");
-    } else {
+    }
+    else {
       document.body.classList.remove("menu-open");
     }
   }, [isMenuOpen]);

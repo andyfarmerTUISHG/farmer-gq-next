@@ -23,11 +23,13 @@ export default function Statistics() {
               <div className="pt-5 md:pt-0 md:pl-5">
                 <h1 className="font-body text-primary text-2xl font-bold md:text-4xl">
                   {" "}
-                  12{" "}
+                  12
+                  {" "}
                 </h1>
                 <h4 className="text-grey-dark font-header text-base leading-loose font-medium md:text-xl">
                   {" "}
-                  Finished Projects{" "}
+                  Finished Projects
+                  {" "}
                 </h4>
               </div>
             </div>
@@ -44,11 +46,13 @@ export default function Statistics() {
               <div className="pt-5 md:pt-0 md:pl-5">
                 <h1 className="font-body text-primary text-2xl font-bold md:text-4xl">
                   {" "}
-                  3{" "}
+                  3
+                  {" "}
                 </h1>
                 <h4 className="text-grey-dark font-header text-base leading-loose font-medium md:text-xl">
                   {" "}
-                  Awards Won{" "}
+                  Awards Won
+                  {" "}
                 </h4>
               </div>
             </div>
@@ -65,11 +69,13 @@ export default function Statistics() {
               <div className="pt-5 md:pt-0 md:pl-5">
                 <h1 className="font-body text-primary text-2xl font-bold md:text-4xl">
                   {" "}
-                  8{" "}
+                  8
+                  {" "}
                 </h1>
                 <h4 className="text-grey-dark font-header text-base leading-loose font-medium md:text-xl">
                   {" "}
-                  Happy Clients{" "}
+                  Happy Clients
+                  {" "}
                 </h4>
               </div>
             </div>
@@ -86,11 +92,13 @@ export default function Statistics() {
               <div className="pt-5 md:pt-0 md:pl-5">
                 <h1 className="font-body text-primary text-2xl font-bold md:text-4xl">
                   {" "}
-                  99{" "}
+                  99
+                  {" "}
                 </h1>
                 <h4 className="text-grey-dark font-header text-base leading-loose font-medium md:text-xl">
                   {" "}
-                  Bugs Fixed{" "}
+                  Bugs Fixed
+                  {" "}
                 </h4>
               </div>
             </div>

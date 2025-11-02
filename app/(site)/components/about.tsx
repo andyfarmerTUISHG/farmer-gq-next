@@ -1,8 +1,8 @@
-interface SocialMediaItem {
+type SocialMediaItem = {
   id: string;
   icon: string;
   url: string;
-}
+};
 
 export default function About() {
   const socialMedia: SocialMediaItem[] = [
@@ -30,7 +30,8 @@ export default function About() {
         <div className="w-full text-center sm:w-3/4 lg:w-3/5 lg:text-left">
           <h2 className="font-header text-primary text-4xl font-semibold uppercase sm:text-5xl lg:text-6xl">
             {" "}
-            Who am I?{" "}
+            Who am I?
+            {" "}
           </h2>
           <h4 className="font-header pt-6 text-xl font-medium text-black sm:text-2xl lg:text-3xl">
             {" "}
@@ -44,21 +45,23 @@ export default function About() {
             aliquip ex ea commodo consequat. Duis aute irure dolor in
             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.{" "}
+            culpa qui officia deserunt mollit anim id est laborum.
+            {" "}
           </p>
           <div className="flex flex-col justify-center pt-6 sm:flex-row lg:justify-start">
             <div className="flex items-center justify-center sm:justify-start">
               <p className="font-body text-grey-20 text-lg font-semibold uppercase">
                 {" "}
-                Connect with me{" "}
+                Connect with me
+                {" "}
               </p>
               <div className="hidden sm:block">
                 <i className="bx bx-chevron-right text-primary text-2xl"></i>
               </div>
             </div>
             <div className="flex items-center justify-center pt-5 pl-2 sm:justify-start sm:pt-0">
-              {socialMedia &&
-                socialMedia.map((socail, key) => (
+              {socialMedia
+                && socialMedia.map((socail, key) => (
                   <a
                     key={key}
                     href={socail.url}
@@ -68,7 +71,8 @@ export default function About() {
                   >
                     <i
                       className={`bx text-primary hover:text-yellow text-2xl${socail.icon}`}
-                    ></i>
+                    >
+                    </i>
                   </a>
                 ))}
             </div>
@@ -79,7 +83,8 @@ export default function About() {
             <div className="flex items-end justify-between">
               <h4 className="font-body font-semibold text-black uppercase">
                 {" "}
-                HTML & CSS{" "}
+                HTML & CSS
+                {" "}
               </h4>
               <h3 className="font-body text-primary text-3xl font-bold">85%</h3>
             </div>
@@ -87,7 +92,8 @@ export default function About() {
               <div
                 className="bg-primary h-3 rounded-full"
                 style={{ width: "85%" }}
-              ></div>
+              >
+              </div>
             </div>
           </div>
           <div className="pt-6">
@@ -101,14 +107,16 @@ export default function About() {
               <div
                 className="bg-primary h-3 rounded-full"
                 style={{ width: "70%" }}
-              ></div>
+              >
+              </div>
             </div>
           </div>
           <div className="pt-6">
             <div className="flex items-end justify-between">
               <h4 className="font-body font-semibold text-black uppercase">
                 {" "}
-                Javascript{" "}
+                Javascript
+                {" "}
               </h4>
               <h3 className="font-body text-primary text-3xl font-bold">98%</h3>
             </div>
@@ -116,7 +124,8 @@ export default function About() {
               <div
                 className="bg-primary h-3 rounded-full"
                 style={{ width: "98%" }}
-              ></div>
+              >
+              </div>
             </div>
           </div>
           <div className="pt-6">
@@ -130,7 +139,8 @@ export default function About() {
               <div
                 className="bg-primary h-3 rounded-full"
                 style={{ width: "91%" }}
-              ></div>
+              >
+              </div>
             </div>
           </div>
         </div>
