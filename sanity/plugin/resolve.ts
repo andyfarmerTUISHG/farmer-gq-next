@@ -8,8 +8,7 @@ import { resolveHref } from "@/sanity/lib/utils";
 
 export const mainDocuments = defineDocuments([
   {
-    route: "/article/:slug",
-    // eslint-disable-next-line quotes
+    route: "/articles/:slug",
     filter: '_type == "article" && slug.current == $slug',
   },
 ]);
@@ -20,12 +19,12 @@ export const locations = {
     tone: "caution",
   }),
   article: defineLocations({
-    select: { title: "title", slug: "slug.current" },
+    select: { name: "name", slug: "slug.current" },
     resolve: (doc) => ({
       locations: [
         {
-          title: doc?.title || "Untitled",
-          href: resolveHref("page", doc?.slug)!,
+          title: doc?.name || "Untitled",
+          href: resolveHref("article", doc?.slug)!,
         },
       ],
     }),

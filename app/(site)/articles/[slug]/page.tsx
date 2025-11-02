@@ -2,9 +2,11 @@
 import type { EncodeDataAttributeCallback } from "@sanity/react-loader";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { createDataAttribute } from "next-sanity";
 
 import { sanityFetch } from "@/sanity/lib/live";
 import { articleBySlugQuery } from "@/sanity/lib/queries";
+import { studioUrl } from "@/sanity/lib/api";
 import type { ArticleType } from "@/types";
 
 import { CustomPortableText } from "../../components/global/custom-portable-text";
@@ -31,6 +33,15 @@ export default async function ArticlePage({ params }: Props) {
 
   const { name, createddate, authors, bodycopy } = article ?? {};
 
+  const dataAttribute =
+    article?._id && article._type
+      ? createDataAttribute({
+          baseUrl: studioUrl,
+          id: article._id,
+          type: article._type,
+        })
+      : null;
+
   return (
     <div>
       {/* <p>{params.article}</p> */}
@@ -38,7 +49,7 @@ export default async function ArticlePage({ params }: Props) {
         <div>
           {/* Title */}
           {name && (
-            <div className="text-4xl">
+            <div className="text-4xl" data-sanity={dataAttribute?.('name')}>
               {name}
               <br />
               <span className="text-sm">{createddate}</span>

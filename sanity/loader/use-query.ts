@@ -23,3 +23,5 @@ export const useQuery = (query, params, options) => {
 export function useSettings(initial) {
   return useQuery(settingsQuery, {}, { initial });
 }
+
+export const useLiveQuery = useQuery;
