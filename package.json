@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.2.0",
+    "@sanity/mcp-server": "^0.12.1",
     "@tailwindcss/postcss": "4.1.16",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
@@ -68,6 +69,7 @@
     "eslint": "^9.39.0",
     "eslint-plugin-format": "^1.0.2",
     "husky": "9.1.7",
+    "next-devtools-mcp": "latest",
     "postcss": "8",
     "tailwindcss": "4.1.16",
     "typescript": "5.9.3"
