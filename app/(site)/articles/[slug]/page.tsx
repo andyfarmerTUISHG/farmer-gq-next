@@ -34,7 +34,7 @@ export default async function ArticlePage({ params }: Props) {
     notFound();
   }
 
-  const { name, createddate, authors, bodycopy } = article ?? {};
+  const { name, _createdAt, authors, bodycopy } = article ?? {};
 
   const dataAttribute
     = article?._id && article._type
@@ -55,7 +55,7 @@ export default async function ArticlePage({ params }: Props) {
             <div className="text-4xl" data-sanity={dataAttribute?.("name")}>
               {name}
               <br />
-              <span className="text-sm">{createddate}</span>
+              <span className="text-sm">{new Date(_createdAt).toLocaleDateString("en-GB", { year: "numeric", month: "short", day: "numeric" })}</span>
             </div>
           )}
           <ul>

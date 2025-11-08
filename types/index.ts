@@ -17,9 +17,10 @@ export type ArticleType = {
   _id: string;
   name: string;
   slug: string;
-  createddate: string;
   bodycopy: string;
   author: string;
+  _createdAt: string;
+  _updatedAt: string;
 };
 
 export type SettingsPayload = {
