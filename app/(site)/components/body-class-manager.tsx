@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-import { useMenu } from "../context/menu-context";
+import { useMenu } from "../context/use-menu";
 
 export default function BodyClassManager() {
   const { isMenuOpen } = useMenu();
