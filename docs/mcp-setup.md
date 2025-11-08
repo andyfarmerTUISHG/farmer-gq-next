@@ -86,6 +86,7 @@ The AI is configured to follow ESLint rules, but verification ensures compliance
 **Symptoms**: AI doesn't show Sanity documents, no MCP server responses
 
 **Solutions**:
+
 - Restart VS Code after configuration changes
 - Check `.env.local` has actual token values (not "your-read-token-here" placeholders)
 - Verify extensions are installed (VS Code will show notifications in bottom-right)
@@ -96,6 +97,7 @@ The AI is configured to follow ESLint rules, but verification ensures compliance
 **Symptoms**: `q` command not found, or farmergq agent not loading
 
 **Solutions**:
+
 - Run `q --version` to check if Q CLI is installed
 - Ensure you're in the project directory (where `.amazonq/config.json` exists)
 - Try `q --agent farmergq` explicitly
@@ -106,6 +108,7 @@ The AI is configured to follow ESLint rules, but verification ensures compliance
 **Symptoms**: "Authentication failed" or "Project not found" errors
 
 **Solutions**:
+
 - Verify tokens in LastPass notes are current and copied correctly
 - Test token at https://manage.sanity.io (should show project access)
 - Confirm project ID is "ix9xb2vm" in both `.env.local` and VS Code settings
@@ -116,6 +119,7 @@ The AI is configured to follow ESLint rules, but verification ensures compliance
 **Symptoms**: No extension recommendations, Amazon Q not available
 
 **Solutions**:
+
 - Open Command Palette (Cmd/Ctrl+Shift+P)
 - Run "Extensions: Show Recommended Extensions"
 - Install any missing extensions from the list
@@ -126,6 +130,7 @@ The AI is configured to follow ESLint rules, but verification ensures compliance
 **Symptoms**: Variables not loading, "undefined" values
 
 **Solutions**:
+
 - Ensure file is named `.env.local` (not `.env.local.txt`)
 - Check file is in project root (same level as `package.json`)
 - Verify no spaces around `=` in variable assignments
@@ -134,6 +139,7 @@ The AI is configured to follow ESLint rules, but verification ensures compliance
 ### General Debug Steps
 
 1. **Check file locations**:
+
    ```
    ✅ .env.local (project root)
    ✅ .vscode/settings.json
@@ -142,6 +148,7 @@ The AI is configured to follow ESLint rules, but verification ensures compliance
    ```
 
 2. **Verify installations**:
+
    ```bash
    npm list @sanity/mcp-server next-devtools-mcp
    ```
