@@ -55,7 +55,8 @@ export const settingsQuery = groq`
       "slug": slug.current,
       name,
       url,
-      title
+      title,
+      _id
     },
   }
 `;
@@ -63,11 +64,13 @@ export const settingsQuery = groq`
 export const articleShowcaseQuery = groq`
   *[_type == "settings"][0]{
     showcaseArticles[]->{
+      _id,
       _type,
       "slug": slug.current,
       name,
       url,
-      title
+      title,
+      asset
     },
   }
 `;
