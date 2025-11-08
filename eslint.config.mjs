@@ -15,6 +15,7 @@ export default antfu({
   },
   ignores: [
     ".next/**",
+    ".sanity/**",
     "dist/**",
     "node_modules/**",
     "public/studio/**",
