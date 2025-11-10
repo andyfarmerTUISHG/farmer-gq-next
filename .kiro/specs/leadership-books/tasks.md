@@ -407,7 +407,7 @@ Full QA completed on feature branch."
   - Generate SEO metadata with fallbacks
   - _Requirements: 4.3-4.9, 7.5-7.7, 9.2-9.3, 10.6-10.7_
 
-- [ ] 6. Implement chapter detail page
+- [x] 6. Implement chapter detail page
   - Create books/[slug]/chapters/[chapterSlug]/page.tsx with static generation
   - Display chapter number, title, and summary
   - Show chapter-specific quotes
