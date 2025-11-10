@@ -8,9 +8,9 @@ import { resolveHref } from "@/sanity/lib/utils";
 
 export default function MenuLayout({ data }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuItems = data?.menuItems || [];
-
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const menuItems = data?.menuItems || [];
 
   return (
     <div className="bg-primary hover:fill-primrary-400 top-0 z-50 w-full py-0 text-white">
@@ -32,7 +32,7 @@ export default function MenuLayout({ data }) {
           </div>
           <div className="hidden lg:block">
             <ul className="flex items-center">
-              {menuItems.map((item, key) => {
+              {menuItems.map((item) => {
                 // destructring values of menuItem
                 let { _type, slug, title, url } = item;
                 if (_type === "sitelinks") {
@@ -44,7 +44,7 @@ export default function MenuLayout({ data }) {
                   return null;
 
                 return (
-                  <li key={key} className="group pl-6">
+                  <li key={item._id} className="group pl-6">
                     <Link
                       href={href}
                       className={`font-header cursor-pointer pt-0.5 font-semibold uppercase ${
@@ -54,6 +54,8 @@ export default function MenuLayout({ data }) {
                       }`}
                     >
                       {link}
+                      {" "}
+
                     </Link>
                     <span className="group-hover:bg-yellow block h-0.5 w-full bg-transparent"></span>
                   </li>
@@ -62,7 +64,10 @@ export default function MenuLayout({ data }) {
             </ul>
           </div>
           <div className="block lg:hidden">
-            <button onClick={toggleMenu}>
+            <button
+              onClick={toggleMenu}
+              type="button"
+            >
               <IoMenu size={40} color="white" />
             </button>
           </div>
@@ -79,12 +84,13 @@ export default function MenuLayout({ data }) {
         <div className="bg-primary absolute right-0 min-h-screen w-2/3 px-8 py-4 shadow md:w-1/3">
           <button
             onClick={toggleMenu}
+            type="button"
             className="absolute top-0 right-0 mt-4 mr-4 cursor-pointer"
           >
             <IoClose size={40} color="white" />
           </button>
           <ul className="mt-8 flex flex-col">
-            {menuItems.map((item, key) => {
+            {menuItems.map((item) => {
               // destructring values of menuItem
               let { _type, slug, title, url } = item;
               if (_type === "sitelinks") {
@@ -96,7 +102,7 @@ export default function MenuLayout({ data }) {
                 return null;
 
               return (
-                <li key={key} className="py-2">
+                <li key={item._id} className="py-2">
                   <Link
                     href={href}
                     className={`font-header block w-full cursor-pointer pt-0.5 font-semibold uppercase ${

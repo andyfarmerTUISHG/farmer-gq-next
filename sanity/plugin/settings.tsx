@@ -58,7 +58,7 @@ export function pageStructure(typeDefArray: DocumentDefinition[]): StructureReso
         S.documentList()
           .title("Articles")
           .filter("_type == \"article\"")
-          .defaultOrdering([{ field: "updateddate", direction: "desc" }])
+          .defaultOrdering([{ field: "_updatedAt", direction: "desc" }])
           .child(documentId =>
             S.document()
               .documentId(documentId)

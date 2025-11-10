@@ -2,33 +2,23 @@
 
 import type { ReactNode } from "react";
 
-import { createContext, use, useState } from "react";
+import { useMemo, useState } from "react";
 
-type MenuContextType = {
-  isMenuOpen: boolean;
-  toggleMenu: () => void;
-};
-
-const MenuContext = createContext<MenuContextType | undefined>(undefined);
+import { MenuContext } from "./use-menu";
 
 export function MenuProvider({ children }: { children: ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const memoizedMenuState = useMemo(() => {
+    const toggleMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+    };
+    return { isMenuOpen, toggleMenu };
+  }, [isMenuOpen]);
 
   return (
-    <MenuContext value={{ isMenuOpen, toggleMenu }}>
+    <MenuContext value={memoizedMenuState}>
       {children}
     </MenuContext>
   );
-}
-
-export function useMenu() {
-  const context = use(MenuContext);
-  if (context === undefined) {
-    throw new Error("useMenu must be used within a MenuProvider");
-  }
-  return context;
 }

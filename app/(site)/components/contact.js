@@ -45,7 +45,10 @@ export default function Contact() {
             rows="10"
           >
           </textarea>
-          <button className="bg-primary font-header hover:bg-grey-20 mt-6 flex items-center justify-center rounded px-8 py-3 text-lg font-bold text-white uppercase">
+          <button
+            type="button"
+            className="bg-primary font-header hover:bg-grey-20 mt-6 flex items-center justify-center rounded px-8 py-3 text-lg font-bold text-white uppercase"
+          >
             {" "}
             Send
             {" "}
@@ -126,7 +129,10 @@ export default function Contact() {
               id="email"
               placeholder="Give me your Email"
             />
-            <button className="bg-yellow font-body text-primary hover:bg-primary focus:ring-yellow mt-2 rounded px-8 py-3 text-base font-bold uppercase transition-colors hover:text-white focus:border-transparent focus:ring focus:outline-none sm:mt-0 sm:ml-2 sm:py-4 md:text-lg">
+            <button
+              type="button"
+              className="bg-yellow font-body text-primary hover:bg-primary focus:ring-yellow mt-2 rounded px-8 py-3 text-base font-bold uppercase transition-colors hover:text-white focus:border-transparent focus:ring focus:outline-none sm:mt-0 sm:ml-2 sm:py-4 md:text-lg"
+            >
               {" "}
               Join the club
               {" "}

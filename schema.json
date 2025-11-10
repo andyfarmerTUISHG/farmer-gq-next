@@ -706,20 +706,6 @@
         },
         "optional": true
       },
-      "createddate": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "updateddate": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "asset": {
         "type": "objectAttribute",
         "value": {

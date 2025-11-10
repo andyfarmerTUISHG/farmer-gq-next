@@ -11,22 +11,25 @@ import { loadProfile } from "@/sanity/loader/load-query";
 import ProfileImage from "./profile-image";
 
 type SocialMediaItem = {
+  id: string;
   name: string;
   url: string;
 };
-
+// TODO: Extract or move to sanity
 const socialMedia: SocialMediaItem[] = [
   {
+    id: "linkedIN",
     name: "TiSocialLinkedin",
     url: "https://www.linkedin.com/in/andyfarmer0676/",
   },
   {
+    id: "github",
     name: "TiSocialGithub",
     url: "https://github.com/andyfarmerTUISHG",
   },
-  { name: "TiSocialFacebook", url: "https://www.facebook.com/andyfarmer76/" },
-  { name: "TiSocialTwitter", url: "https://x.com/andyfarmer0676" },
-  { name: "TiSocialInstagram", url: "https://www.instagram.com/akf0676/" },
+  { id: "facebook", name: "TiSocialFacebook", url: "https://www.facebook.com/andyfarmer76/" },
+  { id: "twitter", name: "TiSocialTwitter", url: "https://x.com/andyfarmer0676" },
+  { id: "instagram", name: "TiSocialInstagram", url: "https://www.instagram.com/akf0676/" },
 ];
 
 const iconComponents = {
@@ -77,11 +80,11 @@ export default async function ProfileComponent() {
                   </div>
                 </div>
                 <div className="flex items-center justify-center pt-5 pl-2 sm:justify-start sm:pt-0">
-                  {socialMedia?.map((social, key) => {
+                  {socialMedia?.map((social) => {
                     const Icon = iconComponents[social.name];
                     return (
                       <a
-                        key={key}
+                        key={social.id}
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"

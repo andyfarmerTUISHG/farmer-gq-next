@@ -5,7 +5,6 @@ export const paginatedArticlesQuery = groq`
     _id,
     "slug": slug.current,
     name,
-    createdDate,
     bodycopy,
     _createdAt,
     _updatedAt,
@@ -18,8 +17,9 @@ export const allArticlesQuery = groq`
     _id,
     "slug": slug.current,
     name,
-    createdDate,
     bodycopy,
+    _createdAt,
+    _updatedAt,
     "authors": author[]->{ name, "slug": slug.current},
   }
 `;
@@ -30,8 +30,9 @@ export const articleBySlugQuery = groq`
         "authorName": author[0]->name,
         "slug": slug.current,
         name,
-        createdDate,
         bodycopy,
+        _createdAt,
+        _updatedAt,
         "authors": author[]->{ name, "slug": slug.current, image},
     }
 `;
@@ -41,8 +42,9 @@ export const articlesWithNoAuthorsQuery = groq`
     _id,
     "slug": slug.current,
     name,
-    createdDate,
-    bodycopy
+    bodycopy,
+    _createdAt,
+    _updatedAt
   }
 `;
 
@@ -53,7 +55,8 @@ export const settingsQuery = groq`
       "slug": slug.current,
       name,
       url,
-      title
+      title,
+      _id
     },
   }
 `;
@@ -61,11 +64,13 @@ export const settingsQuery = groq`
 export const articleShowcaseQuery = groq`
   *[_type == "settings"][0]{
     showcaseArticles[]->{
+      _id,
       _type,
       "slug": slug.current,
       name,
       url,
-      title
+      title,
+      asset
     },
   }
 `;
