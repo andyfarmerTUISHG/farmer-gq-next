@@ -33,6 +33,10 @@ export default function MenuLayout({ data }) {
           <div className="hidden lg:block">
             <ul className="flex items-center">
               {menuItems.map((item) => {
+                // Skip null or undefined items
+                if (!item)
+                  return null;
+
                 // destructring values of menuItem
                 let { _type, slug, title, url } = item;
                 if (_type === "sitelinks") {
@@ -47,10 +51,9 @@ export default function MenuLayout({ data }) {
                   <li key={item._id} className="group pl-6">
                     <Link
                       href={href}
-                      className={`font-header cursor-pointer pt-0.5 font-semibold uppercase ${
-                        item._type === "home"
-                          ? "text-white"
-                          : "text-white/90 hover:text-white"
+                      className={`font-header cursor-pointer pt-0.5 font-semibold uppercase ${item._type === "home"
+                        ? "text-white"
+                        : "text-white/90 hover:text-white"
                       }`}
                     >
                       {link}
@@ -75,10 +78,9 @@ export default function MenuLayout({ data }) {
       </div>
       {/* SideBar Menu */}
       <div
-        className={`bg-payne/90 fixed inset-0 z-70 min-h-screen transition-opacity lg:hidden ${
-          isMenuOpen
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
+        className={`bg-payne/90 fixed inset-0 z-70 min-h-screen transition-opacity lg:hidden ${isMenuOpen
+          ? "pointer-events-auto opacity-100"
+          : "pointer-events-none opacity-0"
         }`}
       >
         <div className="bg-primary absolute right-0 min-h-screen w-2/3 px-8 py-4 shadow md:w-1/3">
@@ -91,6 +93,10 @@ export default function MenuLayout({ data }) {
           </button>
           <ul className="mt-8 flex flex-col">
             {menuItems.map((item) => {
+              // Skip null or undefined items
+              if (!item)
+                return null;
+
               // destructring values of menuItem
               let { _type, slug, title, url } = item;
               if (_type === "sitelinks") {
@@ -105,10 +111,9 @@ export default function MenuLayout({ data }) {
                 <li key={item._id} className="py-2">
                   <Link
                     href={href}
-                    className={`font-header block w-full cursor-pointer pt-0.5 font-semibold uppercase ${
-                      item._type === "home"
-                        ? "text-white"
-                        : "text-white/90 hover:text-white"
+                    className={`font-header block w-full cursor-pointer pt-0.5 font-semibold uppercase ${item._type === "home"
+                      ? "text-white"
+                      : "text-white/90 hover:text-white"
                     }`}
                     onClick={toggleMenu}
                   >
