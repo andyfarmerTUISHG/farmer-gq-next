@@ -363,7 +363,7 @@ Full QA completed on feature branch."
 
 # Implementation Plan
 
-- [ ] 1. Set up Sanity schemas for books, chapters, and quotes
+- [x] 1. Set up Sanity schemas for books, chapters, and quotes
   - Create book schema with all metadata, content, SEO, and relationship fields
   - Create chapter schema with parent book reference
   - Create quote schema with book and optional chapter references
