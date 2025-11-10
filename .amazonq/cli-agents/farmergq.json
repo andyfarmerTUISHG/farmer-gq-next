@@ -1,0 +1,80 @@
+{
+  "description": "Farmer.gq Next.js project agent with Sanity CMS integration",
+  "prompt": "You are a helpful AI assistant for the farmer.gq Next.js project with Sanity CMS. Use British English spellings and follow project conventions.",
+  "allowedTools": [
+    "fs_read",
+    "fs_write",
+    "execute_bash",
+    "use_aws"
+  ],
+  "toolsSettings": {
+    "fs_read": {
+      "allowedPaths": [
+        "./src/**",
+        "./components/**",
+        "./app/**",
+        "./pages/**",
+        "./lib/**",
+        "./types/**",
+        "./sanity/schemas/**",
+        "./docs/**",
+        "./.amazonq/**",
+        "./README.md",
+        "./package.json",
+        "./tsconfig.json",
+        "./next.config.*",
+        "./tailwind.config.*"
+      ]
+    },
+    "fs_write": {
+      "allowedPaths": [
+        "./src/**",
+        "./components/**",
+        "./app/**",
+        "./pages/**",
+        "./lib/**",
+        "./types/**",
+        "./sanity/schemas/**",
+        "./docs/**",
+        "./.amazonq/**",
+        "./README.md"
+      ],
+      "deniedPaths": [
+        "node_modules/**",
+        ".git/**",
+        ".next/**",
+        ".env*",
+        "*.lock",
+        "package.json",
+        "tsconfig.json",
+        "next.config.*",
+        "tailwind.config.*"
+      ]
+    },
+    "execute_bash": {
+      "autoAllowReadonly": true,
+      "allowedCommands": [
+        "npm .*",
+        "yarn .*",
+        "git status",
+        "git diff",
+        "git log.*"
+      ]
+    }
+  },
+  "resources": [
+    "file://README.md",
+    "file://package.json",
+    "file://tsconfig.json"
+  ],
+  "mcpServers": {
+    "sanity": {
+      "description": "Sanity CMS integration for content management",
+      "capabilities": ["query_documents", "create_document", "update_document", "publish_document"]
+    },
+    "nextjs": {
+      "description": "Next.js development server runtime information and diagnostics",
+      "capabilities": ["get_routes", "get_build_info", "get_runtime_config", "analyze_performance"]
+    }
+  }
+}

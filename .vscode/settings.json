@@ -50,5 +50,18 @@
 
   "editor.suggest.snippetsPreventQuickSuggestions": false,
   "editor.inlineSuggest.enabled": true,
-  "workbench.sideBar.location": "right"
+  "workbench.sideBar.location": "right",
+
+  // AI and spell checking settings
+  "cSpell.language": "en-GB",
+  "cSpell.dictionaries": ["project-words"],
+  "cSpell.dictionaryDefinitions": [
+    {
+      "name": "project-words",
+      "path": "./.vscode/project-dictionary.txt",
+      "addWords": true
+    }
+  ],
+  "amazonQ.workspaceIndex": true,
+  "amazonQ.shareCodeWhispererContentWithAWS": false
 }

@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "sanity": {
+      "command": "npx",
+      "args": ["@sanity/mcp-server"],
+      "env": {
+        "SANITY_PROJECT_ID": "your-project-id",
+        "SANITY_DATASET": "production"
+      }
+    },
+    "nextjs": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-nextjs"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-playwright"]
+    }
+  }
+}
