@@ -1,5 +1,368 @@
 # Implementation Plan
 
+## PR Strategy
+
+This implementation is designed to be delivered as a series of incremental PRs into a feature branch.
+
+### Setup: Create Feature Branch
+
+```bash
+# Create and push the main feature branch
+git checkout -b feat/leadership-books
+git push -u origin feat/leadership-books
+```
+
+---
+
+### PR1: Foundation Layer (Tasks 1 + 2)
+
+**Branch from:** `feat/leadership-books`  
+**Tasks:** 1, 2  
+**Dependencies:** None
+
+```bash
+# Create branch
+git checkout feat/leadership-books
+git pull
+git checkout -b feat/leadership-books-schemas-types
+
+# After completing tasks 1 & 2, commit and push
+git add .
+git commit -m "feat: add book, chapter, and quote schemas with TypeScript types"
+git push -u origin feat/leadership-books-schemas-types
+
+# Create PR
+gh pr create --base feat/leadership-books --head feat/leadership-books-schemas-types \
+  --title "feat(books): add Sanity schemas and TypeScript types for books, chapters, and quotes" \
+  --body "**PR1: Foundation Layer**
+
+- ✅ Task 1: Sanity schemas (book, chapter, quote)
+- ✅ Task 2: TypeScript types
+
+**Testing:**
+- [ ] Schemas visible in Sanity Studio
+- [ ] Can create book, chapter, and quote documents
+- [ ] TypeScript types compile without errors"
+```
+
+---
+
+### PR2: Data Layer (Task 3)
+
+**Branch from:** `feat/leadership-books` (after PR1 merged)  
+**Tasks:** 3  
+**Dependencies:** PR1
+
+```bash
+# Create branch
+git checkout feat/leadership-books
+git pull
+git checkout -b feat/leadership-books-queries
+
+# After completing task 3, commit and push
+git add .
+git commit -m "feat: add GROQ queries for books, chapters, and quotes"
+git push -u origin feat/leadership-books-queries
+
+# Create PR
+gh pr create --base feat/leadership-books --head feat/leadership-books-queries \
+  --title "feat(books): add GROQ queries for books, chapters, quotes with sorting and pagination" \
+  --body "**PR2: Data Layer**
+
+- ✅ Task 3: GROQ queries
+
+**Testing:**
+- [ ] Queries return expected data structure
+- [ ] Sorting parameters work correctly
+- [ ] Static generation queries return all slugs"
+```
+
+---
+
+### PR3: Component Layer (Task 7)
+
+**Branch from:** `feat/leadership-books` (can be parallel with PR2)  
+**Tasks:** 7  
+**Dependencies:** None
+
+```bash
+# Create branch
+git checkout feat/leadership-books
+git pull
+git checkout -b feat/leadership-books-components
+
+# After completing task 7, commit and push
+git add .
+git commit -m "feat: add book UI components (BookCard, RatingStars, QuoteCard)"
+git push -u origin feat/leadership-books-components
+
+# Create PR
+gh pr create --base feat/leadership-books --head feat/leadership-books-components \
+  --title "feat(books): add BookCard, RatingStars, and QuoteCard components" \
+  --body "**PR3: Component Layer**
+
+- ✅ Task 7: UI components
+
+**Testing:**
+- [ ] Components render with mock data
+- [ ] Responsive design works on mobile/tablet/desktop
+- [ ] ESLint passes"
+```
+
+---
+
+### PR4: Book Listing (Task 4)
+
+**Branch from:** `feat/leadership-books` (after PR2 & PR3 merged)  
+**Tasks:** 4  
+**Dependencies:** PR2, PR3
+
+```bash
+# Create branch
+git checkout feat/leadership-books
+git pull
+git checkout -b feat/leadership-books-listing
+
+# After completing task 4, commit and push
+git add .
+git commit -m "feat: add book listing page with sorting and pagination"
+git push -u origin feat/leadership-books-listing
+
+# Create PR
+gh pr create --base feat/leadership-books --head feat/leadership-books-listing \
+  --title "feat(books): add /books listing page with sorting and pagination" \
+  --body "**PR4: Book Listing**
+
+- ✅ Task 4: Book listing page
+
+**Testing:**
+- [ ] Pagination works correctly
+- [ ] Sorting by rating, date read, and author works
+- [ ] Sort persists in URL query parameters
+- [ ] Static generation works"
+```
+
+---
+
+### PR5: Book Detail (Task 5)
+
+**Branch from:** `feat/leadership-books` (after PR2 & PR3 merged)  
+**Tasks:** 5  
+**Dependencies:** PR2, PR3
+
+```bash
+# Create branch
+git checkout feat/leadership-books
+git pull
+git checkout -b feat/leadership-books-detail
+
+# After completing task 5, commit and push
+git add .
+git commit -m "feat: add book detail page with related books and quotes"
+git push -u origin feat/leadership-books-detail
+
+# Create PR
+gh pr create --base feat/leadership-books --head feat/leadership-books-detail \
+  --title "feat(books): add /books/[slug] detail page with related books and quotes" \
+  --body "**PR5: Book Detail**
+
+- ✅ Task 5: Book detail page
+
+**Testing:**
+- [ ] All book metadata displays correctly
+- [ ] Related books section renders
+- [ ] Quotes section displays
+- [ ] Personal notes only visible in draft mode
+- [ ] Chapters list with navigation
+- [ ] Static generation works
+- [ ] SEO metadata generated"
+```
+
+---
+
+### PR6: Chapter Detail (Task 6)
+
+**Branch from:** `feat/leadership-books` (after PR2 & PR3 merged)  
+**Tasks:** 6  
+**Dependencies:** PR2, PR3
+
+```bash
+# Create branch
+git checkout feat/leadership-books
+git pull
+git checkout -b feat/leadership-books-chapters
+
+# After completing task 6, commit and push
+git add .
+git commit -m "feat: add chapter detail page with quotes"
+git push -u origin feat/leadership-books-chapters
+
+# Create PR
+gh pr create --base feat/leadership-books --head feat/leadership-books-chapters \
+  --title "feat(books): add /books/[slug]/chapters/[chapterSlug] page with quotes" \
+  --body "**PR6: Chapter Detail**
+
+- ✅ Task 6: Chapter detail page
+
+**Testing:**
+- [ ] Chapter content displays correctly
+- [ ] Chapter-specific quotes render
+- [ ] Breadcrumb navigation works
+- [ ] Static generation works"
+```
+
+---
+
+### PR7: Navigation & SEO (Tasks 8 + 9)
+
+**Branch from:** `feat/leadership-books` (after PR4, PR5, PR6 merged)  
+**Tasks:** 8, 9  
+**Dependencies:** PR4, PR5, PR6
+
+```bash
+# Create branch
+git checkout feat/leadership-books
+git pull
+git checkout -b feat/leadership-books-nav-seo
+
+# After completing tasks 8 & 9, commit and push
+git add .
+git commit -m "feat: add navigation integration and SEO metadata"
+git push -u origin feat/leadership-books-nav-seo
+
+# Create PR
+gh pr create --base feat/leadership-books --head feat/leadership-books-nav-seo \
+  --title "feat(books): add Books navigation link and SEO metadata with fallbacks" \
+  --body "**PR7: Navigation & SEO**
+
+- ✅ Task 8: Navigation integration
+- ✅ Task 9: SEO metadata
+
+**Testing:**
+- [ ] Books link appears in desktop navigation
+- [ ] Books link appears in mobile navigation
+- [ ] SEO metadata with fallbacks works
+- [ ] Schema.org structured data present"
+```
+
+---
+
+### PR8: Studio & Validation (Tasks 10 + 11 + 12)
+
+**Branch from:** `feat/leadership-books` (after all previous PRs merged)  
+**Tasks:** 10, 11, 12  
+**Dependencies:** All previous PRs
+
+```bash
+# Create branch
+git checkout feat/leadership-books
+git pull
+git checkout -b feat/leadership-books-final
+
+# After completing tasks 10, 11, 12, commit and push
+git add .
+git commit -m "feat: add Presentation Studio support and final validation"
+git push -u origin feat/leadership-books-final
+
+# Create PR
+gh pr create --base feat/leadership-books --head feat/leadership-books-final \
+  --title "feat(books): add Presentation Studio support, draft mode, and validation" \
+  --body "**PR8: Studio & Validation**
+
+- ✅ Task 10: Presentation Studio configuration
+- ✅ Task 11: Draft mode verification
+- ✅ Task 12: Testing and validation
+
+**Testing:**
+- [ ] Presentation Studio editing works
+- [ ] Draft mode authentication works
+- [ ] All pages generate statically
+- [ ] Responsive design verified
+- [ ] Accessibility checks pass
+- [ ] ESLint passes"
+```
+
+---
+
+### Optional PRs (Tasks 13-15)
+
+**Branch from:** `feat/leadership-books` (after PR8 merged)  
+**Tasks:** 13, 14, 15 (marked with *)  
+**Dependencies:** PR8
+
+```bash
+# Create branch for tests
+git checkout feat/leadership-books
+git pull
+git checkout -b feat/leadership-books-tests
+
+# After completing tasks 13 & 14, commit and push
+git add .
+git commit -m "test: add unit and integration tests for books feature"
+git push -u origin feat/leadership-books-tests
+
+# Create PR
+gh pr create --base feat/leadership-books --head feat/leadership-books-tests \
+  --title "test(books): add unit and integration tests for books feature" \
+  --body "**Optional: Tests**
+
+- ✅ Task 13: Unit tests
+- ✅ Task 14: Integration tests
+
+**Testing:**
+- [ ] All tests pass
+- [ ] Coverage meets requirements"
+
+# Create branch for docs
+git checkout feat/leadership-books
+git pull
+git checkout -b feat/leadership-books-docs
+
+# After completing task 15, commit and push
+git add .
+git commit -m "docs: add documentation for books feature"
+git push -u origin feat/leadership-books-docs
+
+# Create PR
+gh pr create --base feat/leadership-books --head feat/leadership-books-docs \
+  --title "docs(books): add documentation for schemas, usage, and features" \
+  --body "**Optional: Documentation**
+
+- ✅ Task 15: Documentation updates
+
+**Testing:**
+- [ ] Documentation is accurate and complete"
+```
+
+---
+
+### Final: Merge to Main
+
+After all PRs are merged into `feat/leadership-books` and QA is complete:
+
+```bash
+# Create PR to merge feature branch to main
+gh pr create --base main --head feat/leadership-books \
+  --title "feat(books): add complete leadership books feature with summaries, chapters, and quotes" \
+  --body "**Complete Leadership Books Feature**
+
+This PR merges the complete leadership books feature including:
+- Sanity schemas for books, chapters, and quotes
+- Book listing page with sorting
+- Book detail pages with related books and quotes
+- Chapter detail pages
+- Navigation integration
+- SEO metadata
+- Presentation Studio support
+
+All PRs have been reviewed and merged into feat/leadership-books.
+Full QA completed on feature branch."
+```
+
+---
+
+# Implementation Plan
+
 - [ ] 1. Set up Sanity schemas for books, chapters, and quotes
   - Create book schema with all metadata, content, SEO, and relationship fields
   - Create chapter schema with parent book reference

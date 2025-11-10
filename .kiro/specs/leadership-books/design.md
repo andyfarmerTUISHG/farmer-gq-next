@@ -538,56 +538,130 @@ export const allChapterSlugsQuery = groq`
 
 ## Migration and Rollout
 
-### Phase 1: Schema and Backend (New Files Only)
+### PR Strategy for Incremental Delivery
 
-1. Create `schema/book.js` (new file)
-2. Create `schema/chapter.js` (new file)
-3. Create `schema/quote.js` (new file)
-4. Update `schema/schema.js` to register new schemas (add imports only)
-5. Deploy to Sanity Studio
-6. Test content creation in Studio
+This implementation is designed to be delivered as a series of incremental PRs into a feature branch, allowing for independent review and testing of each layer.
 
-### Phase 2: Frontend Pages (New Files Only)
+#### PR1: Foundation Layer (Tasks 1 + 2)
 
-1. Create `app/(site)/books/page.tsx` (new file) with sorting functionality
-2. Create `app/(site)/books/[slug]/page.tsx` (new file) with related books and quotes
-3. Create `app/(site)/books/[slug]/chapters/[chapterSlug]/page.tsx` (new file) with chapter quotes
-4. Add GROQ queries to `sanity/lib/queries.ts` (append only)
-5. Test data fetching and rendering
+**Files Created:**
 
-### Phase 3: Components and Polish (New Files Only)
+- `schema/book.js`
+- `schema/chapter.js`
+- `schema/quote.js`
+- `types/book.ts`
 
-1. Create `app/(site)/components/book-card.tsx` (new file)
-2. Create `app/(site)/components/rating-stars.tsx` (new file)
-3. Create `app/(site)/components/quote-card.tsx` (new file)
-4. Implement personal notes conditional rendering
-5. Add Presentation Studio support
-6. Style pages with Tailwind CSS
+**Files Modified:**
 
-### Phase 4: Navigation Integration (Minimal Modification)
+- `schema/schema.js` (add imports only)
 
-1. Update navigation component to include Books link
-2. Ensure Books link appears in both desktop and mobile menus
-3. Test navigation integration
+**Dependencies:** None  
+**Testing:** Verify schemas in Sanity Studio, test content creation
 
-### Phase 5: Types (New Files Only)
+---
 
-1. Create `types/book.ts` (new file)
-2. Update type exports if needed
+#### PR2: Data Layer (Task 3)
 
-### Phase 6: Testing and Launch
+**Files Modified:**
 
-1. Run full test suite
-2. Test Presentation Studio integration
-3. Test sorting functionality
-4. Test related books display
-5. Test quotes/highlights display
-6. Verify SEO metadata
-7. Deploy to production
+- `sanity/lib/queries.ts` (append queries only)
 
-**Note**: Files to be modified:
+**Dependencies:** PR1 (schemas must exist)  
+**Testing:** Test GROQ queries return expected data structure
 
-- `schema/schema.js` - adding new imports
-- `sanity/lib/queries.ts` - appending new queries
-- Navigation component - adding Books menu item
-- Type export files if needed
+---
+
+#### PR3: Component Layer (Task 7)
+
+**Files Created:**
+
+- `app/(site)/components/book-card.tsx`
+- `app/(site)/components/rating-stars.tsx`
+- `app/(site)/components/quote-card.tsx`
+
+**Dependencies:** None (can be done in parallel with PR2)  
+**Testing:** Test components render with mock data, verify responsive design
+
+---
+
+#### PR4: Book Listing Page (Task 4)
+
+**Files Created:**
+
+- `app/(site)/books/page.tsx`
+
+**Dependencies:** PR2 (queries), PR3 (components)  
+**Testing:** Test pagination, sorting, static generation
+
+---
+
+#### PR5: Book Detail Page (Task 5)
+
+**Files Created:**
+
+- `app/(site)/books/[slug]/page.tsx`
+
+**Dependencies:** PR2 (queries), PR3 (components)  
+**Testing:** Test all sections render, related books display, quotes display, draft mode
+
+---
+
+#### PR6: Chapter Detail Page (Task 6)
+
+**Files Created:**
+
+- `app/(site)/books/[slug]/chapters/[chapterSlug]/page.tsx`
+
+**Dependencies:** PR2 (queries), PR3 (components)  
+**Testing:** Test chapter content, quotes, breadcrumb navigation
+
+---
+
+#### PR7: Navigation & SEO (Tasks 8 + 9)
+
+**Files Modified:**
+
+- Navigation component (add Books menu item)
+
+**Files Created/Modified:**
+
+- Metadata generation utilities (if needed)
+
+**Dependencies:** PR4, PR5, PR6 (pages must exist to link to)  
+**Testing:** Test navigation on desktop/mobile, verify SEO metadata and fallbacks
+
+---
+
+#### PR8: Studio & Validation (Tasks 10 + 11 + 12)
+
+**Files Modified:**
+
+- Presentation Studio configuration (if needed)
+
+**Dependencies:** All previous PRs  
+**Testing:** Full integration testing, Presentation Studio editing, draft mode verification, accessibility checks, ESLint validation
+
+---
+
+#### Optional PRs (Tasks 13-15)
+
+**Files Created:**
+
+- Test files for unit and integration tests
+- Documentation updates
+
+**Dependencies:** PR8  
+**Testing:** Run test suites, verify documentation accuracy
+
+---
+
+### Deployment Strategy
+
+1. Create feature branch from main
+2. Merge PRs 1-8 sequentially into feature branch
+3. Perform full QA on feature branch
+4. Merge feature branch to main
+5. Deploy to production
+6. Optional: Merge PRs 13-15 for tests and documentation
+
+**Note**: Each PR should be independently reviewable and testable. Later PRs may depend on earlier ones being merged first.
