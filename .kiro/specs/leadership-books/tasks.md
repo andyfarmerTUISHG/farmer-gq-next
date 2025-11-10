@@ -394,7 +394,7 @@ Full QA completed on feature branch."
   - Persist sort selection in URL query parameters
   - _Requirements: 4.1-4.2, 11.1-11.6_
 
-- [ ] 5. Implement book detail page
+- [x] 5. Implement book detail page
   - Create books/[slug]/page.tsx with static generation
   - Display book metadata, cover, rating, and tags
   - Render summary content using CustomPortableText
