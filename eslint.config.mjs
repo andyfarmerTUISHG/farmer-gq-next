@@ -14,6 +14,7 @@ export default antfu({
     quotes: "double",
   },
   ignores: [
+    ".kiro/**",
     ".next/**",
     ".sanity/**",
     "dist/**",
