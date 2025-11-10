@@ -82,3 +82,113 @@ export const profileQuery = groq`
     headline,
   }
 `;
+
+// Book queries
+export const allBooksQuery = groq`
+  *[_type == "book"] | order(dateRead desc, _createdAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    author,
+    rating,
+    coverImage,
+    dateRead,
+    "tags": tags[]->{ _id, name },
+    _createdAt,
+    _updatedAt
+  }
+`;
+
+export const paginatedBooksQuery = groq`
+  *[_type == "book"] | order($orderBy) [$skip...$pageSize] {
+    _id,
+    title,
+    "slug": slug.current,
+    author,
+    rating,
+    coverImage,
+    dateRead,
+    "tags": tags[]->{ _id, name },
+    _createdAt,
+    _updatedAt
+  }
+`;
+
+export const bookBySlugQuery = groq`
+  *[_type == "book" && slug.current == $slug][0] {
+    _id,
+    _type,
+    title,
+    "slug": slug.current,
+    author,
+    bookWebsite,
+    amazonLink,
+    amazonAffiliateLink,
+    coverImage,
+    dateRead,
+    rating,
+    summary,
+    keyTakeaways,
+    personalNotes,
+    isAiSummary,
+    "tags": tags[]->{ _id, name },
+    metaDescription,
+    metaTitle,
+    ogImage,
+    focusKeyword,
+    "relatedBooks": relatedBooks[]->{
+      _id,
+      title,
+      "slug": slug.current,
+      author,
+      rating,
+      coverImage
+    },
+    _createdAt,
+    _updatedAt,
+    "chapters": *[_type == "chapter" && references(^._id)] | order(chapterNumber) {
+      _id,
+      chapterNumber,
+      title,
+      "slug": slug.current
+    },
+    "quotes": *[_type == "quote" && references(^._id) && !defined(parentChapter)] {
+      _id,
+      quoteText,
+      context
+    }
+  }
+`;
+
+export const chapterBySlugQuery = groq`
+  *[_type == "chapter" && slug.current == $slug][0] {
+    _id,
+    _type,
+    chapterNumber,
+    title,
+    "slug": slug.current,
+    summary,
+    "parentBook": parentBook->{
+      _id,
+      title,
+      "slug": slug.current,
+      author
+    },
+    "quotes": *[_type == "quote" && references(^._id)] {
+      _id,
+      quoteText,
+      context
+    }
+  }
+`;
+
+export const allBookSlugsQuery = groq`
+  *[_type == "book" && defined(slug.current)][].slug.current
+`;
+
+export const allChapterSlugsQuery = groq`
+  *[_type == "chapter" && defined(slug.current)] {
+    "slug": slug.current,
+    "bookSlug": parentBook->slug.current
+  }
+`;
