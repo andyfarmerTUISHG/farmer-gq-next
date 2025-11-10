@@ -386,7 +386,7 @@ Full QA completed on feature branch."
   - Create allChapterSlugsQuery for static generation
   - _Requirements: 4.1-4.10, 9.2-9.3, 10.6-10.7, 11.1-11.6_
 
-- [ ] 4. Implement book listing page with sorting
+- [x] 4. Implement book listing page with sorting
   - Create books/page.tsx with pagination
   - Implement sort parameter handling (rating, dateRead, author)
   - Add sorting UI controls (dropdown or buttons)
