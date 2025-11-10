@@ -40,9 +40,9 @@ gh pr create --base feat/leadership-books --head feat/leadership-books-schemas-t
 - ✅ Task 2: TypeScript types
 
 **Testing:**
-- [ ] Schemas visible in Sanity Studio
-- [ ] Can create book, chapter, and quote documents
-- [ ] TypeScript types compile without errors"
+- [x] Schemas visible in Sanity Studio
+- [x] Can create book, chapter, and quote documents
+- [x] TypeScript types compile without errors"
 ```
 
 ---
@@ -363,7 +363,7 @@ Full QA completed on feature branch."
 
 # Implementation Plan
 
-- [ ] 1. Set up Sanity schemas for books, chapters, and quotes
+- [x] 1. Set up Sanity schemas for books, chapters, and quotes
   - Create book schema with all metadata, content, SEO, and relationship fields
   - Create chapter schema with parent book reference
   - Create quote schema with book and optional chapter references
