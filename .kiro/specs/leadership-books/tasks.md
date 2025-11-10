@@ -40,9 +40,9 @@ gh pr create --base feat/leadership-books --head feat/leadership-books-schemas-t
 - ✅ Task 2: TypeScript types
 
 **Testing:**
-- [ ] Schemas visible in Sanity Studio
-- [ ] Can create book, chapter, and quote documents
-- [ ] TypeScript types compile without errors"
+- [x] Schemas visible in Sanity Studio
+- [x] Can create book, chapter, and quote documents
+- [x] TypeScript types compile without errors"
 ```
 
 ---
