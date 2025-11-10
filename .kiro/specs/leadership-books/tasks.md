@@ -72,9 +72,9 @@ gh pr create --base feat/leadership-books --head feat/leadership-books-queries \
 - ✅ Task 3: GROQ queries
 
 **Testing:**
-- [ ] Queries return expected data structure
-- [ ] Sorting parameters work correctly
-- [ ] Static generation queries return all slugs"
+- [x] Queries return expected data structure
+- [x] Sorting parameters work correctly
+- [x] Static generation queries return all slugs"
 ```
 
 ---
@@ -377,7 +377,7 @@ Full QA completed on feature branch."
   - Export types for use across the application
   - _Requirements: 1.1-1.9, 2.1-2.7, 3.1-3.5, 10.1-10.7_
 
-- [ ] 3. Add GROQ queries for data fetching
+- [x] 3. Add GROQ queries for data fetching
   - Create allBooksQuery for listing books
   - Create paginatedBooksQuery with sorting support
   - Create bookBySlugQuery with related books, chapters, and quotes
