@@ -1,4 +1,4 @@
-import { GrChapter as icon } from "react-icons/gr";
+import { GrChapterAdd as icon } from "react-icons/gr";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 export default defineType({
