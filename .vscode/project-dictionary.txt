@@ -8,4 +8,5 @@ optimise
 realise
 Sanity
 Sitelinks
+stega
 TypeScript
