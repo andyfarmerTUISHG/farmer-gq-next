@@ -448,7 +448,7 @@ Full QA completed on feature branch."
   - Verify live preview updates work correctly
   - _Requirements: 6.1-6.4_
 
-- [ ] 11. Verify draft mode and authentication
+- [x] 11. Verify draft mode and authentication
   - Test personal notes visibility when not authenticated
   - Test personal notes visibility when authenticated in Sanity Studio
   - Ensure draft mode check handles errors gracefully

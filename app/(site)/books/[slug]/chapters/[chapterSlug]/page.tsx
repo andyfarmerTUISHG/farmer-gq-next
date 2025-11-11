@@ -74,7 +74,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ChapterPage({ params }: Props) {
   const { chapterSlug } = await params;
-  const isDraftMode = (await draftMode()).isEnabled;
+
+  // Safely check draft mode with error handling
+  let isDraftMode = false;
+  try {
+    isDraftMode = (await draftMode()).isEnabled;
+  }
+  catch (error) {
+    console.error("Error checking draft mode:", error);
+    // Default to false if check fails
+    isDraftMode = false;
+  }
 
   const { data: chapter } = await sanityFetch({
     query: chapterBySlugQuery,
