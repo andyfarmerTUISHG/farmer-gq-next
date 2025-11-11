@@ -113,13 +113,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BookPage({ params }: Props) {
   const { slug } = await params;
+  const isDraftMode = (await draftMode()).isEnabled;
+
   const { data: book } = await sanityFetch({
     query: bookBySlugQuery,
     params: { slug },
-    stega: false,
+    stega: isDraftMode,
   });
-
-  const isDraftMode = (await draftMode()).isEnabled;
 
   if (!book?._id && !isDraftMode) {
     notFound();

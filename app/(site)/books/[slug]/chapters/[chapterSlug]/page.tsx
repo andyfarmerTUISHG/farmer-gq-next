@@ -2,6 +2,7 @@ import type { EncodeDataAttributeCallback } from "@sanity/react-loader";
 import type { Metadata } from "next";
 
 import { createDataAttribute } from "next-sanity";
+import { draftMode } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -73,13 +74,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ChapterPage({ params }: Props) {
   const { chapterSlug } = await params;
+  const isDraftMode = (await draftMode()).isEnabled;
+
   const { data: chapter } = await sanityFetch({
     query: chapterBySlugQuery,
     params: { slug: chapterSlug },
-    stega: false,
+    stega: isDraftMode,
   });
 
-  if (!chapter?._id) {
+  if (!chapter?._id && !isDraftMode) {
     notFound();
   }
 

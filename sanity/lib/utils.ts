@@ -7,6 +7,7 @@ import { dataset, projectId } from "@/sanity/lib/api";
 export function resolveHref(
   documentType?: string,
   slug?: string,
+  parentSlug?: string,
 ): string | undefined {
   switch (documentType) {
     case "home":
@@ -15,6 +16,10 @@ export function resolveHref(
       return slug ? `/${slug}` : undefined;
     case "article":
       return slug ? `/articles/${slug}` : undefined;
+    case "book":
+      return slug ? `/books/${slug}` : undefined;
+    case "chapter":
+      return slug && parentSlug ? `/books/${parentSlug}/chapters/${slug}` : undefined;
     case "sitelinks":
       return slug ? `${slug}` : undefined;
     default:
