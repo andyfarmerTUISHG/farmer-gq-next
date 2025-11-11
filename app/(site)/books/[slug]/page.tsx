@@ -326,11 +326,7 @@ export default async function BookPage({ params }: Props) {
             </h2>
             <div className="grid gap-4 md:grid-cols-2">
               {book.quotes.map(quote => (
-                <QuoteCard
-                  key={quote._id}
-                  quote={quote.quoteText}
-                  context={quote.context}
-                />
+                <QuoteCard key={quote._id} quote={quote} />
               ))}
             </div>
           </section>
