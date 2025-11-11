@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import type { BookListItem } from "@/types";
 
 import BookCard from "@/app/(site)/components/book-card";
@@ -7,6 +9,24 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { paginatedBooksQuery } from "@/sanity/lib/queries";
 
 type SortOption = "rating" | "dateRead" | "author";
+
+export const metadata: Metadata = {
+  title: "Leadership Books | Summaries & Insights",
+  description:
+    "Explore summaries, key takeaways, and insights from leadership books. Find book recommendations sorted by rating, date read, or author.",
+  openGraph: {
+    title: "Leadership Books | Summaries & Insights",
+    description:
+      "Explore summaries, key takeaways, and insights from leadership books.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Leadership Books | Summaries & Insights",
+    description:
+      "Explore summaries, key takeaways, and insights from leadership books.",
+  },
+};
 
 type SearchParams = {
   page?: string;
