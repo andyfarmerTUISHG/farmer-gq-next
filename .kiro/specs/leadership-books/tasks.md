@@ -454,7 +454,7 @@ Full QA completed on feature branch."
   - Ensure draft mode check handles errors gracefully
   - _Requirements: 4.8-4.9_
 
-- [ ] 12. Test and validate implementation
+- [x] 12. Test and validate implementation
   - Verify all book pages generate statically at build time
   - Test sorting functionality on books listing page
   - Test related books display and navigation
@@ -466,26 +466,26 @@ Full QA completed on feature branch."
   - Run ESLint to ensure code quality standards
   - _Requirements: All requirements_
 
-- [ ]\* 13. Write unit tests for core functionality
-  - [ ]\* 13.1 Write tests for GROQ query construction
-  - [ ]\* 13.2 Write tests for TypeScript type validation
-  - [ ]\* 13.3 Write tests for rating validation (1-5 range)
-  - [ ]\* 13.4 Write tests for slug generation
+- [x] 13. Write unit tests for core functionality
+  - [x] 13.1 Write tests for GROQ query construction
+  - [x] 13.2 Write tests for TypeScript type validation
+  - [x] 13.3 Write tests for rating validation (1-5 range)
+  - [x] 13.4 Write tests for slug generation
   - _Requirements: All requirements_
 
-- [ ]\* 14. Write integration tests
-  - [ ]\* 14.1 Test book list page rendering with mock data
-  - [ ]\* 14.2 Test book detail page displays all fields correctly
-  - [ ]\* 14.3 Test chapter page shows parent book reference
-  - [ ]\* 14.4 Test personal notes visibility based on draft mode
-  - [ ]\* 14.5 Test pagination functionality
-  - [ ]\* 14.6 Test CustomPortableText rendering
+- [x] 14. Write integration tests
+  - [x] 14.1 Test book list page rendering with mock data
+  - [x] 14.2 Test book detail page displays all fields correctly
+  - [x] 14.3 Test chapter page shows parent book reference
+  - [x] 14.4 Test personal notes visibility based on draft mode
+  - [x] 14.5 Test pagination functionality
+  - [x] 14.6 Test CustomPortableText rendering
   - _Requirements: 4.8-4.9_
 
-- [ ]\* 15. Update project documentation
-  - [ ]\* 15.1 Document book schema fields and usage in README or docs
-  - [ ]\* 15.2 Add examples of creating books, chapters, and quotes in Sanity Studio
-  - [ ]\* 15.3 Document sorting options and URL parameters
-  - [ ]\* 15.4 Add notes about SEO metadata fallback behavior
-  - [ ]\* 15.5 Document related books and quotes features
+- [x] 15. Update project documentation
+  - [x] 15.1 Document book schema fields and usage in README or docs
+  - [x] 15.2 Add examples of creating books, chapters, and quotes in Sanity Studio
+  - [x] 15.3 Document sorting options and URL parameters
+  - [x] 15.4 Add notes about SEO metadata fallback behavior
+  - [x] 15.5 Document related books and quotes features
   - _Requirements: All requirements_

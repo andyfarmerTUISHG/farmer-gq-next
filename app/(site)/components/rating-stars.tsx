@@ -16,9 +16,9 @@ export default function RatingStars({
   return (
     <div className={`flex items-center gap-1 ${className}`} aria-label={`Rating: ${rating} out of ${maxRating} stars`}>
       {/* Full stars */}
-      {Array.from({ length: fullStars }).map((_, index) => (
+      {Array.from({ length: fullStars }, (_, index) => `full-${index}`).map(key => (
         <svg
-          key={`full-${index}`}
+          key={key}
           className="h-5 w-5 fill-yellow-400 text-yellow-400"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -58,9 +58,9 @@ export default function RatingStars({
       )}
 
       {/* Empty stars */}
-      {Array.from({ length: emptyStars }).map((_, index) => (
+      {Array.from({ length: emptyStars }, (_, index) => `empty-${index}`).map(key => (
         <svg
-          key={`empty-${index}`}
+          key={key}
           className="h-5 w-5 fill-none text-gray-300 stroke-current"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

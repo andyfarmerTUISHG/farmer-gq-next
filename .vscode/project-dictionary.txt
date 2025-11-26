@@ -2,6 +2,7 @@ behaviour
 centre
 colour
 defence
+GROQ
 licence
 NextJS
 optimise
