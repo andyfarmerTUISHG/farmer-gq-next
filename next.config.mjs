@@ -6,6 +6,9 @@ const jiti = createJiti(fileURLToPath(import.meta.url));
 const { env } = jiti("./app/(site)/env/index.ts");
 
 const NextConfig = {
+  turbopack: {
+    root: fileURLToPath(new URL(".", import.meta.url)),
+  },
   images: {
     remotePatterns: [
       { hostname: "cdn.sanity.io" },
