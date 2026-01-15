@@ -1,13 +1,13 @@
 import Link from "next/link";
 
-import type { SettingsPayload } from "@/types";
+import type { ArticleShowcaseQueryResult } from "@/sanity.types";
 
 import { urlForImage } from "@/sanity/lib/utils";
 
 export default function ArticleShowcaseLayout({
   data,
 }: {
-  data: SettingsPayload;
+  data: ArticleShowcaseQueryResult;
 }) {
   return (
     <>
@@ -30,7 +30,7 @@ export default function ArticleShowcaseLayout({
                   <div
                     style={{
                       backgroundImage: article.asset
-                        ? `url(${urlForImage(article.asset)?.width(400).height(300).url()})`
+                        ? `url(${urlForImage(article.asset as any)?.width(400).height(300).url()})`
                         : "url(/assets/img/post-01.png)",
                     }}
                     className="group relative h-72 bg-cover bg-center bg-no-repeat sm:h-84 lg:h-64 xl:h-72"

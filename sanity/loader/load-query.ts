@@ -12,7 +12,7 @@ import {
   settingsQuery,
 } from "@/sanity/lib/queries";
 import { token } from "@/sanity/lib/token";
-import { ArticleType, ProfileType, SettingsPayload } from "@/types";
+import { Article, Profile, Settings } from "@/types";
 
 const serverClient = client.withConfig({
   token,
@@ -56,7 +56,7 @@ export const loadQuery = (async (query, params = {}, options = {}) => {
 }) satisfies typeof queryStore.loadQuery;
 
 export function loadSettings() {
-  return loadQuery<SettingsPayload>(
+  return loadQuery<Settings>(
     settingsQuery,
     {},
     { next: { tags: ["settings", "article", "articleShowcase", "siteLinks"] } }
@@ -64,7 +64,7 @@ export function loadSettings() {
 }
 
 export function loadArticleShowcase() {
-  return loadQuery<SettingsPayload>(
+  return loadQuery<Settings>(
     articleShowcaseQuery,
     {},
     { next: { tags: ["settings", "article", "articleShowcase"] } }
@@ -72,7 +72,7 @@ export function loadArticleShowcase() {
 }
 
 export function loadArticle(slug: string) {
-  return loadQuery<ArticleType | null>(
+  return loadQuery<Article | null>(
     articleBySlugQuery,
     { slug },
     { next: { tags: [`article:${slug}`] } }
@@ -80,7 +80,7 @@ export function loadArticle(slug: string) {
 }
 
 export function loadPaginatedArticle(skip: number, pageSize: number) {
-  return loadQuery<ArticleType | null>(
+  return loadQuery<Article | null>(
     paginatedArticlesQuery,
     { skip, pageSize },
     { next: { tags: ["article"] } }
@@ -90,7 +90,7 @@ export function loadPaginatedArticle(skip: number, pageSize: number) {
 export async function loadProfile() {
   // Add artificial delay to test loading state
   await new Promise((resolve) => setTimeout(resolve, 3000));
-  return loadQuery<ProfileType | null>(
+  return loadQuery<Profile | null>(
     profileQuery,
     {},
     { next: { tags: ["profile"] } }

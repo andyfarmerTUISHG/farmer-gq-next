@@ -5,7 +5,7 @@ import { createDataAttribute } from "next-sanity";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 
-import type { ArticleType } from "@/types";
+import type { Article } from "@/types";
 
 import { studioUrl } from "@/sanity/lib/api";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -14,8 +14,7 @@ import { articleBySlugQuery } from "@/sanity/lib/queries";
 import { CustomPortableText } from "../../components/global/custom-portable-text";
 
 export type ArticlePageProps = {
-
-  data: ArticleType | null;
+  data: Article | null;
   encodeDataAttribute?: EncodeDataAttributeCallback;
 };
 

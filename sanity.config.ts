@@ -24,9 +24,12 @@ import { fixNullDatesAction, publishWithTimestamp } from "@/sanity/actions/updat
 
 
 import article from "./schema/articles";
+import book from "./schema/book";
+import chapter from "./schema/chapter";
 import siteLinks from "./schema/documents/site-links";
 import person from "./schema/person";
 import profile from "./schema/profile";
+import quote from "./schema/quote";
 import settings from "./schema/singleton/settings";
 import tags from "./schema/tags";
 
@@ -56,8 +59,11 @@ export default defineConfig({
       settings,
       // Documents
       article,
+      book,
+      chapter,
       person,
       profile,
+      quote,
       siteLinks,
       // Objects
       tags,

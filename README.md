@@ -49,6 +49,10 @@ To update Sanity Data Model
 - `npm run build`
 - `npm run deploy`
 
+### Features
+
+- **Leadership Books**: Manage book summaries with chapters, quotes, and ratings. See [Leadership Books Documentation](docs/leadership-books.md) for details.
+
 ## Recommended VS Code Extensions
 
 There are a few VS Code recommended extensions in the project
