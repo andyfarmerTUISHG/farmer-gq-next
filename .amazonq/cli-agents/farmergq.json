@@ -65,7 +65,18 @@
   "resources": [
     "file://README.md",
     "file://package.json",
-    "file://tsconfig.json"
+    "file://tsconfig.json",
+    "file://.kiro/steering/code-style.md",
+    "file://.kiro/specs/technical-standards.md",
+    "file://docs/leadership-books.md",
+    {
+      "type": "knowledgeBase",
+      "source": "file://docs",
+      "name": "Project Documentation",
+      "indexType": "best",
+      "include": ["**/*.md"],
+      "exclude": ["**/node_modules/**"]
+    }
   ],
   "mcpServers": {
     "sanity": {
