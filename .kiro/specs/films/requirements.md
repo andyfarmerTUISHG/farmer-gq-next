@@ -16,6 +16,7 @@ This feature enables the site owner to track films watched using their Cineworld
 - **Wrapped Page**: Annual statistics page showing viewing patterns and insights
 - **Cineworld Unlimited**: Cinema subscription pass for unlimited film viewing
 - **Viewing Details**: Personal data about when and where a film was watched
+- **Secret Screening**: A special cinema event where the film is not revealed until attendance
 - **Wait Time**: Days between adding to wishlist and watching the film
 
 ## Requirements
@@ -30,8 +31,10 @@ This feature enables the site owner to track films watched using their Cineworld
 2. THE Film System SHALL store OMDb-fetched metadata (title, director, cast, poster, year, runtime, plot)
 3. THE Film System SHALL store personal viewing data (date watched, cinema location, rating, notes)
 4. THE Film System SHALL store wishlist metadata (date added to wishlist)
-5. THE Film System SHALL generate URL-friendly slugs from film titles
-6. THE Film System SHALL support filtering by status in Sanity Studio
+5. THE Film System SHALL support secret screenings with placeholder titles on wishlist
+6. THE Film System SHALL allow updating secret screenings with actual film details after viewing
+7. THE Film System SHALL generate URL-friendly slugs from film titles
+8. THE Film System SHALL support filtering by status in Sanity Studio
 
 ### Requirement 2: API Integration & Abstraction
 
@@ -73,7 +76,20 @@ This feature enables the site owner to track films watched using their Cineworld
 5. THE Film System SHALL still fetch OMDb data for direct watched entries
 6. THE Film System SHALL calculate wait time for wishlist films
 
-### Requirement 5: Film Display & Navigation
+### Requirement 5: Secret Screenings
+
+**User Story:** As a site owner, I want to track secret screenings where the film is unknown until attendance
+
+#### Acceptance Criteria
+
+1. THE Film System SHALL support adding secret screenings to wishlist with placeholder titles
+2. THE Film System SHALL mark entries as secret screenings with boolean flag
+3. THE Film System SHALL allow updating secret screenings with actual film details after viewing
+4. THE Film System SHALL fetch OMDb data when actual film title is revealed
+5. THE Film System SHALL maintain secret screening flag for statistical purposes
+6. THE Film System SHALL display secret screenings appropriately in wishlist and watched views
+
+### Requirement 6: Film Display & Navigation
 
 **User Story:** As a site visitor, I want to browse films and view detailed information
 
@@ -89,7 +105,23 @@ This feature enables the site owner to track films watched using their Cineworld
 8. THE Film System SHALL display upcoming films with poster, title, and date added
 9. THE Film System SHALL allow visitors to see what films are planned for viewing
 
-### Requirement 6: Annual Wrapped Statistics
+### Requirement 7: Last Film Watched Component
+
+**User Story:** As a site visitor, I want to see what film was most recently watched, so I can get a sense of current viewing activity
+
+#### Acceptance Criteria
+
+1. THE Film System SHALL provide a "Last Film Watched" component for use across multiple pages
+2. THE Film System SHALL display the most recent film watched in the current year
+3. THE Film System SHALL fallback to the most recent film from the previous year if no current year films exist
+4. THE Film System SHALL display the component prominently with larger styling than standard film cards
+5. THE Film System SHALL include film poster, title, personal rating, viewing date, and cinema location
+6. THE Film System SHALL include contextual text ("Just watched" or "Last watched")
+7. THE Film System SHALL be usable on home page, about page, and films listing page
+8. THE Film System SHALL update automatically when films are marked as watched
+9. THE Film System SHALL handle edge cases gracefully when no films exist
+
+### Requirement 8: Annual Wrapped Statistics
 
 **User Story:** As a site owner, I want annual cinema statistics similar to Spotify Wrapped
 
@@ -105,6 +137,7 @@ This feature enables the site owner to track films watched using their Cineworld
 8. THE Film System SHALL show genre distribution
 9. THE Film System SHALL calculate "patience awards" (longest wait times)
 10. THE Film System SHALL identify "impulse watches" (same-day additions)
+11. THE Film System SHALL count and display secret screenings attended per year
 
 ## Technical Requirements
 

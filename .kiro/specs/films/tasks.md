@@ -14,6 +14,7 @@ This document outlines the implementation phases for the Films feature, designed
   - [ ] `title` (string, required)
   - [ ] `slug` (slug, auto-generated from title)
   - [ ] `status` (string, options: wishlist/watched)
+  - [ ] `isSecretScreening` (boolean, default false)
   - [ ] `imdbId` (string, optional)
   - [ ] `year` (number, optional)
   - [ ] `dateAddedToWishlist` (date, optional)
@@ -32,6 +33,22 @@ This document outlines the implementation phases for the Films feature, designed
 - [ ] Can edit all fields successfully
 - [ ] Status filtering works in Studio
 - [ ] Preview shows title and status correctly
+
+### Test Data
+
+Use these real films for testing and initial content:
+
+**Watched Films (2025):**
+- **28 Years Later: The Bone Temple** - Watched: 18 Jan 2025
+- **Mercy** - Watched: 23 Jan 2025
+- **Return to Silent Hill** - Watched: 27 Jan 2025
+
+**Wishlist Films:**
+- **Iron Lung**
+- **Primate**
+- **Shelter**
+
+These can be published as actual content once the feature is complete.
 
 ---
 
@@ -220,6 +237,7 @@ This document outlines the implementation phases for the Films feature, designed
 - [ ] Create genre distribution charts
 - [ ] Calculate patience awards (longest waits)
 - [ ] Identify impulse watches (same-day)
+- [ ] Count secret screenings attended
 - [ ] Add visual charts/graphs
 - [ ] Create shareable wrapped summaries
 
@@ -260,3 +278,35 @@ Make small, focused commits for each completed task. Each phase should result in
 ### British English Compliance
 
 Ensure all user-facing text, comments, and documentation use British English spelling and terminology throughout implementation.
+
+---
+
+## Phase 10: Last Film Watched Component
+
+**Objective:** Create a prominent "last film watched" component for use across multiple pages
+
+### Tasks
+
+- [ ] Create `LastFilmWatched` component with prominent styling
+- [ ] Implement smart query logic:
+  - [ ] First: Get most recent film watched in current year
+  - [ ] Fallback: Get most recent film watched from previous year
+  - [ ] Order by `dateWatched` descending
+- [ ] Design prominent card layout (larger than standard film card)
+- [ ] Include film poster, title, rating, viewing date, and cinema location
+- [ ] Add "Just watched" or "Last watched" contextual text
+- [ ] Create reusable component for multiple page placements
+- [ ] Add to home page in appropriate section
+- [ ] Add to about page as personal touch
+- [ ] Add to films listing page (hero section or sidebar)
+- [ ] Ensure component updates when films are marked as watched
+
+### Testing Criteria
+
+- [ ] Component displays most recent film from current year
+- [ ] Falls back to previous year when no current year films exist
+- [ ] Displays prominently with all required information
+- [ ] Works correctly on home, about, and films pages
+- [ ] Updates automatically when new films are watched
+- [ ] Handles edge cases gracefully (no films at all)
+- [ ] Component is responsive across device sizes
