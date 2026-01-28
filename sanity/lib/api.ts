@@ -2,13 +2,15 @@
  * As this file is reused in several other files, try to keep it lean and small.
  * Importing other npm packages here could lead to needlessly increasing the client bundle size, or end up in a server-only function that don't need it.
  */
-import { env } from "@/app/(site)/env";
-
+// Use process.env directly for Sanity Studio deployment compatibility
 const SANITY_STUDIO_DATASET
-  = env.SANITY_STUDIO_DATASET || env.NEXT_PUBLIC_SANITY_DATASET;
+  // eslint-disable-next-line node/no-process-env
+  = process.env.SANITY_STUDIO_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET;
 const SANITY_STUDIO_PROJECT_ID
-  = env.SANITY_STUDIO_PROJECT_ID
-    || env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+  // eslint-disable-next-line node/no-process-env
+  = process.env.SANITY_STUDIO_PROJECT_ID
+    // eslint-disable-next-line node/no-process-env
+    || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 export const dataset = assertValue(
   SANITY_STUDIO_DATASET,
   "Missing environment variable: SANITY_STUDIO_DATASET",
@@ -21,10 +23,12 @@ export const projectId = assertValue(
 
 // see https://www.sanity.io/docs/api-versioning for how versioning works
 export const apiVersion
-  = env.NEXT_PUBLIC_SANITY_API_VERSION || "2023-06-21";
+  // eslint-disable-next-line node/no-process-env
+  = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2023-06-21";
 
 // See the app/api/revalidate/route.ts for how this is used
-export const revalidateSecret = env.SANITY_REVALIDATE_SECRET;
+// eslint-disable-next-line node/no-process-env
+export const revalidateSecret = process.env.SANITY_REVALIDATE_SECRET;
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
@@ -41,5 +45,6 @@ export const studioUrl = "/studio";
  * Used to configure edit intent links, for Presentation Mode, as well as to configure where the Studio is mounted in the router.
  */
 export const title
-  = env.NEXT_PUBLIC_SANITY_PROJECT_TITLE
+  // eslint-disable-next-line node/no-process-env
+  = process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE
     || "Farmer-gq - Personal Site with Sanity.io and Next.js";
