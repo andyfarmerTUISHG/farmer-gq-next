@@ -28,6 +28,16 @@ export const client = createClient({
   },
 });
 
+// Write client for creating/updating content
+export const writeClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  token: process.env.SANITY_API_WRITE_TOKEN,
+  useCdn: false,
+  perspective: "published",
+});
+
 console.warn(
   "This template is using stega to embed Content Source Maps, see more information here: https://www.sanity.io/docs/loaders-and-overlays#26cf681fadd4",
 );

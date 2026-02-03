@@ -151,6 +151,21 @@ All implementation must follow the standards defined in `.kiro/specs/technical-s
 - Environment variable management
 - Error handling and graceful degradation
 
+### Requirement 11: Year-Based Filtering for Watched Films
+
+**User Story:** As a site owner, I want to filter watched films by year to easily browse my viewing history by time period
+
+#### Acceptance Criteria
+
+1. THE Watched Films Page SHALL display year filter tabs based on watched dates
+2. THE Watched Films Page SHALL show film counts for each year in tab labels
+3. THE Watched Films Page SHALL include an "All Years" tab showing total count
+4. THE Watched Films Page SHALL filter films client-side by selected year
+5. THE Watched Films Page SHALL default to the most recent year with watched films
+6. THE Watched Films Page SHALL only show year tabs when multiple years exist
+7. THE Watched Films Page SHALL update the empty state message based on selected filter
+8. THE Watched Films Page SHALL maintain responsive design with year tabs
+
 ## Success Criteria
 
 The feature will be considered successful when:

@@ -1,0 +1,96 @@
+import Link from "next/link";
+
+import { sanityFetch } from "@/sanity/lib/live";
+import { lastFilmWatchedQuery } from "@/sanity/lib/queries";
+
+type LastFilmWatchedProps = {
+  className?: string;
+};
+
+export default async function LastFilmWatched({ className = "" }: LastFilmWatchedProps) {
+  const { data: film } = await sanityFetch({
+    query: lastFilmWatchedQuery,
+  });
+
+  if (!film) {
+    return null;
+  }
+
+  const currentYear = new Date().getFullYear().toString();
+  const isCurrentYear = film.watchedYear === currentYear;
+  const contextText = isCurrentYear ? "Just watched" : "Last watched";
+
+  return (
+    <div className={`bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-6 ${className}`}>
+      <div className="flex items-start justify-between mb-4">
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-1">
+            🎬
+            {" "}
+            {contextText}
+          </h3>
+          <p className="text-sm text-gray-600">
+            {isCurrentYear ? "Latest cinema visit" : `From ${film.watchedYear}`}
+          </p>
+        </div>
+        {film.isSecretScreening && (
+          <span className="text-lg" title="Secret Screening">🤫</span>
+        )}
+      </div>
+
+      <div className="space-y-3">
+        <div>
+          <Link
+            href={`/films/${film.slug}`}
+            className="text-xl font-bold text-blue-700 hover:text-blue-900 transition-colors"
+          >
+            {film.title}
+          </Link>
+          {film.year && (
+            <span className="text-gray-600 ml-2">
+              (
+              {film.year}
+              )
+            </span>
+          )}
+        </div>
+
+        <div className="flex flex-wrap gap-4 text-sm text-gray-700">
+          {film.dateWatched && (
+            <div className="flex items-center gap-1">
+              <span>📅</span>
+              <span>{new Date(film.dateWatched).toLocaleDateString("en-GB")}</span>
+            </div>
+          )}
+
+          {film.cinemaLocation && (
+            <div className="flex items-center gap-1">
+              <span>🏢</span>
+              <span className="truncate max-w-48">{film.cinemaLocation}</span>
+            </div>
+          )}
+
+          {film.personalRating && (
+            <div className="flex items-center gap-1">
+              <span>{"⭐".repeat(film.personalRating)}</span>
+              <span>
+                (
+                {film.personalRating}
+                /5)
+              </span>
+            </div>
+          )}
+        </div>
+
+        <div className="pt-2">
+          <Link
+            href="/films"
+            className="text-sm text-blue-600 hover:text-blue-800 underline"
+          >
+            View all films →
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}

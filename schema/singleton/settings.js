@@ -40,6 +40,12 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: "defaultCinema",
+      title: "Default Cinema Location",
+      type: "string",
+      description: "Default cinema location for film viewings (e.g., 'Cineworld Birmingham Broad Street')",
+    }),
   ],
   preview: {
     prepare() {

@@ -20,12 +20,14 @@ import {
 import * as resolve from "@/sanity/plugin/resolve";
 import { pageStructure, singletonPlugin } from "@/sanity/plugin/settings";
 import { fixNullDatesAction, publishWithTimestamp } from "@/sanity/actions/update-timestamp.js";
+// import fetchOMDbAction from "@/sanity/actions/fetch-omdb-action.js"; // Temporarily disabled for deployment
 
 
 
 import article from "./schema/articles";
 import book from "./schema/book";
 import chapter from "./schema/chapter";
+import film from "./schema/film";
 import siteLinks from "./schema/documents/site-links";
 import person from "./schema/person";
 import profile from "./schema/profile";
@@ -47,6 +49,10 @@ export default defineConfig({
         })
         return [...filteredActions, publishWithTimestamp, fixNullDatesAction]
       }
+      if (context.schemaType === 'film') {
+        // return [...prev, fetchOMDbAction] // Temporarily disabled for deployment
+        return prev
+      }
       return prev
     }
   },
@@ -61,6 +67,7 @@ export default defineConfig({
       article,
       book,
       chapter,
+      film,
       person,
       profile,
       quote,
