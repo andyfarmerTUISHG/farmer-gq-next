@@ -102,9 +102,9 @@ export default function FilmSearchTest() {
                         src={film.poster}
                         alt={`${film.title} poster`}
                         className="w-full h-full object-cover rounded"
-                        onLoad={() => console.log(`Image loaded: ${film.title}`)}
+                        onLoad={() => console.warn(`Image loaded: ${film.title}`)}
                         onError={(e) => {
-                          console.log(`Image failed to load (404): ${film.title}`, film.poster);
+                          console.warn(`Image failed to load (404): ${film.title}`, film.poster);
                           const target = e.currentTarget;
                           target.style.display = "none";
                           // Show fallback text

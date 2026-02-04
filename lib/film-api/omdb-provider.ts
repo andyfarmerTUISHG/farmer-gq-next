@@ -1,3 +1,5 @@
+import { env } from "@/app/(site)/env";
+
 import type { FilmDetails, FilmDetailsResponse, FilmSearchResponse, FilmSearchResult } from "./types";
 
 import { BaseFilmProvider } from "./base-provider";
@@ -57,8 +59,8 @@ export class OMDbProvider extends BaseFilmProvider {
       url.searchParams.set("s", query);
 
       // Log API request in development
-      if (process.env.NODE_ENV !== "production") {
-        console.log(`[OMDb API] Search request: ${url.toString()}`);
+      if (env.NODE_ENV !== "production") {
+        console.warn(`[OMDb API] Search request: ${url.toString()}`);
       }
       url.searchParams.set("type", "movie");
 
@@ -103,8 +105,8 @@ export class OMDbProvider extends BaseFilmProvider {
       url.searchParams.set("plot", "full");
 
       // Log API request in development
-      if (process.env.NODE_ENV !== "production") {
-        console.log(`[OMDb API] Details request: ${url.toString()}`);
+      if (env.NODE_ENV !== "production") {
+        console.warn(`[OMDb API] Details request: ${url.toString()}`);
       }
 
       const response = await fetch(url.toString());
@@ -152,8 +154,8 @@ export class OMDbProvider extends BaseFilmProvider {
       url.searchParams.set("plot", "full");
 
       // Log API request in development
-      if (process.env.NODE_ENV !== "production") {
-        console.log(`[OMDb API] Title lookup request: ${url.toString()}`);
+      if (env.NODE_ENV !== "production") {
+        console.warn(`[OMDb API] Title lookup request: ${url.toString()}`);
       }
 
       const response = await fetch(url.toString());

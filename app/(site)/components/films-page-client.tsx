@@ -18,7 +18,6 @@ type FilmsPageClientProps = {
 };
 
 export default function FilmsPageClient({
-  recentFilms,
   wishlistFilms,
   allWatchedFilms,
   isDraftMode,

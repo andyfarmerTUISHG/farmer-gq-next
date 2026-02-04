@@ -15,7 +15,7 @@ export async function GET() {
   }
   catch (error) {
     return NextResponse.json(
-      { error: "Failed to fetch settings" },
+      { error: `Failed to fetch settings ${error}` },
       { status: 500 },
     );
   }

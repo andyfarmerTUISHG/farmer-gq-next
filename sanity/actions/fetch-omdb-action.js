@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { SearchIcon } from "@sanity/icons";
 import { useDocumentOperation } from "sanity";
 
@@ -10,10 +11,20 @@ export default function FetchOMDbAction(props) {
     return null;
   }
 
+  // Check if we're running in hosted Sanity Studio
+  const isHostedStudio = typeof window !== "undefined"
+    && (window.location.hostname.includes("sanity.studio")
+      || window.location.hostname.includes("sanity.io"));
+
   return {
-    label: "Fetch OMDb Data",
+    label: isHostedStudio ? "Fetch OMDb Data (Local Only)" : "Fetch OMDb Data",
     icon: SearchIcon,
+    disabled: isHostedStudio,
     onHandle: async () => {
+      if (isHostedStudio) {
+        alert("OMDb integration is only available in local development.\n\nTo use this feature:\n1. Run 'npm run dev' locally\n2. Open http://localhost:3000/studio\n3. Use the OMDb action there");
+        return;
+      }
       const title = doc?.title;
       const year = doc?.year;
       const imdbId = doc?.imdbId;
@@ -52,6 +63,7 @@ export default function FetchOMDbAction(props) {
             }
             catch (e) {
               // Fall through to search if direct lookup fails
+              console.warn("Direct lookup failed, falling back to search", e);
             }
           }
 

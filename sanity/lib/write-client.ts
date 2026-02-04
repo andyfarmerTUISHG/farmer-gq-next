@@ -1,3 +1,4 @@
+/* eslint-disable node/no-process-env */
 import { createClient } from "next-sanity";
 
 import {

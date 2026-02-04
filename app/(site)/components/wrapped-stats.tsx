@@ -18,7 +18,7 @@ type WrappedStatsProps = {
   year: string;
 };
 
-export default function WrappedStats({ films, year }: WrappedStatsProps) {
+export default function WrappedStats({ films }: WrappedStatsProps) {
   if (!films || films.length === 0) {
     return null;
   }
@@ -76,7 +76,9 @@ export default function WrappedStats({ films, year }: WrappedStatsProps) {
       {/* Key Statistics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-6 text-center">
-          <div className="text-3xl font-bold mb-2">{totalFilms}</div>
+          <div className="text-3xl font-bold mb-2">
+            {totalFilms}
+          </div>
           <div className="text-blue-100">Films Watched</div>
         </div>
 
