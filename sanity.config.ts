@@ -20,7 +20,7 @@ import {
 import * as resolve from "@/sanity/plugin/resolve";
 import { pageStructure, singletonPlugin } from "@/sanity/plugin/settings";
 import { fixNullDatesAction, publishWithTimestamp } from "@/sanity/actions/update-timestamp.js";
-// import fetchOMDbAction from "@/sanity/actions/fetch-omdb-action.js"; // Temporarily disabled for deployment
+import fetchOMDbAction from "@/sanity/actions/fetch-omdb-action.js";
 
 
 
@@ -50,8 +50,7 @@ export default defineConfig({
         return [...filteredActions, publishWithTimestamp, fixNullDatesAction]
       }
       if (context.schemaType === 'film') {
-        // return [...prev, fetchOMDbAction] // Temporarily disabled for deployment
-        return prev
+        return [...prev, fetchOMDbAction]
       }
       return prev
     }
