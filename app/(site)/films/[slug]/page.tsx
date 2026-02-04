@@ -72,7 +72,7 @@ export default async function FilmDetailPage({ params }: Props) {
     stega: isDraftMode,
   });
 
-  if (!film && !isDraftMode) {
+  if (!film) {
     notFound();
   }
 
