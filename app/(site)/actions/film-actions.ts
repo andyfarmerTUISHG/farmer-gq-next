@@ -10,7 +10,7 @@ import {
   sanitizeText,
   searchFilmsSchema,
 } from "@/lib/validation";
-import { writeClient } from "@/sanity/lib/client";
+import { writeClient } from "@/sanity/lib/write-client";
 
 export async function searchFilmsAction(query: string) {
   if (!filmService) {

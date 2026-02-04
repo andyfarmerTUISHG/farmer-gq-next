@@ -37,7 +37,7 @@ function createFilmService(): FilmService | null {
     console.warn("OMDB_API_KEY not available - film service disabled");
     return null;
   }
-  
+
   const omdbProvider = new OMDbProvider(env.OMDB_API_KEY);
   return new FilmService(omdbProvider);
 }
