@@ -7,6 +7,11 @@ export default function FetchOMDbAction(props) {
   const { patch } = useDocumentOperation(id, type);
   const doc = draft || published;
 
+  // Safety check - ensure document exists
+  if (!doc || !doc._id) {
+    return null;
+  }
+
   if (type !== "film") {
     return null;
   }
@@ -170,14 +175,20 @@ export default function FetchOMDbAction(props) {
         patches.push({ set: { slug: { current: slug } } });
 
         if (patches.length > 0) {
-          await patch.execute(patches);
-          alert(`✅ Updated ${patches.length} fields with OMDb data!
+          try {
+            await patch.execute(patches);
+            alert(`✅ Updated ${patches.length} fields with OMDb data!
 
 ${filmData.title} (${filmData.year})
 Director: ${filmData.director}
 Genre: ${filmData.genre}
 
 Fields updated: ${patches.map(p => Object.keys(p.set)[0]).join(", ")}`);
+          }
+          catch (patchError) {
+            console.error("Patch execution failed:", patchError);
+            alert(`Failed to update document: ${patchError.message}\n\nTry saving the document first, then retry the OMDb fetch.`);
+          }
         }
         else {
           alert(`ℹ️ No new data to update for ${filmData.title} (${filmData.year})`);
