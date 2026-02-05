@@ -32,17 +32,19 @@ export default function WrappedStats({ films }: WrappedStatsProps) {
 
   const secretScreenings = films.filter(f => f.isSecretScreening).length;
 
-  // Cinema statistics
+  // Cinema statistics - sanitize to remove stega-encoded invisible characters
+  const sanitizeCinema = (cinema?: string) => cinema?.replace(/[\u200B-\u200D\uFEFF]/g, '').trim();
+  
   const cinemaVisits = films.filter(f => f.cinemaLocation);
-  const cinemaCount = [...new Set(cinemaVisits.map(f => f.cinemaLocation))];
+  const uniqueCinemas = [...new Set(cinemaVisits.map(f => sanitizeCinema(f.cinemaLocation)))];
+  
   const cinemaFrequency = cinemaVisits.reduce((acc: Record<string, number>, film) => {
-    if (film.cinemaLocation) {
-      acc[film.cinemaLocation] = (acc[film.cinemaLocation] || 0) + 1;
+    const cinema = sanitizeCinema(film.cinemaLocation);
+    if (cinema) {
+      acc[cinema] = (acc[cinema] || 0) + 1;
     }
     return acc;
   }, {});
-  const topCinema = Object.entries(cinemaFrequency)
-    .sort(([,a], [,b]) => b - a)[0];
 
   // Rating distribution
   const ratingDistribution = ratedFilms.reduce((acc: Record<number, number>, film) => {
@@ -95,7 +97,7 @@ export default function WrappedStats({ films }: WrappedStatsProps) {
         </div>
 
         <div className="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-lg p-6 text-center">
-          <div className="text-3xl font-bold mb-2">{cinemaCount.length}</div>
+          <div className="text-3xl font-bold mb-2">{uniqueCinemas.length}</div>
           <div className="text-orange-100">Different Cinemas</div>
         </div>
       </div>
