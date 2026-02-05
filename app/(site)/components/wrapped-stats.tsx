@@ -105,24 +105,14 @@ export default function WrappedStats({ films }: WrappedStatsProps) {
         {/* Cinema Statistics */}
         <div className="bg-white border rounded-lg p-6">
           <h3 className="text-xl font-semibold mb-4">🏆 Cinema Loyalty</h3>
-          {topCinema && (
-            <div className="mb-4">
-              <p className="font-medium">{topCinema[0]}</p>
-              <p className="text-sm text-gray-600">
-                {topCinema[1]}
-                {" "}
-                visits
-              </p>
-            </div>
-          )}
           <div className="space-y-2">
             {Object.entries(cinemaFrequency)
               .sort(([,a], [,b]) => b - a)
               .slice(0, 5)
               .map(([cinema, count]) => (
-                <div key={cinema} className="flex justify-between text-sm">
+                <div key={cinema} className="flex justify-between">
                   <span className="truncate">{cinema}</span>
-                  <span className="text-gray-600">{count}</span>
+                  <span className="text-gray-600 font-semibold">{count} visits</span>
                 </div>
               ))}
           </div>
