@@ -9,8 +9,16 @@ export async function GET() {
       query: settingsQuery,
     });
 
+    // Sanitize the default cinema value to remove any invisible characters
+    const defaultCinema = settings?.defaultCinema 
+      ? settings.defaultCinema
+          .trim()
+          .replace(/[\u200B-\u200D\uFEFF]/g, "")
+          .replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
+      : null;
+
     return NextResponse.json({
-      defaultCinema: settings?.defaultCinema || null,
+      defaultCinema,
     });
   }
   catch (error) {
