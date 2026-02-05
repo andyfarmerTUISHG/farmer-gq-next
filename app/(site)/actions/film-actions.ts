@@ -235,6 +235,16 @@ export async function markFilmAsWatchedAction(
   dateAddedToWishlist?: string,
 ) {
   try {
+    // Debug logging
+    console.log("Mark as watched input:", {
+      filmId,
+      dateWatched,
+      cinemaLocation: `"${cinemaLocation}" (length: ${cinemaLocation?.length})`,
+      personalRating,
+      personalNotes: personalNotes?.substring(0, 50),
+      dateAddedToWishlist,
+    });
+
     // Validate and sanitize all inputs
     const validatedInput = markAsWatchedSchema.parse({
       filmId,
