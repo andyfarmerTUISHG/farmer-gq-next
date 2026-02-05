@@ -5,16 +5,16 @@ export const markAsWatchedSchema = z.object({
   filmId: z.string().min(1, "Film ID is required").max(50, "Film ID too long"),
   dateWatched: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format"),
   cinemaLocation: z.string()
+    .trim()
     .min(1, "Cinema location is required")
-    .max(100, "Cinema location too long")
-    .trim(),
+    .max(100, "Cinema location too long"),
   personalRating: z.number()
     .int("Rating must be a whole number")
     .min(1, "Rating must be at least 1")
     .max(5, "Rating must be at most 5"),
   personalNotes: z.string()
-    .max(1000, "Notes too long")
     .trim()
+    .max(1000, "Notes too long")
     .optional()
     .default(""),
   dateAddedToWishlist: z.string()
@@ -24,9 +24,9 @@ export const markAsWatchedSchema = z.object({
 
 export const searchFilmsSchema = z.object({
   query: z.string()
+    .trim()
     .min(1, "Search query is required")
-    .max(100, "Search query too long")
-    .trim(),
+    .max(100, "Search query too long"),
 });
 
 export const addFilmSchema = z.object({
@@ -35,9 +35,9 @@ export const addFilmSchema = z.object({
     .min(1, "IMDB ID is required")
     .max(20, "IMDB ID too long"),
   title: z.string()
+    .trim()
     .min(1, "Title is required")
-    .max(200, "Title too long")
-    .trim(),
+    .max(200, "Title too long"),
   year: z.number()
     .int("Year must be a whole number")
     .min(1900, "Year too old")
