@@ -49,6 +49,10 @@ export const addFilmSchema = z.object({
 export function sanitizeText(input: string): string {
   return input
     .trim()
+    // Remove zero-width and invisible Unicode characters
+    .replace(/[\u200B-\u200D\uFEFF]/g, "")
+    // Remove other control characters
+    .replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
     .replace(/[<>]/g, "") // Remove potential HTML tags
     .replace(/javascript:/gi, "") // Remove javascript: protocols
     .replace(/on\w+=/gi, "") // Remove event handlers

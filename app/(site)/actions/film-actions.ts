@@ -235,23 +235,23 @@ export async function markFilmAsWatchedAction(
   dateAddedToWishlist?: string,
 ) {
   try {
-    // Debug logging
-    console.log("Mark as watched input:", {
-      filmId,
-      dateWatched,
-      cinemaLocation: `"${cinemaLocation}" (length: ${cinemaLocation?.length})`,
-      personalRating,
-      personalNotes: personalNotes?.substring(0, 50),
-      dateAddedToWishlist,
-    });
+    // Pre-sanitize text inputs to remove invisible characters before validation
+    const cleanCinemaLocation = cinemaLocation
+      .trim()
+      .replace(/[\u200B-\u200D\uFEFF]/g, "")
+      .replace(/[\u0000-\u001F\u007F-\u009F]/g, "");
+    
+    const cleanPersonalNotes = personalNotes
+      ? personalNotes.trim().replace(/[\u200B-\u200D\uFEFF]/g, "").replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
+      : "";
 
     // Validate and sanitize all inputs
     const validatedInput = markAsWatchedSchema.parse({
       filmId,
       dateWatched,
-      cinemaLocation,
+      cinemaLocation: cleanCinemaLocation,
       personalRating,
-      personalNotes: personalNotes || "",
+      personalNotes: cleanPersonalNotes,
       dateAddedToWishlist,
     });
 
