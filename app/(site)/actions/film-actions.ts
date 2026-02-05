@@ -287,12 +287,13 @@ export async function markFilmAsWatchedAction(
     };
   }
   catch (error) {
-    if (error instanceof Error && error.name === "ZodError") {
-      const zodError = error as any;
-      const errorMessages = zodError.errors?.map((e: any) => `${e.path.join(".")}: ${e.message}`).join(", ");
+    // Handle Zod validation errors
+    if (error && typeof error === "object" && "issues" in error) {
+      const zodError = error as { issues: Array<{ path: string[]; message: string }> };
+      const errorMessages = zodError.issues.map(e => `${e.path.join(".")}: ${e.message}`).join(", ");
       return {
         success: false,
-        error: `Invalid input: ${errorMessages || "Validation failed"}`,
+        error: `Validation failed: ${errorMessages}`,
       };
     }
     return {
