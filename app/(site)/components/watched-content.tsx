@@ -51,10 +51,6 @@ export default function WatchedContent({ films, isDraftMode }: WatchedContentPro
     });
   }, [films, selectedYear]);
 
-  if (!isDraftMode) {
-    return null;
-  }
-
   return (
     <>
       {/* Year Filter Tabs */}
