@@ -58,6 +58,12 @@ export default async function WrappedYearPage({ params }: Props) {
     params: { year }, // Pass as string since GROQ query expects string
   });
 
+  // Get all available years for navigation
+  const yearsData = await client.fetch(wrappedYearsQuery);
+  const availableYears = yearsData
+    ? [...new Set(yearsData.map((item: any) => item.year))].sort((a, b) => b - a)
+    : [];
+
   if (!films || films.length === 0) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -68,21 +74,33 @@ export default async function WrappedYearPage({ params }: Props) {
               {" "}
               Cinema Wrapped
             </h1>
-            <div className="flex gap-4">
-              <Link
-                href="/films"
-                className="text-blue-600 hover:text-blue-800 underline"
-              >
-                All Films
-              </Link>
-              <Link
-                href="/films/wrapped"
-                className="text-blue-600 hover:text-blue-800 underline"
-              >
-                All Years
-              </Link>
-            </div>
+            <Link
+              href="/films"
+              className="text-blue-600 hover:text-blue-800 underline"
+            >
+              All Films
+            </Link>
           </div>
+          
+          {/* Year Navigation */}
+          {availableYears.length > 0 && (
+            <div className="flex gap-2 mb-4 flex-wrap">
+              {availableYears.map((y) => (
+                <Link
+                  key={y}
+                  href={`/films/wrapped/${y}`}
+                  className={`px-3 py-1 rounded ${
+                    y.toString() === year
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
+                >
+                  {y}
+                </Link>
+              ))}
+            </div>
+          )}
+          
           <p className="text-gray-600">
             No films watched in
             {year}
@@ -101,21 +119,33 @@ export default async function WrappedYearPage({ params }: Props) {
             {" "}
             Cinema Wrapped
           </h1>
-          <div className="flex gap-4">
-            <Link
-              href="/films"
-              className="text-blue-600 hover:text-blue-800 underline"
-            >
-              All Films
-            </Link>
-            <Link
-              href="/films/wrapped"
-              className="text-blue-600 hover:text-blue-800 underline"
-            >
-              All Years
-            </Link>
-          </div>
+          <Link
+            href="/films"
+            className="text-blue-600 hover:text-blue-800 underline"
+          >
+            All Films
+          </Link>
         </div>
+        
+        {/* Year Navigation */}
+        {availableYears.length > 0 && (
+          <div className="flex gap-2 mb-4 flex-wrap">
+            {availableYears.map((y) => (
+              <Link
+                key={y}
+                href={`/films/wrapped/${y}`}
+                className={`px-3 py-1 rounded ${
+                  y.toString() === year
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                }`}
+              >
+                {y}
+              </Link>
+            ))}
+          </div>
+        )}
+        
         <p className="text-gray-600">
           Your
           {year}
