@@ -59,45 +59,41 @@ export default function FilmsPageClient({
       <div className="mb-6">
         <div className="border-b border-gray-200">
           <nav className="-mb-px flex space-x-8">
-            {isDraftMode && (
-              <button
-                onClick={() => setActiveTab("watched")}
-                className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                  activeTab === "watched"
-                    ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                }`}
-              >
-                All Watched (
-                {allWatchedFilms?.length || 0}
-                )
-              </button>
-            )}
+            <button
+              onClick={() => setActiveTab("watched")}
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "watched"
+                  ? "border-blue-500 text-blue-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              All Watched (
+              {allWatchedFilms?.length || 0}
+              )
+            </button>
 
-            {isDraftMode && (
-              <button
-                onClick={() => setActiveTab("wishlist")}
-                className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                  activeTab === "wishlist"
-                    ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                }`}
-              >
-                Wishlist (
-                {wishlistFilms?.length || 0}
-                )
-              </button>
-            )}
+            <button
+              onClick={() => setActiveTab("wishlist")}
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "wishlist"
+                  ? "border-blue-500 text-blue-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              Wishlist (
+              {wishlistFilms?.length || 0}
+              )
+            </button>
           </nav>
         </div>
       </div>
 
       {/* Tab Content */}
-      {activeTab === "watched" && isDraftMode && (
+      {activeTab === "watched" && (
         <WatchedContent films={allWatchedFilms} isDraftMode={isDraftMode} />
       )}
 
-      {activeTab === "wishlist" && isDraftMode && (
+      {activeTab === "wishlist" && (
         <WishlistContent films={wishlistFilms} isDraftMode={isDraftMode} />
       )}
     </div>
