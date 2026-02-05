@@ -288,9 +288,11 @@ export async function markFilmAsWatchedAction(
   }
   catch (error) {
     if (error instanceof Error && error.name === "ZodError") {
+      const zodError = error as any;
+      const errorMessages = zodError.errors?.map((e: any) => `${e.path.join(".")}: ${e.message}`).join(", ");
       return {
         success: false,
-        error: "Invalid input data",
+        error: `Invalid input: ${errorMessages || "Validation failed"}`,
       };
     }
     return {
