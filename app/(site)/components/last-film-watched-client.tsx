@@ -117,7 +117,7 @@ export default function LastFilmWatchedClient({ className = "" }: LastFilmWatche
           </div>
 
           {film.plot && (
-            <p className="text-sm text-gray-700 line-clamp-3">{film.plot}</p>
+            <p className="text-sm text-gray-700">{film.plot}</p>
           )}
 
           <div className="flex flex-wrap gap-4 text-sm text-gray-700">
