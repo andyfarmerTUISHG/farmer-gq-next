@@ -315,6 +315,8 @@ export const lastFilmWatchedQuery = groq`
     dateWatched,
     cinemaLocation,
     personalRating,
+    posterUrl,
+    plot,
     "watchedYear": string::split(dateWatched, "-")[0]
   }
 `;
