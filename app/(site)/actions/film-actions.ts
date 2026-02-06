@@ -226,6 +226,110 @@ export async function addFilmToWishlistAction(imdbId: string, _title: string, _y
   }
 }
 
+export async function addFilmAsWatchedAction(
+  imdbId: string,
+  _title: string,
+  _year: number | undefined,
+  dateWatched: string,
+  cinemaLocation: string,
+  personalRating: number,
+  personalNotes?: string,
+) {
+  if (!filmService) {
+    return {
+      success: false,
+      error: "Film service not available - OMDB_API_KEY not configured",
+    };
+  }
+
+  try {
+    // Pre-sanitize text inputs
+    const cleanCinemaLocation = cinemaLocation
+      .trim()
+      .replace(/[\u200B-\u200D\uFEFF]/g, "");
+
+    const cleanPersonalNotes = personalNotes
+      ? personalNotes.trim().replace(/[\u200B-\u200D\uFEFF]/g, "")
+      : "";
+
+    // Validate inputs
+    const validatedWatchData = markAsWatchedSchema.parse({
+      filmId: "temp", // Will be replaced after creation
+      dateWatched,
+      cinemaLocation: cleanCinemaLocation,
+      personalRating,
+      personalNotes: cleanPersonalNotes,
+    });
+
+    const validatedFilmData = addFilmSchema.parse({
+      imdbId,
+      title: _title,
+      year: _year,
+    });
+
+    // Get film details from OMDb
+    const filmResult = await filmService.getFilmDetails(validatedFilmData.imdbId);
+
+    if (filmResult.error || !filmResult.film) {
+      return {
+        success: false,
+        error: filmResult.error || "Failed to fetch film details",
+      };
+    }
+
+    const film = filmResult.film;
+    const slug = generateFilmSlug(film.title, film.year);
+
+    // Sanitize all text inputs
+    const sanitizedTitle = sanitizeText(film.title);
+    const sanitizedPlot = film.plot ? sanitizeText(film.plot) : null;
+    const sanitizedCinema = sanitizeText(validatedWatchData.cinemaLocation);
+    const sanitizedNotes = sanitizeText(validatedWatchData.personalNotes);
+
+    // Create film document in Sanity with watched status
+    const filmDoc = {
+      _type: "film",
+      title: sanitizedTitle,
+      slug: { current: slug },
+      status: "watched",
+      isSecretScreening: false,
+      imdbId: film.imdbId,
+      posterUrl: film.poster && film.poster !== "N/A" ? film.poster : null,
+      year: film.year,
+      runtime: film.runtime ? (typeof film.runtime === "string" ? Number.parseInt((film.runtime as string).replace(/\D/g, "")) : film.runtime) : null,
+      plot: sanitizedPlot,
+      dateWatched: validatedWatchData.dateWatched,
+      cinemaLocation: sanitizedCinema,
+      personalRating: validatedWatchData.personalRating,
+      personalNotes: sanitizedNotes,
+    };
+
+    const result = await writeClient.create(filmDoc);
+
+    // Revalidate the films pages
+    revalidatePath("/films");
+    revalidatePath("/films/wrapped");
+
+    return {
+      success: true,
+      filmId: result._id,
+      message: `Added "${sanitizedTitle}" as watched`,
+    };
+  }
+  catch (error) {
+    if (error instanceof Error && error.name === "ZodError") {
+      return {
+        success: false,
+        error: "Invalid film data",
+      };
+    }
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to add film",
+    };
+  }
+}
+
 export async function markFilmAsWatchedAction(
   filmId: string,
   dateWatched: string,
@@ -238,11 +342,10 @@ export async function markFilmAsWatchedAction(
     // Pre-sanitize text inputs to remove invisible characters before validation
     const cleanCinemaLocation = cinemaLocation
       .trim()
-      .replace(/[\u200B-\u200D\uFEFF]/g, "")
-      .replace(/[\u0000-\u001F\u007F-\u009F]/g, "");
-    
+      .replace(/[\u200B-\u200D\uFEFF]/g, "");
+
     const cleanPersonalNotes = personalNotes
-      ? personalNotes.trim().replace(/[\u200B-\u200D\uFEFF]/g, "").replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
+      ? personalNotes.trim().replace(/[\u200B-\u200D\uFEFF]/g, "")
       : "";
 
     // Validate and sanitize all inputs
