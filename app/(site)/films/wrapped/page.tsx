@@ -27,7 +27,7 @@ export default async function WrappedIndexPage() {
 
   // Extract unique years from the simplified query result
   const years = yearsData
-    ? [...new Set(yearsData.map((item: any) => item.year))].sort((a, b) => b - a)
+    ? [...new Set(yearsData.map((item: any) => item.year))].sort((a: number, b: number) => b - a)
     : [];
 
   return (
