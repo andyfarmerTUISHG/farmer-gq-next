@@ -38,57 +38,73 @@ export default async function LastFilmWatched({ className = "" }: LastFilmWatche
         )}
       </div>
 
-      <div className="space-y-3">
-        <div>
-          <Link
-            href={`/films/${film.slug}`}
-            className="text-xl font-bold text-blue-700 hover:text-blue-900 transition-colors"
-          >
-            {film.title}
-          </Link>
-          {film.year && (
-            <span className="text-gray-600 ml-2">
-              (
-              {film.year}
-              )
-            </span>
-          )}
-        </div>
+      <div className="flex gap-4">
+        {film.posterUrl && (
+          <div className="flex-shrink-0">
+            <img
+              src={film.posterUrl}
+              alt={`${film.title} poster`}
+              className="w-24 h-36 object-cover rounded shadow-md"
+            />
+          </div>
+        )}
 
-        <div className="flex flex-wrap gap-4 text-sm text-gray-700">
-          {film.dateWatched && (
-            <div className="flex items-center gap-1">
-              <span>📅</span>
-              <span>{new Date(film.dateWatched).toLocaleDateString("en-GB")}</span>
-            </div>
-          )}
-
-          {film.cinemaLocation && (
-            <div className="flex items-center gap-1">
-              <span>🏢</span>
-              <span className="truncate max-w-48">{film.cinemaLocation}</span>
-            </div>
-          )}
-
-          {film.personalRating && (
-            <div className="flex items-center gap-1">
-              <span>{"⭐".repeat(film.personalRating)}</span>
-              <span>
+        <div className="flex-1 space-y-3">
+          <div>
+            <Link
+              href={`/films/${film.slug}`}
+              className="text-xl font-bold text-blue-700 hover:text-blue-900 transition-colors"
+            >
+              {film.title}
+            </Link>
+            {film.year && (
+              <span className="text-gray-600 ml-2">
                 (
-                {film.personalRating}
-                /5)
+                {film.year}
+                )
               </span>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
 
-        <div className="pt-2">
-          <Link
-            href="/films"
-            className="text-sm text-blue-600 hover:text-blue-800 underline"
-          >
-            View all films →
-          </Link>
+          {film.plot && (
+            <p className="text-sm text-gray-700 line-clamp-3">{film.plot}</p>
+          )}
+
+          <div className="flex flex-wrap gap-4 text-sm text-gray-700">
+            {film.dateWatched && (
+              <div className="flex items-center gap-1">
+                <span>📅</span>
+                <span>{new Date(film.dateWatched).toLocaleDateString("en-GB")}</span>
+              </div>
+            )}
+
+            {film.cinemaLocation && (
+              <div className="flex items-center gap-1">
+                <span>🏢</span>
+                <span className="truncate max-w-48">{film.cinemaLocation}</span>
+              </div>
+            )}
+
+            {film.personalRating && (
+              <div className="flex items-center gap-1">
+                <span>{"⭐".repeat(film.personalRating)}</span>
+                <span>
+                  (
+                  {film.personalRating}
+                  /5)
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div className="pt-2">
+            <Link
+              href="/films"
+              className="text-sm text-blue-600 hover:text-blue-800 underline"
+            >
+              View all films →
+            </Link>
+          </div>
         </div>
       </div>
     </div>
