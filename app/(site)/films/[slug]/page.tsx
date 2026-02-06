@@ -188,7 +188,7 @@ export default async function FilmDetailPage({ params }: Props) {
             )}
 
             {/* Personal Notes - Only show if notes exist and user is authenticated */}
-            {isDraftMode && film.personalNotes && (
+            {isDraftMode && film.personalNotes && film.personalNotes.trim() && (
               <div className="bg-yellow-50 rounded-lg p-6">
                 <h2 className="text-xl font-semibold mb-4">Personal Notes</h2>
                 <div className="whitespace-pre-wrap">{film.personalNotes}</div>
