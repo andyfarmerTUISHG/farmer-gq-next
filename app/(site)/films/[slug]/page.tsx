@@ -187,7 +187,7 @@ export default async function FilmDetailPage({ params }: Props) {
               </div>
             )}
 
-            {/* Personal Notes - Only visible when authenticated */}
+            {/* Personal Notes - Only show if notes exist and user is authenticated */}
             {isDraftMode && film.personalNotes && (
               <div className="bg-yellow-50 rounded-lg p-6">
                 <h2 className="text-xl font-semibold mb-4">Personal Notes</h2>
@@ -213,6 +213,12 @@ export default async function FilmDetailPage({ params }: Props) {
             <div className="bg-white border rounded-lg p-6">
               <h2 className="text-lg font-semibold mb-4">Film Information</h2>
               <div className="space-y-3">
+                {film.plot && (
+                  <div>
+                    <h3 className="font-medium text-gray-700">Synopsis</h3>
+                    <p className="text-sm">{film.plot}</p>
+                  </div>
+                )}
                 {film.year && (
                   <div>
                     <h3 className="font-medium text-gray-700">Release Year</h3>
