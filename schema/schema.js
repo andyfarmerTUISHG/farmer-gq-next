@@ -2,10 +2,11 @@
 import article from "./articles";
 import book from "./book";
 import chapter from "./chapter";
+import film from "./film";
 import person from "./person";
 import profile from "./profile";
 import quote from "./quote";
 import settings from "./singleton/settings";
 import tags from "./tags";
 
-export default [article, book, chapter, quote, tags, person, profile, settings];
+export default [article, book, chapter, film, quote, tags, person, profile, settings];

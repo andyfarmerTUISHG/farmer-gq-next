@@ -5,6 +5,7 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "production"]).default("development"),
     NEXT_PAGE_SIZE: z.string().default("15"),
+    OMDB_API_KEY: z.string().min(1).optional(),
     SANITY_API_READ_TOKEN: z.string().min(1),
     SANITY_API_WRITE_TOKEN: z.string().min(1),
     SANITY_STUDIO_PROJECT_ID: z.string().min(1),

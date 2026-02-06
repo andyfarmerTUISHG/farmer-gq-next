@@ -52,6 +52,29 @@ To update Sanity Data Model
 ### Features
 
 - **Leadership Books**: Manage book summaries with chapters, quotes, and ratings. See [Leadership Books Documentation](docs/leadership-books.md) for details.
+- **Films**: Track cinema visits and film reviews with Cineworld Unlimited pass integration. _In development - see [Films Specification](.kiro/specs/films/requirements.md)_
+
+## Feature Development
+
+### Specification-Driven Development
+
+New features are developed using a structured specification process:
+
+- **Requirements**: Detailed user stories and acceptance criteria in `.kiro/specs/<feature>/requirements.md`
+- **Tasks**: Implementation phases and testing criteria in `.kiro/specs/<feature>/tasks.md`
+- **Technical Standards**: All features follow standards defined in `.kiro/specs/technical-standards.md`
+
+### Current Features in Development
+
+- **Films Feature**: Cinema tracking system with OMDb API integration
+  - Status: Phase planning complete
+  - Spec: [Requirements](.kiro/specs/films/requirements.md) | [Tasks](.kiro/specs/films/tasks.md)
+
+### Completed Features
+
+- **Leadership Books**: Full implementation with chapters, ratings, and search
+- **Articles**: Blog-style content with Sanity CMS integration
+- **Google Analytics**: Privacy-compliant analytics implementation
 
 ## Recommended VS Code Extensions
 

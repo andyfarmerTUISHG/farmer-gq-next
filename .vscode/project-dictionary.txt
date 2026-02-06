@@ -11,3 +11,4 @@ Sanity
 Sitelinks
 stega
 TypeScript
+wishlist

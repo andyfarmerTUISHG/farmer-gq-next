@@ -31,3 +31,13 @@ When creating feature specifications for SDD (Specification-Driven Development):
 - Additional files: `design.md`, `tasks.md`, etc. as needed
 - Reference `technical-standards.md` instead of repeating common requirements
 - Use British English spelling and terminology
+
+### README.md Synchronisation
+
+**CRITICAL**: Always keep README.md in sync with feature specifications:
+
+- When creating new feature specs, add to "Current Features in Development" section
+- When completing features, move from "in development" to "Completed Features"
+- Update feature status and links to match actual implementation progress
+- Include direct links to requirements and tasks files
+- This ensures project documentation remains accurate and discoverable

@@ -64,5 +64,8 @@
   ],
   "amazonQ.workspaceIndex": true,
   "amazonQ.shareCodeWhispererContentWithAWS": false,
-  "typescript.autoClosingTags": false
+  "typescript.autoClosingTags": false,
+  "cSpell.words": [
+    "imdb"
+  ]
 }

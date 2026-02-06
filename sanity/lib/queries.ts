@@ -50,6 +50,7 @@ export const articlesWithNoAuthorsQuery = groq`
 
 export const settingsQuery = groq`
   *[_type == "settings"][0]{
+    defaultCinema,
     menuItems[]->{
       _type,
       "slug": slug.current,
@@ -190,5 +191,132 @@ export const allChapterSlugsQuery = groq`
   *[_type == "chapter" && defined(slug.current)] {
     "slug": slug.current,
     "bookSlug": parentBook->slug.current
+  }
+`;
+
+// Film queries
+export const allFilmsQuery = groq`
+  *[_type == "film"] | order(dateWatched desc, dateAddedToWishlist desc, _createdAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    status,
+    isSecretScreening,
+    posterUrl,
+    year,
+    runtime,
+    dateAddedToWishlist,
+    dateWatched,
+    cinemaLocation,
+    personalRating,
+    _createdAt,
+    _updatedAt
+  }
+`;
+
+export const watchedFilmsQuery = groq`
+  *[_type == "film" && status == "watched"] | order(dateWatched desc, _createdAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    status,
+    isSecretScreening,
+    posterUrl,
+    year,
+    runtime,
+    dateWatched,
+    cinemaLocation,
+    personalRating,
+    _createdAt,
+    _updatedAt
+  }
+`;
+
+export const wishlistFilmsQuery = groq`
+  *[_type == "film" && status == "wishlist"] | order(dateAddedToWishlist desc, _createdAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    status,
+    isSecretScreening,
+    posterUrl,
+    year,
+    runtime,
+    dateAddedToWishlist,
+    _createdAt,
+    _updatedAt
+  }
+`;
+
+export const filmBySlugQuery = groq`
+  *[_type == "film" && slug.current == $slug][0] {
+    _id,
+    _type,
+    title,
+    "slug": slug.current,
+    status,
+    isSecretScreening,
+    imdbId,
+    posterUrl,
+    year,
+    runtime,
+    plot,
+    dateAddedToWishlist,
+    dateWatched,
+    cinemaLocation,
+    personalRating,
+    personalNotes,
+    _createdAt,
+    _updatedAt
+  }
+`;
+
+export const allFilmSlugsQuery = groq`
+  *[_type == "film" && defined(slug.current)][].slug.current
+`;
+
+export const wrappedYearsQuery = groq`
+  *[_type == "film" && status == "watched" && defined(dateWatched)] {
+    "year": string::split(dateWatched, "-")[0]
+  } | order(year desc)
+`;
+
+export const wrappedFilmsQuery = groq`
+  *[_type == "film" && status == "watched" && string::split(dateWatched, "-")[0] == $year] | order(dateWatched desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    status,
+    isSecretScreening,
+    year,
+    dateWatched,
+    cinemaLocation,
+    personalRating,
+    personalNotes,
+    dateAddedToWishlist,
+    _createdAt,
+    _updatedAt,
+    "waitTime": select(
+      defined(dateAddedToWishlist) && defined(dateWatched) => 
+        round((dateTime(dateWatched) - dateTime(dateAddedToWishlist)) / 86400),
+      0
+    )
+  }
+`;
+
+export const lastFilmWatchedQuery = groq`
+  *[_type == "film" && status == "watched" && defined(dateWatched)] | order(dateWatched desc) [0] {
+    _id,
+    title,
+    "slug": slug.current,
+    status,
+    isSecretScreening,
+    year,
+    dateWatched,
+    cinemaLocation,
+    personalRating,
+    posterUrl,
+    plot,
+    "watchedYear": string::split(dateWatched, "-")[0]
   }
 `;
