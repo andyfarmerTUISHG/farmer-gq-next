@@ -98,6 +98,12 @@ export async function searchFilmsAction(query: string) {
 }
 
 export async function getFilmDetailsAction(imdbId: string) {
+  if (!filmService) {
+    return {
+      film: null,
+      error: "Film service not available - OMDB_API_KEY not configured",
+    };
+  }
   if (!imdbId.trim()) {
     return {
       film: null,
