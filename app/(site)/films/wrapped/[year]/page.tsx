@@ -61,7 +61,9 @@ export default async function WrappedYearPage({ params }: Props) {
   // Get all available years for navigation
   const yearsData = await client.fetch(wrappedYearsQuery);
   const availableYears = yearsData
+
     ? [...new Set(yearsData.map((item: any) => item.year))].sort((a: number, b: number) => b - a)
+
     : [];
 
   if (!films || films.length === 0) {
@@ -85,7 +87,9 @@ export default async function WrappedYearPage({ params }: Props) {
           {/* Year Navigation */}
           {availableYears.length > 0 && (
             <div className="flex gap-2 mb-4 flex-wrap">
+
               {availableYears.map((y: number) => (
+
                 <Link
                   key={y}
                   href={`/films/wrapped/${y}`}
@@ -130,7 +134,9 @@ export default async function WrappedYearPage({ params }: Props) {
         {/* Year Navigation */}
         {availableYears.length > 0 && (
           <div className="flex gap-2 mb-4 flex-wrap">
+
             {availableYears.map((y: number) => (
+
               <Link
                 key={y}
                 href={`/films/wrapped/${y}`}

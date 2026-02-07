@@ -104,7 +104,6 @@ export async function getFilmDetailsAction(imdbId: string) {
       error: "Film service not available - OMDB_API_KEY not configured",
     };
   }
-
   if (!imdbId.trim()) {
     return {
       film: null,

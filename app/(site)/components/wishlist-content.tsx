@@ -11,8 +11,10 @@ type WishlistFilm = {
   slug: string;
   status: "wishlist";
   year?: number;
+
   runtime?: number;
   posterUrl?: string;
+
   dateAddedToWishlist?: string;
   isSecretScreening?: boolean;
 };
