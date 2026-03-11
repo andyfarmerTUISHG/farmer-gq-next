@@ -1,3 +1,40 @@
+# Films Feature Specification
+
+**Status**: Partially Superseded (see below)  
+**Last Updated**: 2026-03-09
+
+## ⚠️ Supersession Notice
+
+**Authentication requirements in this specification have been superseded by:**
+- [Google Authentication Specification](../google-auth/requirements.md)
+
+**Still Valid**: 
+- ✅ OMDb API integration and film metadata
+- ✅ Film data structure (wishlist/watched status)
+- ✅ Wrapped statistics and year filtering
+- ✅ Secret screenings functionality
+- ✅ Cinema location tracking
+- ✅ Film display and navigation
+
+**Superseded**: 
+- ❌ All authentication requirements (Requirement 3, 4 authentication aspects)
+- ❌ References to "Sanity draft mode"
+- ❌ "authenticated with Sanity" language
+- ❌ Draft mode UI patterns
+
+**Effective Date**: 2026-03-09
+
+**For authentication implementation, refer to:**
+- [Google Auth Requirements](../google-auth/requirements.md)
+- [Google Auth Tasks](../google-auth/tasks.md)
+
+**Migration Impact:**
+- Film management now requires Google OAuth instead of Sanity Studio access
+- `isDraftMode` props replaced with auth session checks
+- Mobile experience significantly improved
+
+---
+
 # Requirements Document
 
 ## Introduction
