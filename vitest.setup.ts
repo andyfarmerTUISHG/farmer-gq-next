@@ -16,7 +16,7 @@ vi.mock("@/sanity/lib/live", () => ({
   sanityFetch: vi.fn(),
 }));
 
-// Mock NextAuth
-vi.mock("@/auth", () => ({
+// Mock Better Auth
+vi.mock("@/lib/auth", () => ({
   auth: vi.fn(),
 }));

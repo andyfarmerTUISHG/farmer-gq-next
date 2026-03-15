@@ -251,7 +251,7 @@ Tests auto-run when you save files, giving instant feedback.
 
 ## Authentication Setup
 
-This project uses Google OAuth for authentication. Follow these steps to set up locally:
+This project uses Google OAuth for authentication via [Better Auth](https://www.better-auth.com/). Follow these steps to set up locally:
 
 ### 1. Google OAuth Credentials
 
@@ -260,7 +260,7 @@ This project uses Google OAuth for authentication. Follow these steps to set up 
 3. Enable Google+ API
 4. Create OAuth 2.0 Client ID:
    - Application type: Web application
-   - Authorized redirect URIs: `http://localhost:3000/api/auth/callback/google`
+   - Authorised redirect URIs: `http://localhost:3000/api/auth/callback/google`
 5. Copy Client ID and Client Secret
 
 ### 2. Local Environment Setup
@@ -272,8 +272,8 @@ cp .env.local.example .env.local
 # Edit .env.local and add:
 GOOGLE_CLIENT_ID="your-client-id"
 GOOGLE_CLIENT_SECRET="your-client-secret"
-NEXTAUTH_SECRET="$(openssl rand -base64 32)"
-NEXTAUTH_URL="http://localhost:3000"
+BETTER_AUTH_SECRET="$(openssl rand -base64 32)"
+BETTER_AUTH_URL="http://localhost:3000"
 AUTHORIZED_EMAILS="your-email@gmail.com"
 ```
 
@@ -285,8 +285,8 @@ Add environment variables in Netlify dashboard:
 2. Add each variable:
    - `GOOGLE_CLIENT_ID`
    - `GOOGLE_CLIENT_SECRET`
-   - `NEXTAUTH_SECRET`
-   - `NEXTAUTH_URL` (set to your production URL)
+   - `BETTER_AUTH_SECRET`
+   - `BETTER_AUTH_URL` (set to your production URL)
    - `AUTHORIZED_EMAILS`
 3. Update Google OAuth redirect URI to include production URL
 4. Redeploy site
@@ -313,8 +313,8 @@ npm run dev
 - Check redirect URI matches in Google Console
 
 **Session not persisting:**
-- Verify `NEXTAUTH_SECRET` is set
-- Check `NEXTAUTH_URL` matches your domain
+- Verify `BETTER_AUTH_SECRET` is set
+- Check `BETTER_AUTH_URL` matches your domain
 
 ## Recommended VS Code Extensions
 

@@ -21,7 +21,7 @@ Each task follows this structure:
 **TDD Workflow:**
 1. Install Vitest and testing dependencies
 2. Configure coverage thresholds (80% minimum)
-3. Set up global mocks (Sanity, NextAuth)
+3. Set up global mocks (Sanity, Better Auth)
 4. Create test helper scripts
 5. Write setup validation test
 6. Document testing approach
@@ -29,7 +29,7 @@ Each task follows this structure:
 **Implementation:**
 - Install dependencies: `vitest`, `@vitest/ui`, `@testing-library/react`, `@testing-library/jest-dom`, `jsdom`, `@vitest/coverage-v8`
 - Create `vitest.config.ts` with jsdom environment and coverage thresholds
-- Create `vitest.setup.ts` with Sanity and NextAuth mocks
+- Create `vitest.setup.ts` with Sanity and Better Auth mocks
 - Add test scripts to `package.json`:
   - `test`: Run all tests
   - `test:ui`: Run with UI
@@ -58,7 +58,7 @@ chore(test): set up testing infrastructure with Vitest
 - Configure coverage thresholds (80% minimum)
 - Add test scripts to package.json for per-feature testing
 - Create vitest.config.ts with jsdom environment
-- Add Sanity and NextAuth global mocks to vitest.setup.ts
+- Add Sanity and Better Auth global mocks to vitest.setup.ts
 - Add testing standards to technical-standards.md
 - Document testing workflow in README.md
 
@@ -128,43 +128,56 @@ Refs: #auth-logic
 
 ---
 
-## Task 2: NextAuth.js Configuration (TDD)
+## Task 2: Better Auth Configuration (TDD)
 
-**Objective**: Configure NextAuth.js with Google OAuth provider and authorisation callback.
+**Objective**: Configure Better Auth with Google OAuth provider and authorisation callback.
 
 **TDD Workflow:**
 1. Terminal 2: Keep `npm run test:watch:auth` running
 2. Red: Create `auth.test.ts` with configuration tests
-3. Green: Complete `auth.ts` with Google provider
+3. Green: Complete `lib/auth.ts` with Google provider
 4. Refactor: Use `isEmailAuthorized()` in callback
 5. Red: Create API route tests
-6. Green: Create `app/api/auth/[...nextauth]/route.ts`
+6. Green: Create `app/api/auth/[...all]/route.ts`
 7. Verify: `npm run test:coverage`
 
+**Why Better Auth over NextAuth.js:**
+- NextAuth.js has had no releases since October 2025
+- Better Auth is actively maintained with App Router native support
+- Simpler configuration for Google OAuth
+- Better TypeScript support
+
 **Implementation:**
-- Complete `auth.ts`:
+- Install `better-auth`:
+  ```bash
+  npm install better-auth
+  ```
+- Create `lib/auth.ts`:
   - Add Google provider with client ID/secret from env
-  - Implement `signIn` callback using `isEmailAuthorized()`
-  - Configure JWT session with 30-day expiry
-- Create `app/api/auth/[...nextauth]/route.ts` with handlers
-- Add TypeScript types in `types/next-auth.d.ts`
+  - Implement `trustedOrigins` for production URL
+  - Configure session with 30-day expiry
+  - Use `isEmailAuthorized()` to restrict access
+- Create `app/api/auth/[...all]/route.ts` with handlers
+- Create `lib/auth-client.ts` for client-side auth
+- Add TypeScript types
 
 **Test Requirements:**
 - 8 tests total (configuration + integration)
 - 85%+ coverage for auth.ts
 - Execution time: <1.5s
 
-**Coverage Target**: 85% for `auth.ts`
+**Coverage Target**: 85% for `lib/auth.ts`
 
 **Commit Message Format:**
 ```
-feat(auth): configure NextAuth.js with Google OAuth
+feat(auth): configure Better Auth with Google OAuth
 
 - Add Google OAuth provider configuration
 - Implement authorisation callback with email whitelist
 - Create API route handlers for auth endpoints
-- Configure JWT sessions with 30-day expiry
+- Configure sessions with 30-day expiry
 - Add TypeScript types for session and user
+- Replace NextAuth.js (no releases since Oct 2025)
 
 Tests: 8 passing (20 total)
 Coverage: 85% for auth.ts (meets 80% requirement)

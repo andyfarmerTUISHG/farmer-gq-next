@@ -13,7 +13,7 @@ This specification supersedes `.kiro/specs/films/requirements.md` for authentica
 - Draft mode visibility for book personal notes
 
 **Replaced With**: 
-- Google OAuth authentication via NextAuth.js
+- Google OAuth authentication via Better Auth
 - Email whitelist authorisation via environment variable
 
 **Effective Date**: 2026-03-09
@@ -43,7 +43,7 @@ This specification defines the replacement of Sanity draft mode authentication w
 ## Glossary
 
 - **Google OAuth**: Authentication method using Google accounts
-- **NextAuth.js**: Authentication library for Next.js applications
+- **Better Auth**: Authentication library for Next.js applications
 - **Email Whitelist**: List of authorised email addresses stored in environment variable
 - **JWT Session**: JSON Web Token-based session management
 - **Protected Features**: Film management and personal notes requiring authentication
@@ -58,7 +58,7 @@ This specification defines the replacement of Sanity draft mode authentication w
 
 #### Acceptance Criteria
 
-1. THE System SHALL use NextAuth.js v5 for authentication
+1. THE System SHALL use Better Auth for authentication
 2. THE System SHALL support Google OAuth provider
 3. THE System SHALL use JWT session strategy
 4. THE System SHALL maintain sessions for 30 days with automatic refresh
@@ -155,7 +155,7 @@ This specification defines the replacement of Sanity draft mode authentication w
 4. THE System SHALL support watch mode for active development
 5. THE System SHALL execute full test suite in under 5 seconds
 6. THE System SHALL mock Sanity client in tests (no real API calls)
-7. THE System SHALL mock NextAuth in tests
+7. THE System SHALL mock Better Auth in tests
 8. THE System SHALL provide test coverage reporting
 
 ## Technical Requirements
@@ -178,9 +178,11 @@ All implementation must follow the standards defined in `.kiro/specs/technical-s
 GOOGLE_CLIENT_ID="your-google-client-id"
 GOOGLE_CLIENT_SECRET="your-google-client-secret"
 
-# NextAuth Configuration
-NEXTAUTH_SECRET="generate-with-openssl-rand-base64-32"
-NEXTAUTH_URL="http://localhost:3000"  # Production: https://farmer.gq
+# Better Auth Configuration
+# Generate secret: openssl rand -base64 32
+BETTER_AUTH_SECRET="generate-with-openssl-rand-base64-32"
+# Local: http://localhost:3000, Production: https://farmer.gq
+BETTER_AUTH_URL="http://localhost:3000"
 
 # Authorisation - Comma-separated list of authorised email addresses
 AUTHORIZED_EMAILS="andy@example.com,friend@example.com"
