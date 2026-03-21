@@ -4,6 +4,8 @@ import { draftMode } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { auth } from "@/lib/auth";
+import { getAuthorizedEmails, isEmailAuthorized } from "@/lib/auth-helpers";
 import { client } from "@/sanity/lib/client";
 import { sanityFetch } from "@/sanity/lib/live";
 import { allFilmSlugsQuery, filmBySlugQuery } from "@/sanity/lib/queries";
@@ -65,6 +67,10 @@ export default async function FilmDetailPage({ params }: Props) {
     console.error("Error checking draft mode:", error);
     isDraftMode = false;
   }
+
+  const session = await auth();
+  const authorisedEmails = getAuthorizedEmails(process.env.AUTHORIZED_EMAILS || "");
+  const isAuthenticated = !!(session?.user?.email && isEmailAuthorized(session.user.email, authorisedEmails));
 
   const { data: film } = await sanityFetch({
     query: filmBySlugQuery,
@@ -188,7 +194,7 @@ export default async function FilmDetailPage({ params }: Props) {
             )}
 
             {/* Personal Notes - Only show if notes exist and user is authenticated */}
-            {isDraftMode && film.personalNotes && film.personalNotes.trim() && (
+            {isAuthenticated && film.personalNotes && film.personalNotes.trim() && (
               <div className="bg-yellow-50 rounded-lg p-6">
                 <h2 className="text-xl font-semibold mb-4">Personal Notes</h2>
                 <div className="whitespace-pre-wrap">{film.personalNotes}</div>
