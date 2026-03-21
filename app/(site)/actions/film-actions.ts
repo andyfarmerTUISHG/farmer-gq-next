@@ -2,10 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 
-import { auth } from "@/lib/auth";
-import { getAuthorizedEmails, isEmailAuthorized } from "@/lib/auth-helpers";
+import { isAuthorisedUser } from "@/lib/server-auth";
 import { filmService } from "@/lib/film-api/film-service";
-import { generateFilmSlug } from "@/lib/film-utils";
 import {
   addFilmSchema,
   markAsWatchedSchema,
@@ -15,13 +13,9 @@ import {
 import { writeClient } from "@/sanity/lib/write-client";
 
 async function verifyAuth() {
-  const session = await auth();
-  if (!session?.user?.email) {
-    return { authorised: false, error: "Unauthorised: not authenticated" };
-  }
-  const authorisedEmails = getAuthorizedEmails(process.env.AUTHORIZED_EMAILS || "");
-  if (!isEmailAuthorized(session.user.email, authorisedEmails)) {
-    return { authorised: false, error: "Unauthorised: email not permitted" };
+  const authorised = await isAuthorisedUser();
+  if (!authorised) {
+    return { authorised: false, error: "Unauthorised: not authenticated or email not permitted" };
   }
   return { authorised: true, error: null };
 }

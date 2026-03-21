@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 
 import Link from "next/link";
 
-import { auth } from "@/lib/auth";
-import { getAuthorizedEmails, isEmailAuthorized } from "@/lib/auth-helpers";
+import { isAuthorisedUser } from "@/lib/server-auth";
 import AddFilmForm from "@/app/(site)/components/add-film-form";
 import WishlistContent from "@/app/(site)/components/wishlist-content";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -25,9 +24,7 @@ export const metadata: Metadata = {
 };
 
 export default async function WishlistPage() {
-  const session = await auth();
-  const authorisedEmails = getAuthorizedEmails(process.env.AUTHORIZED_EMAILS || "");
-  const isAuthenticated = !!(session?.user?.email && isEmailAuthorized(session.user.email, authorisedEmails));
+  const isAuthenticated = await isAuthorisedUser();
 
   const { data: films } = await sanityFetch({
     query: wishlistFilmsQuery,

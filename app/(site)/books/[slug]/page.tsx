@@ -9,8 +9,7 @@ import { notFound } from "next/navigation";
 
 import type { BookDetail } from "@/types";
 
-import { auth } from "@/lib/auth";
-import { getAuthorizedEmails, isEmailAuthorized } from "@/lib/auth-helpers";
+import { isAuthorisedUser } from "@/lib/server-auth";
 import { studioUrl } from "@/sanity/lib/api";
 import { client } from "@/sanity/lib/client";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -126,9 +125,7 @@ export default async function BookPage({ params }: Props) {
     isDraftMode = false;
   }
 
-  const session = await auth();
-  const authorisedEmails = getAuthorizedEmails(process.env.AUTHORIZED_EMAILS || "");
-  const isAuthenticated = !!(session?.user?.email && isEmailAuthorized(session.user.email, authorisedEmails));
+  const isAuthenticated = await isAuthorisedUser();
 
   const { data: book } = await sanityFetch({
     query: bookBySlugQuery,

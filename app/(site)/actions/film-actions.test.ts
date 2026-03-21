@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { addFilmToWishlistAction, markFilmAsWatchedAction } from "./film-actions";
 
-// Sanity client is mocked globally in vitest.setup.ts
 import { writeClient } from "@/sanity/lib/write-client";
 
 vi.mock("@/sanity/lib/write-client", () => ({
@@ -12,15 +11,15 @@ vi.mock("@/sanity/lib/write-client", () => ({
   },
 }));
 
-vi.mock("@/lib/auth", () => ({
-  auth: vi.fn(),
+vi.mock("@/lib/server-auth", () => ({
+  isAuthorisedUser: vi.fn(),
 }));
 
 vi.mock("next/cache", () => ({
   revalidatePath: vi.fn(),
 }));
 
-import { auth } from "@/lib/auth";
+import { isAuthorisedUser } from "@/lib/server-auth";
 
 describe("addFilmToWishlistAction - auth gate", () => {
   beforeEach(() => {
@@ -28,7 +27,7 @@ describe("addFilmToWishlistAction - auth gate", () => {
   });
 
   it("should reject when not authenticated", async () => {
-    vi.mocked(auth).mockResolvedValueOnce(null as any);
+    vi.mocked(isAuthorisedUser).mockResolvedValueOnce(false);
 
     const result = await addFilmToWishlistAction("tt1234567", "Test Film", 2026);
 
@@ -38,10 +37,7 @@ describe("addFilmToWishlistAction - auth gate", () => {
   });
 
   it("should reject when email not whitelisted", async () => {
-    vi.mocked(auth).mockResolvedValueOnce({
-      session: { userId: "123" },
-      user: { email: "stranger@example.com" },
-    } as any);
+    vi.mocked(isAuthorisedUser).mockResolvedValueOnce(false);
 
     const result = await addFilmToWishlistAction("tt1234567", "Test Film", 2026);
 
@@ -57,7 +53,7 @@ describe("markFilmAsWatchedAction - auth gate", () => {
   });
 
   it("should reject when not authenticated", async () => {
-    vi.mocked(auth).mockResolvedValueOnce(null as any);
+    vi.mocked(isAuthorisedUser).mockResolvedValueOnce(false);
 
     const result = await markFilmAsWatchedAction(
       "film-id-123",
@@ -74,10 +70,7 @@ describe("markFilmAsWatchedAction - auth gate", () => {
   });
 
   it("should reject when email not whitelisted", async () => {
-    vi.mocked(auth).mockResolvedValueOnce({
-      session: { userId: "123" },
-      user: { email: "stranger@example.com" },
-    } as any);
+    vi.mocked(isAuthorisedUser).mockResolvedValueOnce(false);
 
     const result = await markFilmAsWatchedAction(
       "film-id-123",
@@ -93,3 +86,5 @@ describe("markFilmAsWatchedAction - auth gate", () => {
     expect(writeClient.patch).not.toHaveBeenCalled();
   });
 });
+
+

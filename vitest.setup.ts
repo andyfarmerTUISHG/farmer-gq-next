@@ -20,6 +20,10 @@ vi.mock("@/app/(site)/env", () => ({
   },
 }));
 
+vi.mock("next/headers", () => ({
+  headers: vi.fn().mockResolvedValue(new Headers()),
+}));
+
 // Mock Sanity client globally
 vi.mock("@/sanity/lib/client", () => ({
   client: {

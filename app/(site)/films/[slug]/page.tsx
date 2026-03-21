@@ -4,8 +4,7 @@ import { draftMode } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { auth } from "@/lib/auth";
-import { getAuthorizedEmails, isEmailAuthorized } from "@/lib/auth-helpers";
+import { isAuthorisedUser } from "@/lib/server-auth";
 import { client } from "@/sanity/lib/client";
 import { sanityFetch } from "@/sanity/lib/live";
 import { allFilmSlugsQuery, filmBySlugQuery } from "@/sanity/lib/queries";
@@ -58,19 +57,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function FilmDetailPage({ params }: Props) {
   const { slug } = await params;
 
-  // Check authentication status
+  // Check draft mode for Sanity Studio stega overlays
   let isDraftMode = false;
   try {
     isDraftMode = (await draftMode()).isEnabled;
   }
-  catch (error) {
-    console.error("Error checking draft mode:", error);
+  catch {
     isDraftMode = false;
   }
 
-  const session = await auth();
-  const authorisedEmails = getAuthorizedEmails(process.env.AUTHORIZED_EMAILS || "");
-  const isAuthenticated = !!(session?.user?.email && isEmailAuthorized(session.user.email, authorisedEmails));
+  const isAuthenticated = await isAuthorisedUser();
 
   const { data: film } = await sanityFetch({
     query: filmBySlugQuery,
