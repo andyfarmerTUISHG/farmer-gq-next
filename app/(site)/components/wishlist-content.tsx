@@ -21,10 +21,10 @@ type WishlistFilm = {
 
 type WishlistContentProps = {
   films: WishlistFilm[];
-  isDraftMode: boolean;
+  isAuthenticated: boolean;
 };
 
-export default function WishlistContent({ films, isDraftMode }: WishlistContentProps) {
+export default function WishlistContent({ films, isAuthenticated }: WishlistContentProps) {
   const [selectedFilm, setSelectedFilm] = useState<{ id: string; title: string; wishlistDate?: string } | null>(null);
 
   const handleMarkAsWatched = (filmId: string, filmTitle: string) => {
@@ -76,7 +76,7 @@ export default function WishlistContent({ films, isDraftMode }: WishlistContentP
                   posterUrl={film.posterUrl}
                   dateAddedToWishlist={film.dateAddedToWishlist}
                   isSecretScreening={film.isSecretScreening}
-                  showMarkAsWatched={isDraftMode}
+                  showMarkAsWatched={isAuthenticated}
                   onMarkAsWatched={handleMarkAsWatched}
                 />
               ))}

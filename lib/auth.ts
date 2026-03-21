@@ -11,26 +11,21 @@ export const auth = betterAuth({
     },
   },
   session: {
-    expiresIn: 30 * 24 * 60 * 60, // 30 days
-    updateAge: 24 * 60 * 60, // Refresh session if older than 1 day
+    expiresIn: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
   },
-  hooks: {
-    after: [
-      {
-        matcher: path => path === "/sign-in/social",
-        handler: async (ctx) => {
-          const email = ctx.context?.session?.user?.email;
-          if (!email) return;
-
+  databaseHooks: {
+    user: {
+      create: {
+        before: async (user) => {
           const authorizedEmails = getAuthorizedEmails(
             process.env.AUTHORIZED_EMAILS || "",
           );
-
-          if (!isEmailAuthorized(email, authorizedEmails)) {
-            throw new Error("Unauthorised: email not in whitelist");
+          if (!isEmailAuthorized(user.email, authorizedEmails)) {
+            return false;
           }
         },
       },
-    ],
+    },
   },
 });
