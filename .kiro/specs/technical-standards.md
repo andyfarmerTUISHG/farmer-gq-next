@@ -81,6 +81,7 @@ npx eslint <files> --fix
 - **Existing Feature Changes**: 
   - Create basic test suite for existing functionality (if none exists)
   - New changes must have 80% coverage
+- **Bug Fixes**: Every bug fix must include a regression test that reproduces the bug before the fix and passes after. This is mandatory acceptance criteria for all bug tickets.
 - **Test Execution**: Must be fast (<5s for unit tests, <30s for full suite)
 - **Test Clarity**: Clear test names, descriptive assertions, obvious failure messages
 

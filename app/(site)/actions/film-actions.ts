@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { isAuthorisedUser } from "@/lib/server-auth";
 import { filmService } from "@/lib/film-api/film-service";
+import { generateFilmSlug } from "@/lib/film-utils";
 import {
   addFilmSchema,
   markAsWatchedSchema,

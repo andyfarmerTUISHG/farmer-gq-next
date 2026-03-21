@@ -15,11 +15,18 @@ vi.mock("@/lib/server-auth", () => ({
   isAuthorisedUser: vi.fn(),
 }));
 
+vi.mock("@/lib/film-api/film-service", () => ({
+  filmService: {
+    getFilmDetails: vi.fn(),
+  },
+}));
+
 vi.mock("next/cache", () => ({
   revalidatePath: vi.fn(),
 }));
 
 import { isAuthorisedUser } from "@/lib/server-auth";
+import { filmService } from "@/lib/film-api/film-service";
 
 describe("addFilmToWishlistAction - auth gate", () => {
   beforeEach(() => {
@@ -84,6 +91,34 @@ describe("markFilmAsWatchedAction - auth gate", () => {
     expect(result.success).toBe(false);
     expect(result.error).toContain("Unauthorised");
     expect(writeClient.patch).not.toHaveBeenCalled();
+  });
+});
+
+// Regression test: FG-3 - generateFilmSlug was accidentally removed during auth refactor
+describe("addFilmToWishlistAction - regression", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("should call writeClient.create when authenticated and film details are found", async () => {
+    vi.mocked(isAuthorisedUser).mockResolvedValueOnce(true);
+    vi.mocked(filmService!.getFilmDetails).mockResolvedValueOnce({
+      film: {
+        imdbId: "tt1234567",
+        title: "Test Film",
+        year: 2026,
+        poster: "N/A",
+        plot: "A test film",
+        runtime: "120 min",
+      },
+      error: null,
+    } as any);
+    vi.mocked(writeClient.create).mockResolvedValueOnce({ _id: "new-id" } as any);
+
+    const result = await addFilmToWishlistAction("tt1234567", "Test Film", 2026);
+
+    expect(writeClient.create).toHaveBeenCalled();
+    expect(result.success).toBe(true);
   });
 });
 
