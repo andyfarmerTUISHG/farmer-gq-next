@@ -60,7 +60,7 @@ This specification defines the replacement of Sanity draft mode authentication w
 
 1. THE System SHALL use Better Auth for authentication
 2. THE System SHALL support Google OAuth provider
-3. THE System SHALL use JWT session strategy
+3. THE System SHALL use cookie-based session strategy (JWE encrypted cookie, no database required)
 4. THE System SHALL maintain sessions for 30 days with automatic refresh
 5. THE System SHALL provide sign-in at `/auth/signin`
 6. THE System SHALL provide API routes at `/api/auth/*`
@@ -181,8 +181,10 @@ GOOGLE_CLIENT_SECRET="your-google-client-secret"
 # Better Auth Configuration
 # Generate secret: openssl rand -base64 32
 BETTER_AUTH_SECRET="generate-with-openssl-rand-base64-32"
-# Local: http://localhost:3000, Production: https://farmer.gq
-BETTER_AUTH_URL="http://localhost:3000"
+# Local: http://localhost:3000, Production: https://farmer-gq.netlify.app
+# IMPORTANT: Do not wrap value in quotes in Netlify environment variables
+BETTER_AUTH_URL=http://localhost:3000
+NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3000
 
 # Authorisation - Comma-separated list of authorised email addresses
 AUTHORIZED_EMAILS="andy@example.com,friend@example.com"
