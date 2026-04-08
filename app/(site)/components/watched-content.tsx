@@ -20,10 +20,10 @@ type WatchedFilm = {
 
 type WatchedContentProps = {
   films: WatchedFilm[];
-  isDraftMode: boolean;
+  isAuthenticated: boolean;
 };
 
-export default function WatchedContent({ films, isDraftMode }: WatchedContentProps) {
+export default function WatchedContent({ films, isAuthenticated: _ }: WatchedContentProps) {
   // Get unique years from watched films
   const availableYears = useMemo(() => {
     const years = films

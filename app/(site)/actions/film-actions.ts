@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
+import { isAuthorisedUser } from "@/lib/server-auth";
 import { filmService } from "@/lib/film-api/film-service";
 import { generateFilmSlug } from "@/lib/film-utils";
 import {
@@ -11,6 +12,14 @@ import {
   searchFilmsSchema,
 } from "@/lib/validation";
 import { writeClient } from "@/sanity/lib/write-client";
+
+async function verifyAuth() {
+  const authorised = await isAuthorisedUser();
+  if (!authorised) {
+    return { authorised: false, error: "Unauthorised: not authenticated or email not permitted" };
+  }
+  return { authorised: true, error: null };
+}
 
 export async function searchFilmsAction(query: string) {
   if (!filmService) {
@@ -151,6 +160,11 @@ export async function getFilmDetailsByTitleAction(title: string, year?: number) 
 }
 
 export async function addFilmToWishlistAction(imdbId: string, _title: string, _year?: number) {
+  const { authorised, error: authError } = await verifyAuth();
+  if (!authorised) {
+    return { success: false, error: authError };
+  }
+
   if (!filmService) {
     return {
       success: false,
@@ -344,6 +358,11 @@ export async function markFilmAsWatchedAction(
   personalNotes?: string,
   dateAddedToWishlist?: string,
 ) {
+  const { authorised, error: authError } = await verifyAuth();
+  if (!authorised) {
+    return { success: false, error: authError };
+  }
+
   try {
     // Pre-sanitize text inputs to remove invisible characters before validation
     const cleanCinemaLocation = cinemaLocation

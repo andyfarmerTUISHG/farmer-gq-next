@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { IoClose, IoMenu } from "react-icons/io5";
 
+import AuthButton from "@/app/(site)/components/auth/auth-button";
 import { resolveHref } from "@/sanity/lib/utils";
 
 export default function MenuLayout({ data }) {
@@ -30,7 +31,7 @@ export default function MenuLayout({ data }) {
               </div>
             </Link>
           </div>
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex lg:items-center lg:gap-6">
             <ul className="flex items-center">
               {menuItems.map((item) => {
                 // Skip null or undefined items
@@ -65,8 +66,10 @@ export default function MenuLayout({ data }) {
                 );
               })}
             </ul>
+            <AuthButton />
           </div>
-          <div className="block lg:hidden">
+          <div className="flex items-center gap-4 lg:hidden">
+            <AuthButton />
             <button
               onClick={toggleMenu}
               type="button"

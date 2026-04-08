@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-import { draftMode } from "next/headers";
 import Link from "next/link";
 
+import { isAuthorisedUser } from "@/lib/server-auth";
 import AddFilmForm from "@/app/(site)/components/add-film-form";
 import WishlistContent from "@/app/(site)/components/wishlist-content";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -24,15 +24,7 @@ export const metadata: Metadata = {
 };
 
 export default async function WishlistPage() {
-  // Check authentication status
-  let isDraftMode = false;
-  try {
-    isDraftMode = (await draftMode()).isEnabled;
-  }
-  catch (error) {
-    console.error("Error checking draft mode:", error);
-    isDraftMode = false;
-  }
+  const isAuthenticated = await isAuthorisedUser();
 
   const { data: films } = await sanityFetch({
     query: wishlistFilmsQuery,
@@ -63,12 +55,12 @@ export default async function WishlistPage() {
         </p>
       </div>
       {/* Add Film Form - Only visible when authenticated */}
-      {isDraftMode && (
+      {isAuthenticated && (
         <div className="mb-8">
           <AddFilmForm />
         </div>
       )}
-      <WishlistContent films={films || []} isDraftMode={isDraftMode} />
+      <WishlistContent films={films || []} isAuthenticated={isAuthenticated} />
     </div>
   );
 }

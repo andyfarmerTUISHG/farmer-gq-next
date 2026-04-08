@@ -1,19 +1,10 @@
-import { draftMode } from "next/headers";
-
+import { isAuthorisedUser } from "@/lib/server-auth";
 import FilmsPageClient from "@/app/(site)/components/films-page-client";
 import { sanityFetch } from "@/sanity/lib/live";
 import { watchedFilmsQuery, wishlistFilmsQuery } from "@/sanity/lib/queries";
 
 export default async function FilmsPage() {
-  // Check authentication status
-  let isDraftMode = false;
-  try {
-    isDraftMode = (await draftMode()).isEnabled;
-  }
-  catch (error) {
-    console.error("Error checking draft mode:", error);
-    isDraftMode = false;
-  }
+  const isAuthenticated = await isAuthorisedUser();
 
   const { data: recentFilms } = await sanityFetch({
     query: watchedFilmsQuery,
@@ -32,7 +23,7 @@ export default async function FilmsPage() {
       recentFilms={recentFilms}
       wishlistFilms={wishlistFilms}
       allWatchedFilms={allWatchedFilms}
-      isDraftMode={isDraftMode}
+      isAuthenticated={isAuthenticated}
     />
   );
 }

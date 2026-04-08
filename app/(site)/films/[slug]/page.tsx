@@ -4,6 +4,7 @@ import { draftMode } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { isAuthorisedUser } from "@/lib/server-auth";
 import { client } from "@/sanity/lib/client";
 import { sanityFetch } from "@/sanity/lib/live";
 import { allFilmSlugsQuery, filmBySlugQuery } from "@/sanity/lib/queries";
@@ -56,15 +57,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function FilmDetailPage({ params }: Props) {
   const { slug } = await params;
 
-  // Check authentication status
+  // Check draft mode for Sanity Studio stega overlays
   let isDraftMode = false;
   try {
     isDraftMode = (await draftMode()).isEnabled;
   }
-  catch (error) {
-    console.error("Error checking draft mode:", error);
+  catch {
     isDraftMode = false;
   }
+
+  const isAuthenticated = await isAuthorisedUser();
 
   const { data: film } = await sanityFetch({
     query: filmBySlugQuery,
@@ -188,7 +190,7 @@ export default async function FilmDetailPage({ params }: Props) {
             )}
 
             {/* Personal Notes - Only show if notes exist and user is authenticated */}
-            {isDraftMode && film.personalNotes && film.personalNotes.trim() && (
+            {isAuthenticated && film.personalNotes && film.personalNotes.trim() && (
               <div className="bg-yellow-50 rounded-lg p-6">
                 <h2 className="text-xl font-semibold mb-4">Personal Notes</h2>
                 <div className="whitespace-pre-wrap">{film.personalNotes}</div>

@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 
 import type { BookDetail } from "@/types";
 
+import { isAuthorisedUser } from "@/lib/server-auth";
 import { studioUrl } from "@/sanity/lib/api";
 import { client } from "@/sanity/lib/client";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -121,9 +122,10 @@ export default async function BookPage({ params }: Props) {
   }
   catch (error) {
     console.error("Error checking draft mode:", error);
-    // Default to false (hide personal notes) if check fails
     isDraftMode = false;
   }
+
+  const isAuthenticated = await isAuthorisedUser();
 
   const { data: book } = await sanityFetch({
     query: bookBySlugQuery,
@@ -307,15 +309,11 @@ export default async function BookPage({ params }: Props) {
           </section>
         )}
 
-        {/* Personal Notes Section (Draft Mode Only) */}
-        {isDraftMode && book?.personalNotes && (
+        {/* Personal Notes Section (Authenticated users only) */}
+        {isAuthenticated && book?.personalNotes && (
           <section className="mb-12">
             <h2 className="mb-4 text-2xl font-bold text-gray-900">
               Personal Notes
-              {" "}
-              <span className="text-sm font-normal text-gray-500">
-                (Visible only in draft mode)
-              </span>
             </h2>
             <div
               className="rounded-lg border-2 border-yellow-300 bg-yellow-50 p-6"
