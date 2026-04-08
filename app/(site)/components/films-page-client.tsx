@@ -14,13 +14,13 @@ type FilmsPageClientProps = {
   recentFilms: any[];
   wishlistFilms: any[];
   allWatchedFilms: any[];
-  isDraftMode: boolean;
+  isAuthenticated: boolean;
 };
 
 export default function FilmsPageClient({
   wishlistFilms,
   allWatchedFilms,
-  isDraftMode,
+  isAuthenticated,
 }: FilmsPageClientProps) {
   const [activeTab, setActiveTab] = useState<TabType>("watched");
 
@@ -49,7 +49,7 @@ export default function FilmsPageClient({
       </div>
 
       {/* Add to Wishlist Form - Only when authenticated */}
-      {isDraftMode && (
+      {isAuthenticated && (
         <div className="mb-8">
           <AddFilmForm />
         </div>
@@ -90,11 +90,11 @@ export default function FilmsPageClient({
 
       {/* Tab Content */}
       {activeTab === "watched" && (
-        <WatchedContent films={allWatchedFilms} isDraftMode={isDraftMode} />
+        <WatchedContent films={allWatchedFilms} isAuthenticated={isAuthenticated} />
       )}
 
       {activeTab === "wishlist" && (
-        <WishlistContent films={wishlistFilms} isDraftMode={isDraftMode} />
+        <WishlistContent films={wishlistFilms} isAuthenticated={isAuthenticated} />
       )}
     </div>
   );

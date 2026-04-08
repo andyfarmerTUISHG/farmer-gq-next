@@ -23,7 +23,7 @@ export default async function FilmsPage() {
       recentFilms={recentFilms}
       wishlistFilms={wishlistFilms}
       allWatchedFilms={allWatchedFilms}
-      isDraftMode={isAuthenticated}
+      isAuthenticated={isAuthenticated}
     />
   );
 }
