@@ -5,6 +5,7 @@ export type FilmSearchResult = {
   year: number;
   poster?: string;
   type: string;
+  plot?: string;
 };
 
 export type FilmDetails = {
