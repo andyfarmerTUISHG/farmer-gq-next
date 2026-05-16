@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import type { FilmSearchResult } from "@/lib/film-api/types";
 
-import { addFilmAsWatchedAction, addFilmToWishlistAction, searchFilmsAction } from "@/app/(site)/actions/film-actions";
+import { addFilmAsWatchedAction, addFilmToWishlistAction, getFilmDetailsAction, searchFilmsAction } from "@/app/(site)/actions/film-actions";
 
 type AddFilmFormProps = {
   onSuccess?: () => void;
@@ -13,6 +13,8 @@ type AddFilmFormProps = {
 export default function AddFilmForm({ onSuccess }: AddFilmFormProps) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<FilmSearchResult[]>([]);
+  const [plots, setPlots] = useState<Record<string, string>>({});
+  const [loadingPlot, setLoadingPlot] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState<string | null>(null);
   const [selectedFilm, setSelectedFilm] = useState<FilmSearchResult | null>(null);
@@ -246,7 +248,7 @@ export default function AddFilmForm({ onSuccess }: AddFilmFormProps) {
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
-            placeholder="Search for films or enter IMDB ID (tt1234567)..."
+            placeholder="Search by title + year for best results (e.g. Sinners 2025)..."
             className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
@@ -301,7 +303,18 @@ export default function AddFilmForm({ onSuccess }: AddFilmFormProps) {
                       {film.year}
                       )
                     </h5>
-                    <p className="text-sm text-gray-600">{film.type}</p>
+                    <p className="text-sm text-gray-500 font-mono">{film.imdbId}</p>
+                    {film.plot && (
+                      <p className="text-sm text-gray-600 mt-1 mb-1">{film.plot}</p>
+                    )}
+                    <a
+                      href={`https://www.imdb.com/title/${film.imdbId}/`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-blue-600 hover:underline"
+                    >
+                      View on IMDb ↗
+                    </a>
                   </div>
                 </div>
                 <div className="flex gap-2">

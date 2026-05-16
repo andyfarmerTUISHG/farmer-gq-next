@@ -46,6 +46,7 @@ export async function searchFilmsAction(query: string) {
             year: result.film.year,
             type: "movie",
             poster: result.film.poster,
+            plot: result.film.plot,
           }],
           totalResults: 1,
         };
@@ -80,6 +81,7 @@ export async function searchFilmsAction(query: string) {
             year: result.film.year,
             type: "movie",
             poster: result.film.poster,
+            plot: result.film.plot,
           }],
           totalResults: 1,
         };
