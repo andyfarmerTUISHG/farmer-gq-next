@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import type { ArticleShowcaseQueryResult } from "@/sanity.types";
+import type { ArticleShowcaseQueryResult } from "@/sanity/lib/sanity.types";
 
 import { urlForImage } from "@/sanity/lib/utils";
 

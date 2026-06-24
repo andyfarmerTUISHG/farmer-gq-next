@@ -1,16 +1,16 @@
 type WrappedFilm = {
   _id: string;
-  title: string;
-  slug: string;
-  status: "watched";
-  isSecretScreening?: boolean;
-  year?: number;
-  dateWatched: string;
-  cinemaLocation?: string;
-  personalRating?: number;
-  personalNotes?: string;
-  dateAddedToWishlist?: string;
-  waitTime?: number;
+  title: string | null;
+  slug: string | null;
+  status: "watched" | "wishlist" | null;
+  isSecretScreening?: boolean | null;
+  year?: number | null;
+  dateWatched: string | null;
+  cinemaLocation?: string | null;
+  personalRating?: number | null;
+  personalNotes?: string | null;
+  dateAddedToWishlist?: string | null;
+  waitTime?: number | null;
 };
 
 type WrappedStatsProps = {
@@ -33,7 +33,7 @@ export default function WrappedStats({ films }: WrappedStatsProps) {
   const secretScreenings = films.filter(f => f.isSecretScreening).length;
 
   // Cinema statistics - sanitize to remove stega-encoded invisible characters
-  const sanitizeCinema = (cinema?: string) => cinema?.replace(/[\u200B-\u200D\uFEFF]/g, '').trim();
+  const sanitizeCinema = (cinema?: string | null) => cinema?.replace(/[\u200B-\u200D\uFEFF]/g, "").trim();
   
   const cinemaVisits = films.filter(f => f.cinemaLocation);
   const uniqueCinemas = [...new Set(cinemaVisits.map(f => sanitizeCinema(f.cinemaLocation)))];
@@ -66,6 +66,7 @@ export default function WrappedStats({ films }: WrappedStatsProps) {
 
   // Monthly distribution
   const monthlyDistribution = films.reduce((acc: Record<string, number>, film) => {
+    if (!film.dateWatched) return acc;
     const month = new Date(film.dateWatched).toLocaleDateString("en-GB", { month: "long" });
     acc[month] = (acc[month] || 0) + 1;
     return acc;

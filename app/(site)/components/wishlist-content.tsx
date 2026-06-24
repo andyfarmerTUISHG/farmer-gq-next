@@ -7,16 +7,14 @@ import MarkAsWatchedForm from "@/app/(site)/components/mark-as-watched-form";
 
 type WishlistFilm = {
   _id: string;
-  title: string;
-  slug: string;
+  title: string | null;
+  slug: string | null;
   status: "wishlist";
-  year?: number;
-
-  runtime?: number;
-  posterUrl?: string;
-
-  dateAddedToWishlist?: string;
-  isSecretScreening?: boolean;
+  year?: number | null;
+  runtime?: number | null;
+  posterUrl?: string | null;
+  dateAddedToWishlist?: string | null;
+  isSecretScreening?: boolean | null;
 };
 
 type WishlistContentProps = {
@@ -32,7 +30,7 @@ export default function WishlistContent({ films, isAuthenticated }: WishlistCont
     setSelectedFilm({
       id: filmId,
       title: filmTitle,
-      wishlistDate: film?.dateAddedToWishlist,
+      wishlistDate: film?.dateAddedToWishlist ?? undefined,
     });
   };
 
@@ -68,14 +66,14 @@ export default function WishlistContent({ films, isAuthenticated }: WishlistCont
                 <FilmCard
                   key={film._id}
                   _id={film._id}
-                  title={film.title}
-                  slug={film.slug}
+                  title={film.title ?? ""}
+                  slug={film.slug ?? ""}
                   status={film.status}
-                  year={film.year}
-                  runtime={film.runtime}
-                  posterUrl={film.posterUrl}
-                  dateAddedToWishlist={film.dateAddedToWishlist}
-                  isSecretScreening={film.isSecretScreening}
+                  year={film.year ?? undefined}
+                  runtime={film.runtime ?? undefined}
+                  posterUrl={film.posterUrl ?? undefined}
+                  dateAddedToWishlist={film.dateAddedToWishlist ?? undefined}
+                  isSecretScreening={film.isSecretScreening ?? undefined}
                   showMarkAsWatched={isAuthenticated}
                   onMarkAsWatched={handleMarkAsWatched}
                 />

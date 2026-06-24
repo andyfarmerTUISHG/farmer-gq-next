@@ -98,8 +98,8 @@ describe("customPortableText Rendering", () => {
       };
 
       expect(block.markDefs).toBeDefined();
-      expect(block.markDefs.length).toBeGreaterThan(0);
-      expect(block.markDefs[0]).toHaveProperty("href");
+      expect(block.markDefs!.length).toBeGreaterThan(0);
+      expect(block.markDefs![0]).toHaveProperty("href");
     });
   });
 

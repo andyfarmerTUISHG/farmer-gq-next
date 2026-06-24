@@ -1,22 +1,15 @@
 // import { notFound } from "next/navigation";
-import type { EncodeDataAttributeCallback } from "@sanity/react-loader";
-
 import { createDataAttribute } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-
-import type { Article } from "@/types";
 
 import { studioUrl } from "@/sanity/lib/api";
 import { sanityFetch } from "@/sanity/lib/live";
 import { articleBySlugQuery } from "@/sanity/lib/queries";
+import type { ArticleBySlugQueryResult } from "@/sanity/lib/sanity.types";
 
 import { CustomPortableText } from "../../components/global/custom-portable-text";
-
-export type ArticlePageProps = {
-  data: Article | null;
-  encodeDataAttribute?: EncodeDataAttributeCallback;
-};
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -54,7 +47,7 @@ export default async function ArticlePage({ params }: Props) {
             <div className="text-4xl" data-sanity={dataAttribute?.("name")}>
               {name}
               <br />
-              <span className="text-sm">{new Date(_createdAt).toLocaleDateString("en-GB", { year: "numeric", month: "short", day: "numeric" })}</span>
+              <span className="text-sm">{_createdAt && new Date(_createdAt).toLocaleDateString("en-GB", { year: "numeric", month: "short", day: "numeric" })}</span>
             </div>
           )}
           <ul>
@@ -75,7 +68,7 @@ export default async function ArticlePage({ params }: Props) {
                   type={article?._type || null}
                   path={["bodycopy"]}
                   paragraphClasses=""
-                  value={bodycopy}
+                  value={bodycopy as PortableTextBlock[]}
                 />
               </>
             )}

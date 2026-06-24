@@ -1,8 +1,8 @@
 type QuoteCardProps = {
   quote: {
     _id: string;
-    quoteText?: string;
-    context?: string;
+    quoteText?: string | null;
+    context?: string | null;
   };
   className?: string;
 };

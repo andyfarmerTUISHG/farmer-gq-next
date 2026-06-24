@@ -1,6 +1,6 @@
-import { groq } from "next-sanity";
+import { defineQuery } from "next-sanity";
 
-export const paginatedArticlesQuery = groq`
+export const paginatedArticlesQuery = defineQuery(`
   *[_type == "article"] | order(_updatedAt desc, _createdAt desc) [$skip...$pageSize] {
     _id,
     "slug": slug.current,
@@ -11,8 +11,8 @@ export const paginatedArticlesQuery = groq`
     "authors": author[]->{ name, "slug": slug.current},
     "articleCount": count(*[_type == "article"])
   }
-`;
-export const allArticlesQuery = groq`
+`);
+export const allArticlesQuery = defineQuery(`
   *[_type == "article"] {
     _id,
     "slug": slug.current,
@@ -22,11 +22,12 @@ export const allArticlesQuery = groq`
     _updatedAt,
     "authors": author[]->{ name, "slug": slug.current},
   }
-`;
+`);
 
-export const articleBySlugQuery = groq`
+export const articleBySlugQuery = defineQuery(`
     *[_type == "article" && slug.current == $slug][0] {
         _id,
+        _type,
         "authorName": author[0]->name,
         "slug": slug.current,
         name,
@@ -35,9 +36,9 @@ export const articleBySlugQuery = groq`
         _updatedAt,
         "authors": author[]->{ name, "slug": slug.current, image},
     }
-`;
+`);
 
-export const articlesWithNoAuthorsQuery = groq`
+export const articlesWithNoAuthorsQuery = defineQuery(`
   *[_type == "article" && (!defined(author) || count(author) == 0)] {
     _id,
     "slug": slug.current,
@@ -46,9 +47,9 @@ export const articlesWithNoAuthorsQuery = groq`
     _createdAt,
     _updatedAt
   }
-`;
+`);
 
-export const settingsQuery = groq`
+export const settingsQuery = defineQuery(`
   *[_type == "settings"][0]{
     defaultCinema,
     menuItems[]->{
@@ -60,9 +61,9 @@ export const settingsQuery = groq`
       _id
     },
   }
-`;
+`);
 
-export const articleShowcaseQuery = groq`
+export const articleShowcaseQuery = defineQuery(`
   *[_type == "settings"][0]{
     showcaseArticles[]->{
       _id,
@@ -74,18 +75,18 @@ export const articleShowcaseQuery = groq`
       asset
     },
   }
-`;
+`);
 
-export const profileQuery = groq`
+export const profileQuery = defineQuery(`
   *[_type == "profile"]{
     _id,
     fullName,
     headline,
   }
-`;
+`);
 
 // Book queries
-export const allBooksQuery = groq`
+export const allBooksQuery = defineQuery(`
   *[_type == "book"] | order(dateRead desc, _createdAt desc) {
     _id,
     title,
@@ -98,9 +99,9 @@ export const allBooksQuery = groq`
     _createdAt,
     _updatedAt
   }
-`;
+`);
 
-export const paginatedBooksQuery = groq`
+export const paginatedBooksQuery = defineQuery(`
   *[_type == "book"] | order($orderBy) [$skip...$pageSize] {
     _id,
     title,
@@ -113,9 +114,9 @@ export const paginatedBooksQuery = groq`
     _createdAt,
     _updatedAt
   }
-`;
+`);
 
-export const bookBySlugQuery = groq`
+export const bookBySlugQuery = defineQuery(`
   *[_type == "book" && slug.current == $slug][0] {
     _id,
     _type,
@@ -159,9 +160,9 @@ export const bookBySlugQuery = groq`
       context
     }
   }
-`;
+`);
 
-export const chapterBySlugQuery = groq`
+export const chapterBySlugQuery = defineQuery(`
   *[_type == "chapter" && slug.current == $slug][0] {
     _id,
     _type,
@@ -181,21 +182,21 @@ export const chapterBySlugQuery = groq`
       context
     }
   }
-`;
+`);
 
-export const allBookSlugsQuery = groq`
+export const allBookSlugsQuery = defineQuery(`
   *[_type == "book" && defined(slug.current)][].slug.current
-`;
+`);
 
-export const allChapterSlugsQuery = groq`
+export const allChapterSlugsQuery = defineQuery(`
   *[_type == "chapter" && defined(slug.current)] {
     "slug": slug.current,
     "bookSlug": parentBook->slug.current
   }
-`;
+`);
 
 // Film queries
-export const allFilmsQuery = groq`
+export const allFilmsQuery = defineQuery(`
   *[_type == "film"] | order(dateWatched desc, dateAddedToWishlist desc, _createdAt desc) {
     _id,
     title,
@@ -212,9 +213,9 @@ export const allFilmsQuery = groq`
     _createdAt,
     _updatedAt
   }
-`;
+`);
 
-export const watchedFilmsQuery = groq`
+export const watchedFilmsQuery = defineQuery(`
   *[_type == "film" && status == "watched"] | order(dateWatched desc, _createdAt desc) {
     _id,
     title,
@@ -230,9 +231,9 @@ export const watchedFilmsQuery = groq`
     _createdAt,
     _updatedAt
   }
-`;
+`);
 
-export const wishlistFilmsQuery = groq`
+export const wishlistFilmsQuery = defineQuery(`
   *[_type == "film" && status == "wishlist"] | order(dateAddedToWishlist desc, _createdAt desc) {
     _id,
     title,
@@ -246,9 +247,9 @@ export const wishlistFilmsQuery = groq`
     _createdAt,
     _updatedAt
   }
-`;
+`);
 
-export const filmBySlugQuery = groq`
+export const filmBySlugQuery = defineQuery(`
   *[_type == "film" && slug.current == $slug][0] {
     _id,
     _type,
@@ -269,19 +270,19 @@ export const filmBySlugQuery = groq`
     _createdAt,
     _updatedAt
   }
-`;
+`);
 
-export const allFilmSlugsQuery = groq`
+export const allFilmSlugsQuery = defineQuery(`
   *[_type == "film" && defined(slug.current)][].slug.current
-`;
+`);
 
-export const wrappedYearsQuery = groq`
+export const wrappedYearsQuery = defineQuery(`
   *[_type == "film" && status == "watched" && defined(dateWatched)] {
     "year": string::split(dateWatched, "-")[0]
   } | order(year desc)
-`;
+`);
 
-export const wrappedFilmsQuery = groq`
+export const wrappedFilmsQuery = defineQuery(`
   *[_type == "film" && status == "watched" && string::split(dateWatched, "-")[0] == $year] | order(dateWatched desc) {
     _id,
     title,
@@ -302,9 +303,9 @@ export const wrappedFilmsQuery = groq`
       0
     )
   }
-`;
+`);
 
-export const lastFilmWatchedQuery = groq`
+export const lastFilmWatchedQuery = defineQuery(`
   *[_type == "film" && status == "watched" && defined(dateWatched)] | order(dateWatched desc) [0] {
     _id,
     title,
@@ -319,4 +320,4 @@ export const lastFilmWatchedQuery = groq`
     plot,
     "watchedYear": string::split(dateWatched, "-")[0]
   }
-`;
+`);
