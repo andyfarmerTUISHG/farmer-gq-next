@@ -1,13 +1,11 @@
-import type { EncodeDataAttributeCallback } from "@sanity/react-loader";
 import type { Metadata } from "next";
 
 import { createDataAttribute } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { draftMode } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
-import type { BookDetail } from "@/types";
 
 import { isAuthorisedUser } from "@/lib/server-auth";
 import { studioUrl } from "@/sanity/lib/api";
@@ -20,11 +18,6 @@ import BookCard from "../../components/book-card";
 import { CustomPortableText } from "../../components/global/custom-portable-text";
 import QuoteCard from "../../components/quote-card";
 import RatingStars from "../../components/rating-stars";
-
-export type BookPageProps = {
-  data: BookDetail | null;
-  encodeDataAttribute?: EncodeDataAttributeCallback;
-};
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -52,12 +45,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const metaTitle = book.metaTitle || book.title;
+  const metaTitle = book.metaTitle ?? book.title ?? undefined;
   const metaDescription
     = book.metaDescription
-      || (book.summary && book.summary.length > 0
-        ? book.summary[0]?.children?.[0]?.text?.substring(0, 160)
-        : `Read summary and insights from ${book.title} by ${book.author}`);
+      ?? (book.summary && book.summary.length > 0
+        ? (book.summary[0] as any)?.children?.[0]?.text?.substring(0, 160)
+        : `Read summary and insights from ${book.title} by ${book.author}`)
+      ?? undefined;
 
   const ogImageUrl = book.ogImage
     ? urlForImage(book.ogImage as any)?.width(1200).height(630).url()
@@ -137,7 +131,11 @@ export default async function BookPage({ params }: Props) {
     notFound();
   }
 
-  const coverImageUrl = book?.coverImage
+  if (!book) {
+    notFound();
+  }
+
+  const coverImageUrl = book.coverImage
     ? urlForImage(book.coverImage as any)?.width(400).height(600).url()
     : null;
 
@@ -283,7 +281,7 @@ export default async function BookPage({ params }: Props) {
                 id={book._id}
                 type={book._type}
                 path={["summary"]}
-                value={book.summary}
+                value={book.summary as PortableTextBlock[]}
               />
             </div>
           </section>
@@ -303,7 +301,7 @@ export default async function BookPage({ params }: Props) {
                 id={book._id}
                 type={book._type}
                 path={["keyTakeaways"]}
-                value={book.keyTakeaways}
+                value={book.keyTakeaways as PortableTextBlock[]}
               />
             </div>
           </section>
@@ -373,7 +371,7 @@ export default async function BookPage({ params }: Props) {
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {book.relatedBooks.map(relatedBook => (
-                <BookCard key={relatedBook._id} book={relatedBook} />
+                <BookCard key={relatedBook._id} book={relatedBook as any} />
               ))}
             </div>
           </section>

@@ -19,7 +19,7 @@ export default function BookCard({ book, className = "" }: BookCardProps) {
 
   return (
     <Link
-      href={`/books/${book.slug?.current || book.slug}`}
+      href={`/books/${book.slug}`}
       className={`group block overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02] ${className}`}
     >
       <div className="relative aspect-[2/3] w-full overflow-hidden bg-gray-100">

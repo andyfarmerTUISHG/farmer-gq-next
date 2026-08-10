@@ -1,12 +1,10 @@
-import type { EncodeDataAttributeCallback } from "@sanity/react-loader";
 import type { Metadata } from "next";
 
 import { createDataAttribute } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
-import type { ChapterDetail } from "@/types";
 
 import { studioUrl } from "@/sanity/lib/api";
 import { client } from "@/sanity/lib/client";
@@ -15,11 +13,6 @@ import { allChapterSlugsQuery, chapterBySlugQuery } from "@/sanity/lib/queries";
 
 import { CustomPortableText } from "../../../../components/global/custom-portable-text";
 import QuoteCard from "../../../../components/quote-card";
-
-export type ChapterPageProps = {
-  data: ChapterDetail | null;
-  encodeDataAttribute?: EncodeDataAttributeCallback;
-};
 
 type Props = {
   params: Promise<{ slug: string; chapterSlug: string }>;
@@ -50,11 +43,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const metaTitle = `Chapter ${chapter.chapterNumber}: ${chapter.title} - ${chapter.parentBook.title}`;
+  const metaTitle = `Chapter ${chapter.chapterNumber}: ${chapter.title} - ${chapter.parentBook?.title}`;
   const metaDescription
     = chapter.summary && chapter.summary.length > 0
-      ? chapter.summary[0]?.children?.[0]?.text?.substring(0, 160)
-      : `Read chapter ${chapter.chapterNumber} summary from ${chapter.parentBook.title} by ${chapter.parentBook.author}`;
+      ? (chapter.summary[0] as any)?.children?.[0]?.text?.substring(0, 160)
+      : `Read chapter ${chapter.chapterNumber} summary from ${chapter.parentBook?.title} by ${chapter.parentBook?.author}`;
 
   return {
     title: metaTitle,
@@ -96,6 +89,10 @@ export default async function ChapterPage({ params }: Props) {
     notFound();
   }
 
+  if (!chapter) {
+    notFound();
+  }
+
   const dataAttribute
     = chapter._id && chapter._type
       ? createDataAttribute({
@@ -123,10 +120,10 @@ export default async function ChapterPage({ params }: Props) {
             <li>/</li>
             <li>
               <Link
-                href={`/books/${chapter.parentBook.slug}`}
+                href={`/books/${chapter.parentBook?.slug}`}
                 className="hover:text-purple-600 transition-colors"
               >
-                {chapter.parentBook.title}
+                {chapter.parentBook?.title}
               </Link>
             </li>
             <li>/</li>
@@ -158,15 +155,15 @@ export default async function ChapterPage({ params }: Props) {
             From
             {" "}
             <Link
-              href={`/books/${chapter.parentBook.slug}`}
+              href={`/books/${chapter.parentBook?.slug}`}
               className="font-medium text-purple-600 hover:text-purple-700 transition-colors"
             >
-              {chapter.parentBook.title}
+              {chapter.parentBook?.title}
             </Link>
             {" "}
             by
             {" "}
-            {chapter.parentBook.author}
+            {chapter.parentBook?.author}
           </p>
         </div>
 
@@ -182,7 +179,7 @@ export default async function ChapterPage({ params }: Props) {
                 id={chapter._id}
                 type={chapter._type}
                 path={["summary"]}
-                value={chapter.summary}
+                value={chapter.summary as PortableTextBlock[]}
               />
             </div>
           </section>
@@ -205,7 +202,7 @@ export default async function ChapterPage({ params }: Props) {
         {/* Back to Book Link */}
         <div className="mt-12 border-t border-gray-200 pt-6">
           <Link
-            href={`/books/${chapter.parentBook.slug}`}
+            href={`/books/${chapter.parentBook?.slug}`}
             className="inline-flex items-center text-purple-600 hover:text-purple-700 transition-colors font-medium"
           >
             <svg
@@ -223,7 +220,7 @@ export default async function ChapterPage({ params }: Props) {
             </svg>
             Back to
             {" "}
-            {chapter.parentBook.title}
+            {chapter.parentBook?.title}
           </Link>
         </div>
       </main>

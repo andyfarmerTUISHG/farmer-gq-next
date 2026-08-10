@@ -64,7 +64,7 @@ export default async function BooksListRoute({
     },
   });
 
-  const books = (data || []) as BookListItem[];
+  const books = (data || []) as unknown as BookListItem[];
 
   // Get total count from first book or default to 0
   const totalCount = books.length;

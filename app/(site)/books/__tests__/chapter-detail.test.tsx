@@ -33,19 +33,17 @@ describe("chapter Detail Page", () => {
       _type: "reference",
       _id: "book-1",
       title: "The Leadership Challenge",
-      slug: { _type: "slug", current: "leadership-challenge" },
+      slug: "leadership-challenge",
       author: "James Kouzes",
     },
     quotes: [
       {
         _id: "quote-1",
-        _type: "quote",
         quoteText: "Actions speak louder than words in leadership.",
         context: "From the chapter introduction",
       },
       {
         _id: "quote-2",
-        _type: "quote",
         quoteText: "Be the change you want to see in your organization.",
       },
     ],
@@ -70,8 +68,7 @@ describe("chapter Detail Page", () => {
 
   it("should have valid parent book slug for navigation", () => {
     expect(mockChapterDetail.parentBook.slug).toBeDefined();
-    expect(mockChapterDetail.parentBook.slug).toHaveProperty("current");
-    expect(mockChapterDetail.parentBook.slug.current).toBeTruthy();
+    expect(mockChapterDetail.parentBook.slug).toBeTruthy();
   });
 
   it("should have valid chapter number", () => {
@@ -87,9 +84,9 @@ describe("chapter Detail Page", () => {
   it("should have valid summary content", () => {
     expect(mockChapterDetail.summary).toBeDefined();
     expect(Array.isArray(mockChapterDetail.summary)).toBe(true);
-    expect(mockChapterDetail.summary.length).toBeGreaterThan(0);
+    expect(mockChapterDetail.summary!.length).toBeGreaterThan(0);
 
-    const firstBlock = mockChapterDetail.summary[0];
+    const firstBlock = mockChapterDetail.summary![0] as any;
     expect(firstBlock).toHaveProperty("_type", "block");
     expect(firstBlock).toHaveProperty("children");
     expect(Array.isArray(firstBlock.children)).toBe(true);
@@ -99,7 +96,6 @@ describe("chapter Detail Page", () => {
     expect(mockChapterDetail.quotes).toBeDefined();
     expect(Array.isArray(mockChapterDetail.quotes)).toBe(true);
     expect(mockChapterDetail.quotes?.length).toBeGreaterThan(0);
-
     mockChapterDetail.quotes?.forEach((quote) => {
       expect(quote).toHaveProperty("_id");
       expect(quote).toHaveProperty("quoteText");
@@ -108,15 +104,20 @@ describe("chapter Detail Page", () => {
   });
 
   it("should support breadcrumb navigation structure", () => {
+    const parentSlug = mockChapterDetail.parentBook.slug;
+    const chapterSlug = typeof mockChapterDetail.slug === "string"
+      ? mockChapterDetail.slug
+      : mockChapterDetail.slug?.current;
+
     const breadcrumbPath = {
       books: "/books",
-      book: `/books/${mockChapterDetail.parentBook.slug.current}`,
-      chapter: `/books/${mockChapterDetail.parentBook.slug.current}/chapters/${mockChapterDetail.slug.current}`,
+      book: `/books/${parentSlug}`,
+      chapter: `/books/${parentSlug}/chapters/${chapterSlug}`,
     };
 
     expect(breadcrumbPath.books).toBe("/books");
-    expect(breadcrumbPath.book).toContain(mockChapterDetail.parentBook.slug.current);
-    expect(breadcrumbPath.chapter).toContain(mockChapterDetail.slug.current);
+    expect(breadcrumbPath.book).toContain(String(parentSlug));
+    expect(breadcrumbPath.chapter).toContain(String(chapterSlug));
   });
 
   it("should have valid parent book metadata for display", () => {
@@ -131,9 +132,8 @@ describe("chapter Detail Page", () => {
     if (quoteWithContext) {
       expect(quoteWithContext.context).toBeTruthy();
     }
-
     if (quoteWithoutContext) {
-      expect(quoteWithoutContext.context).toBeUndefined();
+      expect(quoteWithoutContext.context).toBeFalsy();
     }
   });
 });

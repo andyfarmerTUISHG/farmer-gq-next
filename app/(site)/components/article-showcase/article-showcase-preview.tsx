@@ -1,6 +1,6 @@
 "use client";
 
-import type { ArticleShowcaseQueryResult } from "@/sanity.types";
+import type { ArticleShowcaseQueryResult } from "@/sanity/lib/sanity.types";
 
 import { articleShowcaseQuery } from "@/sanity/lib/queries";
 import { useQuery } from "@/sanity/loader/use-query";

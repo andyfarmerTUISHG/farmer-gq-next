@@ -62,50 +62,36 @@ describe("book Detail Page", () => {
     metaTitle: "The Leadership Challenge - Book Summary",
     focusKeyword: "leadership",
     tags: [
-      { _id: "tag-1", name: "Leadership" },
-      { _id: "tag-2", name: "Management" },
-    ],
+      { _key: "k1", _ref: "tag-1", _type: "reference" as const, _id: "tag-1", name: "Leadership" },
+      { _key: "k2", _ref: "tag-2", _type: "reference" as const, _id: "tag-2", name: "Management" },
+    ] as any,
     relatedBooks: [
       {
         _id: "book-2",
         _type: "book",
+        _createdAt: "2024-02-01T00:00:00Z",
+        _updatedAt: "2024-02-20T00:00:00Z",
+        _rev: "rev-2",
         title: "Good to Great",
-        slug: { _type: "slug", current: "good-to-great" },
+        slug: "good-to-great",
         author: "Jim Collins",
         rating: 4,
         coverImage: {
           _type: "image",
-          asset: {
-            _ref: "image-456",
-            _type: "reference",
-          },
+          asset: { _ref: "image-456", _type: "reference" },
         },
         dateRead: "2024-02-20",
-        _createdAt: "2024-02-01T00:00:00Z",
-        _updatedAt: "2024-02-20T00:00:00Z",
+        tags: null,
       },
     ],
     chapters: [
-      {
-        _id: "chapter-1",
-        _type: "chapter",
-        chapterNumber: "1",
-        title: "Model the Way",
-        slug: { _type: "slug", current: "model-the-way" },
-      },
-      {
-        _id: "chapter-2",
-        _type: "chapter",
-        chapterNumber: "2",
-        title: "Inspire a Shared Vision",
-        slug: { _type: "slug", current: "inspire-shared-vision" },
-      },
+      { _id: "chapter-1", chapterNumber: "1", title: "Model the Way", slug: "model-the-way" },
+      { _id: "chapter-2", chapterNumber: "2", title: "Inspire a Shared Vision", slug: "inspire-shared-vision" },
     ],
     quotes: [
       {
         _id: "quote-1",
-        _type: "quote",
-        quoteText: "Leadership is not about being in charge. It's about taking care of those in your charge.",
+        quoteText: "Leadership is not about being in charge.",
         context: "From the introduction",
       },
     ],
@@ -130,9 +116,9 @@ describe("book Detail Page", () => {
   it("should have valid summary content", () => {
     expect(mockBookDetail.summary).toBeDefined();
     expect(Array.isArray(mockBookDetail.summary)).toBe(true);
-    expect(mockBookDetail.summary.length).toBeGreaterThan(0);
+    expect(mockBookDetail.summary!.length).toBeGreaterThan(0);
 
-    const firstBlock = mockBookDetail.summary[0];
+    const firstBlock = mockBookDetail.summary![0] as any;
     expect(firstBlock).toHaveProperty("_type", "block");
     expect(firstBlock).toHaveProperty("children");
     expect(Array.isArray(firstBlock.children)).toBe(true);
@@ -141,7 +127,7 @@ describe("book Detail Page", () => {
   it("should have valid key takeaways", () => {
     expect(mockBookDetail.keyTakeaways).toBeDefined();
     expect(Array.isArray(mockBookDetail.keyTakeaways)).toBe(true);
-    expect(mockBookDetail.keyTakeaways.length).toBeGreaterThan(0);
+    expect(mockBookDetail.keyTakeaways!.length).toBeGreaterThan(0);
   });
 
   it("should have valid Amazon links", () => {
@@ -153,15 +139,14 @@ describe("book Detail Page", () => {
 
   it("should have valid cover image structure", () => {
     expect(mockBookDetail.coverImage).toBeDefined();
-    expect(mockBookDetail.coverImage).toHaveProperty("asset");
-    expect(mockBookDetail.coverImage.asset).toHaveProperty("_ref");
+    expect(mockBookDetail.coverImage!).toHaveProperty("asset");
+    expect((mockBookDetail.coverImage as any).asset).toHaveProperty("_ref");
   });
 
   it("should have valid tags", () => {
     expect(mockBookDetail.tags).toBeDefined();
     expect(Array.isArray(mockBookDetail.tags)).toBe(true);
     expect(mockBookDetail.tags?.length).toBeGreaterThan(0);
-
     mockBookDetail.tags?.forEach((tag) => {
       expect(tag).toHaveProperty("_id");
       expect(tag).toHaveProperty("name");
@@ -172,7 +157,6 @@ describe("book Detail Page", () => {
     expect(mockBookDetail.relatedBooks).toBeDefined();
     expect(Array.isArray(mockBookDetail.relatedBooks)).toBe(true);
     expect(mockBookDetail.relatedBooks?.length).toBeGreaterThan(0);
-
     mockBookDetail.relatedBooks?.forEach((book) => {
       expect(book).toHaveProperty("_id");
       expect(book).toHaveProperty("title");
@@ -186,7 +170,6 @@ describe("book Detail Page", () => {
     expect(mockBookDetail.chapters).toBeDefined();
     expect(Array.isArray(mockBookDetail.chapters)).toBe(true);
     expect(mockBookDetail.chapters?.length).toBeGreaterThan(0);
-
     mockBookDetail.chapters?.forEach((chapter) => {
       expect(chapter).toHaveProperty("_id");
       expect(chapter).toHaveProperty("chapterNumber");
@@ -199,7 +182,6 @@ describe("book Detail Page", () => {
     expect(mockBookDetail.quotes).toBeDefined();
     expect(Array.isArray(mockBookDetail.quotes)).toBe(true);
     expect(mockBookDetail.quotes?.length).toBeGreaterThan(0);
-
     mockBookDetail.quotes?.forEach((quote) => {
       expect(quote).toHaveProperty("_id");
       expect(quote).toHaveProperty("quoteText");

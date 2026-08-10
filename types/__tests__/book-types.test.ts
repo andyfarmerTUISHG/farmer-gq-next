@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import type { Book, Chapter } from "../../sanity.types";
+import type { Book, Chapter } from "../../sanity/lib/sanity.types";
 import type { BookDetail, BookListItem, ChapterDetail, QuoteWithContext } from "../index";
 
 describe("typeScript Type Validation - Books", () => {
@@ -13,17 +13,15 @@ describe("typeScript Type Validation - Books", () => {
         _updatedAt: "2024-01-01T00:00:00Z",
         _rev: "rev-1",
         title: "Leadership Book",
-        slug: { _type: "slug", current: "leadership-book" },
+        slug: "leadership-book",
         author: "John Doe",
         rating: 5,
         coverImage: {
           _type: "image",
-          asset: {
-            _ref: "image-ref",
-            _type: "reference",
-          },
+          asset: { _ref: "image-ref", _type: "reference" },
         },
         dateRead: "2024-01-01",
+        tags: null,
       };
 
       expect(bookListItem._id).toBe("book-1");
@@ -40,16 +38,14 @@ describe("typeScript Type Validation - Books", () => {
         _updatedAt: "2024-01-01T00:00:00Z",
         _rev: "rev-1",
         title: "Book with Tags",
-        slug: { _type: "slug", current: "book-with-tags" },
+        slug: "book-with-tags",
         author: "Jane Doe",
         rating: 4,
         coverImage: {
           _type: "image",
-          asset: {
-            _ref: "image-ref",
-            _type: "reference",
-          },
+          asset: { _ref: "image-ref", _type: "reference" },
         },
+        dateRead: null,
         tags: [
           { _id: "tag-1", name: "Leadership" },
           { _id: "tag-2", name: "Management" },
@@ -75,23 +71,13 @@ describe("typeScript Type Validation - Books", () => {
         rating: 5,
         coverImage: {
           _type: "image",
-          asset: {
-            _ref: "image-ref",
-            _type: "reference",
-          },
+          asset: { _ref: "image-ref", _type: "reference" },
         },
         summary: [
           {
             _type: "block",
             _key: "block-1",
-            children: [
-              {
-                _type: "span",
-                _key: "span-1",
-                text: "Summary text",
-                marks: [],
-              },
-            ],
+            children: [{ _type: "span", _key: "span-1", text: "Summary text", marks: [] }],
             style: "normal",
           },
         ],
@@ -99,14 +85,7 @@ describe("typeScript Type Validation - Books", () => {
           {
             _type: "block",
             _key: "block-2",
-            children: [
-              {
-                _type: "span",
-                _key: "span-2",
-                text: "Key takeaway",
-                marks: [],
-              },
-            ],
+            children: [{ _type: "span", _key: "span-2", text: "Key takeaway", marks: [] }],
             style: "normal",
           },
         ],
@@ -118,32 +97,22 @@ describe("typeScript Type Validation - Books", () => {
             _updatedAt: "2024-01-01T00:00:00Z",
             _rev: "rev-2",
             title: "Related Book",
-            slug: { _type: "slug", current: "related-book" },
+            slug: "related-book",
             author: "Another Author",
             rating: 4,
             coverImage: {
               _type: "image",
-              asset: {
-                _ref: "image-ref-2",
-                _type: "reference",
-              },
+              asset: { _ref: "image-ref-2", _type: "reference" },
             },
+            dateRead: null,
+            tags: null,
           },
         ],
         chapters: [
-          {
-            _id: "chapter-1",
-            chapterNumber: "1",
-            title: "Chapter One",
-            slug: { _type: "slug", current: "chapter-one" },
-          },
+          { _id: "chapter-1", chapterNumber: "1", title: "Chapter One", slug: "chapter-one" },
         ],
         quotes: [
-          {
-            _id: "quote-1",
-            quoteText: "Memorable quote",
-            context: "Context for the quote",
-          },
+          { _id: "quote-1", quoteText: "Memorable quote", context: "Context for the quote" },
         ],
       };
 
@@ -168,29 +137,18 @@ describe("typeScript Type Validation - Books", () => {
           {
             _type: "block",
             _key: "block-1",
-            children: [
-              {
-                _type: "span",
-                _key: "span-1",
-                text: "Chapter summary",
-                marks: [],
-              },
-            ],
+            children: [{ _type: "span", _key: "span-1", text: "Chapter summary", marks: [] }],
             style: "normal",
           },
         ],
         parentBook: {
           _id: "book-1",
           title: "Parent Book",
-          slug: { _type: "slug", current: "parent-book" },
+          slug: "parent-book",
           author: "Book Author",
         },
         quotes: [
-          {
-            _id: "quote-1",
-            quoteText: "Chapter quote",
-            context: "Quote context",
-          },
+          { _id: "quote-1", quoteText: "Chapter quote", context: "Quote context" },
         ],
       };
 
@@ -211,10 +169,14 @@ describe("typeScript Type Validation - Books", () => {
         quoteText: "Inspirational quote",
         context: "Context about the quote",
         parentBook: {
+          _ref: "book-1",
+          _type: "reference",
           _id: "book-1",
           title: "Book Title",
         },
         parentChapter: {
+          _ref: "chapter-1",
+          _type: "reference",
           _id: "chapter-1",
           title: "Chapter Title",
         },
@@ -233,6 +195,8 @@ describe("typeScript Type Validation - Books", () => {
         _rev: "rev-1",
         quoteText: "Another quote",
         parentBook: {
+          _ref: "book-1",
+          _type: "reference",
           _id: "book-1",
           title: "Book Title",
         },
@@ -256,14 +220,10 @@ describe("typeScript Type Validation - Books", () => {
         rating: 5,
         coverImage: {
           _type: "image",
-          asset: {
-            _ref: "image-ref",
-            _type: "reference",
-          },
+          asset: { _ref: "image-ref", _type: "reference" },
         },
       };
 
-      // This should compile without errors
       const listItem: BookListItem = {
         _id: book._id,
         _type: book._type,
@@ -271,11 +231,12 @@ describe("typeScript Type Validation - Books", () => {
         _updatedAt: book._updatedAt,
         _rev: book._rev,
         title: book.title,
-        slug: book.slug,
+        slug: book.slug?.current ?? null,
         author: book.author,
-        rating: book.rating,
-        coverImage: book.coverImage,
-        dateRead: book.dateRead,
+        rating: book.rating ?? null,
+        coverImage: book.coverImage ?? null,
+        dateRead: book.dateRead ?? null,
+        tags: null,
       };
 
       expect(listItem._id).toBe(book._id);
@@ -298,7 +259,7 @@ describe("typeScript Type Validation - Books", () => {
         parentBook: {
           _id: "book-1",
           title: "Parent Book",
-          slug: { _type: "slug", current: "parent-book" },
+          slug: "parent-book",
           author: "Author",
         },
       };
@@ -320,16 +281,15 @@ describe("typeScript Type Validation - Books", () => {
           _updatedAt: "2024-01-01T00:00:00Z",
           _rev: "rev-1",
           title: "Test Book",
-          slug: { _type: "slug", current: "test-book" },
+          slug: "test-book",
           author: "Author",
           rating,
           coverImage: {
             _type: "image",
-            asset: {
-              _ref: "image-ref",
-              _type: "reference",
-            },
+            asset: { _ref: "image-ref", _type: "reference" },
           },
+          dateRead: null,
+          tags: null,
         };
 
         expect(book.rating).toBeGreaterThanOrEqual(1);
@@ -339,7 +299,7 @@ describe("typeScript Type Validation - Books", () => {
   });
 
   describe("slug structure validation", () => {
-    it("should have correct slug structure", () => {
+    it("should have correct slug as string for BookListItem", () => {
       const book: BookListItem = {
         _id: "book-1",
         _type: "book",
@@ -347,24 +307,19 @@ describe("typeScript Type Validation - Books", () => {
         _updatedAt: "2024-01-01T00:00:00Z",
         _rev: "rev-1",
         title: "Test Book",
-        slug: {
-          _type: "slug",
-          current: "test-book",
-        },
+        slug: "test-book",
         author: "Author",
         rating: 5,
         coverImage: {
           _type: "image",
-          asset: {
-            _ref: "image-ref",
-            _type: "reference",
-          },
+          asset: { _ref: "image-ref", _type: "reference" },
         },
+        dateRead: null,
+        tags: null,
       };
 
-      expect(book.slug?._type).toBe("slug");
-      expect(book.slug?.current).toBe("test-book");
-      expect(typeof book.slug?.current).toBe("string");
+      expect(book.slug).toBe("test-book");
+      expect(typeof book.slug).toBe("string");
     });
   });
 });

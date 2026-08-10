@@ -2,40 +2,27 @@ import { describe, expect, it, vi } from "vitest";
 
 import type { BookListItem } from "@/types";
 
-// Mock Next.js modules
-vi.mock("next/navigation", () => ({
-  notFound: vi.fn(),
-}));
-
-vi.mock("@/sanity/lib/live", () => ({
-  sanityFetch: vi.fn(),
-}));
-
-vi.mock("@/app/(site)/env", () => ({
-  env: {
-    NEXT_PAGE_SIZE: "12",
-  },
-}));
+vi.mock("next/navigation", () => ({ notFound: vi.fn() }));
+vi.mock("@/sanity/lib/live", () => ({ sanityFetch: vi.fn() }));
+vi.mock("@/app/(site)/env", () => ({ env: { NEXT_PAGE_SIZE: "12" } }));
 
 describe("books List Page", () => {
   const mockBooks: BookListItem[] = [
     {
       _id: "book-1",
       _type: "book",
+      _createdAt: "2024-01-01T00:00:00Z",
+      _updatedAt: "2024-01-15T00:00:00Z",
+      _rev: "rev-1",
       title: "The Leadership Challenge",
-      slug: { _type: "slug", current: "leadership-challenge" },
+      slug: "leadership-challenge",
       author: "James Kouzes",
       rating: 5,
       coverImage: {
         _type: "image",
-        asset: {
-          _ref: "image-123",
-          _type: "reference",
-        },
+        asset: { _ref: "image-123", _type: "reference" },
       },
       dateRead: "2024-01-15",
-      _createdAt: "2024-01-01T00:00:00Z",
-      _updatedAt: "2024-01-15T00:00:00Z",
       tags: [
         { _id: "tag-1", name: "Leadership" },
         { _id: "tag-2", name: "Management" },
@@ -44,20 +31,18 @@ describe("books List Page", () => {
     {
       _id: "book-2",
       _type: "book",
+      _createdAt: "2024-02-01T00:00:00Z",
+      _updatedAt: "2024-02-20T00:00:00Z",
+      _rev: "rev-2",
       title: "Good to Great",
-      slug: { _type: "slug", current: "good-to-great" },
+      slug: "good-to-great",
       author: "Jim Collins",
       rating: 4,
       coverImage: {
         _type: "image",
-        asset: {
-          _ref: "image-456",
-          _type: "reference",
-        },
+        asset: { _ref: "image-456", _type: "reference" },
       },
       dateRead: "2024-02-20",
-      _createdAt: "2024-02-01T00:00:00Z",
-      _updatedAt: "2024-02-20T00:00:00Z",
       tags: [{ _id: "tag-1", name: "Leadership" }],
     },
   ];
@@ -78,7 +63,7 @@ describe("books List Page", () => {
       expect(book.author).toBeTruthy();
       expect(book.rating).toBeGreaterThanOrEqual(1);
       expect(book.rating).toBeLessThanOrEqual(5);
-      expect(book.slug).toHaveProperty("current");
+      expect(book.slug).toBeTruthy();
     });
   });
 
@@ -86,7 +71,7 @@ describe("books List Page", () => {
     mockBooks.forEach((book) => {
       expect(book.coverImage).toBeDefined();
       expect(book.coverImage).toHaveProperty("asset");
-      expect(book.coverImage.asset).toHaveProperty("_ref");
+      expect((book.coverImage as any)?.asset).toHaveProperty("_ref");
     });
   });
 
@@ -95,7 +80,6 @@ describe("books List Page", () => {
     expect(bookWithTags.tags).toBeDefined();
     expect(Array.isArray(bookWithTags.tags)).toBe(true);
     expect(bookWithTags.tags?.length).toBeGreaterThan(0);
-
     bookWithTags.tags?.forEach((tag) => {
       expect(tag).toHaveProperty("_id");
       expect(tag).toHaveProperty("name");
@@ -113,10 +97,8 @@ describe("books List Page", () => {
   });
 
   it("should support sorting by rating", () => {
-    const sortedByRating = [...mockBooks].sort((a, b) => b.rating - a.rating);
-    expect(sortedByRating[0].rating).toBeGreaterThanOrEqual(
-      sortedByRating[1].rating,
-    );
+    const sortedByRating = [...mockBooks].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+    expect(sortedByRating[0].rating ?? 0).toBeGreaterThanOrEqual(sortedByRating[1].rating ?? 0);
   });
 
   it("should support sorting by date read", () => {
@@ -125,22 +107,15 @@ describe("books List Page", () => {
       const dateB = b.dateRead ? new Date(b.dateRead).getTime() : 0;
       return dateB - dateA;
     });
-
-    const firstDate = sortedByDate[0].dateRead
-      ? new Date(sortedByDate[0].dateRead).getTime()
-      : 0;
-    const secondDate = sortedByDate[1].dateRead
-      ? new Date(sortedByDate[1].dateRead).getTime()
-      : 0;
-
+    const firstDate = sortedByDate[0].dateRead ? new Date(sortedByDate[0].dateRead).getTime() : 0;
+    const secondDate = sortedByDate[1].dateRead ? new Date(sortedByDate[1].dateRead).getTime() : 0;
     expect(firstDate).toBeGreaterThanOrEqual(secondDate);
   });
 
   it("should support sorting by author", () => {
     const sortedByAuthor = [...mockBooks].sort((a, b) =>
-      a.author.localeCompare(b.author),
+      (a.author ?? "").localeCompare(b.author ?? ""),
     );
-
-    expect(sortedByAuthor[0].author.localeCompare(sortedByAuthor[1].author)).toBeLessThanOrEqual(0);
+    expect((sortedByAuthor[0].author ?? "").localeCompare(sortedByAuthor[1].author ?? "")).toBeLessThanOrEqual(0);
   });
 });
