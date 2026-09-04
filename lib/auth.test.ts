@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { getAuthorizedEmails, isEmailAuthorized } from "./auth-helpers";
 
 describe("auth configuration", () => {

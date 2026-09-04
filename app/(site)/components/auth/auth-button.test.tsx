@@ -1,6 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+
+import { signIn, signOut, useSession } from "@/lib/auth-client";
+
 import AuthButton from "./auth-button";
 
 vi.mock("@/lib/auth-client", () => ({
@@ -9,9 +12,7 @@ vi.mock("@/lib/auth-client", () => ({
   signOut: vi.fn(),
 }));
 
-import { signIn, signOut, useSession } from "@/lib/auth-client";
-
-describe("AuthButton", () => {
+describe("authButton", () => {
   it("should show sign in button when not authenticated", () => {
     vi.mocked(useSession).mockReturnValue({ data: null, isPending: false } as any);
     render(<AuthButton />);

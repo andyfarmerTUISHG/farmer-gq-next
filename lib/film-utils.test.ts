@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { formatFilmTitle, generateFilmSlug, transformFilmDetailsForSanity } from "./film-utils";
 
 describe("generateFilmSlug", () => {

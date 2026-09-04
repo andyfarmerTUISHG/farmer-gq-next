@@ -83,7 +83,7 @@ export default async function WrappedYearPage({ params }: Props) {
               All Films
             </Link>
           </div>
-          
+
           {/* Year Navigation */}
           {availableYears.length > 0 && (
             <div className="flex gap-2 mb-4 flex-wrap">
@@ -104,7 +104,7 @@ export default async function WrappedYearPage({ params }: Props) {
               ))}
             </div>
           )}
-          
+
           <p className="text-gray-600">
             No films watched in
             {year}
@@ -130,7 +130,7 @@ export default async function WrappedYearPage({ params }: Props) {
             All Films
           </Link>
         </div>
-        
+
         {/* Year Navigation */}
         {availableYears.length > 0 && (
           <div className="flex gap-2 mb-4 flex-wrap">
@@ -151,7 +151,7 @@ export default async function WrappedYearPage({ params }: Props) {
             ))}
           </div>
         )}
-        
+
         <p className="text-gray-600">
           Your
           {year}

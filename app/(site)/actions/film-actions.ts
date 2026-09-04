@@ -2,9 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 
-import { isAuthorisedUser } from "@/lib/server-auth";
 import { filmService } from "@/lib/film-api/film-service";
 import { generateFilmSlug } from "@/lib/film-utils";
+import { isAuthorisedUser } from "@/lib/server-auth";
 import {
   addFilmSchema,
   markAsWatchedSchema,
@@ -36,7 +36,7 @@ export async function searchFilmsAction(query: string) {
     const sanitizedQuery = sanitizeText(validatedInput.query);
 
     // Check if query is an IMDB ID (starts with tt followed by digits)
-    if (sanitizedQuery.match(/^tt\d+$/)) {
+    if (/^tt\d+$/.test(sanitizedQuery)) {
       const result = await filmService.getFilmDetails(sanitizedQuery);
       if (result.film) {
         return {

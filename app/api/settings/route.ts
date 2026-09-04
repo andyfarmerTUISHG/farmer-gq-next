@@ -10,10 +10,11 @@ export async function GET() {
     });
 
     // Sanitize the default cinema value to remove any invisible characters
-    const defaultCinema = settings?.defaultCinema 
+    const defaultCinema = settings?.defaultCinema
       ? settings.defaultCinema
           .trim()
           .replace(/[\u200B-\u200D\uFEFF]/g, "")
+          // eslint-disable-next-line no-control-regex
           .replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
       : null;
 

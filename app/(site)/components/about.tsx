@@ -99,7 +99,7 @@ export default function About() {
           <div className="pt-6">
             <div className="flex items-end justify-between">
               <h4 className="font-body font-semibold text-black uppercase">
-                Agile &amp; Continuous Improvement 
+                Agile &amp; Continuous Improvement
               </h4>
               <h3 className="font-body text-primary text-3xl font-bold">90%</h3>
             </div>
@@ -161,8 +161,8 @@ export default function About() {
               >
               </div>
             </div>
-          </div>          
-            <div className="pt-6">
+          </div>
+          <div className="pt-6">
             <div className="flex items-end justify-between">
               <h4 className="font-body font-semibold text-black uppercase">
                 {" "}

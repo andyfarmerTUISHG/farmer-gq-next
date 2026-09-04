@@ -4,6 +4,8 @@
 import type { DocumentDefinition } from "sanity";
 import type { StructureResolver } from "sanity/structure";
 
+import { apiVersion } from "../lib/api";
+
 export function singletonPlugin(types: string[]) {
   return {
     name: "singletonPlugin",
@@ -57,6 +59,7 @@ export function pageStructure(typeDefArray: DocumentDefinition[]): StructureReso
       .child(
         S.documentList()
           .title("Articles")
+          .apiVersion(apiVersion)
           .filter("_type == \"article\"")
           .defaultOrdering([{ field: "_updatedAt", direction: "desc" }])
           .child(documentId =>
@@ -70,7 +73,7 @@ export function pageStructure(typeDefArray: DocumentDefinition[]): StructureReso
     const defaultListItems = S.documentTypeListItems().filter(
       (listItem) => {
         const id = listItem.getId();
-        return !typeDefArray.find(singleton => singleton.name === id) && id !== "article";
+        return !typeDefArray.some(singleton => singleton.name === id) && id !== "article";
       },
     );
 

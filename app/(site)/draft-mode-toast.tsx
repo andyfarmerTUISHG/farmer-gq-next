@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  useDraftModeEnvironment,
+  useVisualEditingEnvironment as useDraftModeEnvironment,
 } from "next-sanity/hooks";
 import { useRouter } from "next/navigation";
 import { useEffect, useTransition } from "react";

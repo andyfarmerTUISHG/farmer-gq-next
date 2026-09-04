@@ -1,22 +1,13 @@
 // tailwind.config.js
-import { heroui } from "@heroui/react";
+// HeroUI v3 uses CSS-first theming - no plugin required.
+// Tailwind v4 configuration is handled via globals.css @theme directives.
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
-  },
   darkMode: "class",
-  plugins: [heroui()],
 };

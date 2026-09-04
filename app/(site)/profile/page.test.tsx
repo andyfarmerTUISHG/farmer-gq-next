@@ -1,6 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+
+import { signOut, useSession } from "@/lib/auth-client";
+
 import ProfilePage from "./page";
 
 vi.mock("@/lib/auth-client", () => ({
@@ -8,9 +11,7 @@ vi.mock("@/lib/auth-client", () => ({
   signOut: vi.fn(),
 }));
 
-import { signOut, useSession } from "@/lib/auth-client";
-
-describe("ProfilePage", () => {
+describe("profilePage", () => {
   it("should show loading state while session is pending", () => {
     vi.mocked(useSession).mockReturnValue({ data: null, isPending: true } as any);
     render(<ProfilePage />);

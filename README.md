@@ -94,19 +94,20 @@ This project uses Specification-Driven Development (SDD). Each feature has detai
 
 ### Active Specifications
 
-| Feature | Status | Requirements | Tasks | Notes |
-|---------|--------|--------------|-------|-------|
-| **Google Authentication** | 🚧 In Development | [Requirements](.kiro/specs/google-auth/requirements.md) | [Tasks](.kiro/specs/google-auth/tasks.md) | Replaces draft mode for films & books |
-| **Films** | 🚧 In Development | [Requirements](.kiro/specs/films/requirements.md) | [Tasks](.kiro/specs/films/tasks.md) | Cinema tracking with OMDb API |
-| **Leadership Books** | ✅ Complete | [Requirements](.kiro/specs/leadership-books/requirements.md) | [Tasks](.kiro/specs/leadership-books/tasks.md) | Book summaries with chapters |
-| **Articles** | ✅ Complete | [Requirements](.kiro/specs/articles/requirements.md) | [Tasks](.kiro/specs/articles/tasks.md) | Blog-style content |
-| **Google Analytics** | ✅ Complete | [Requirements](.kiro/specs/google-analytics/requirements.md) | [Tasks](.kiro/specs/google-analytics/tasks.md) | Privacy-compliant analytics |
+| Feature                   | Status            | Requirements                                                 | Tasks                                          | Notes                                 |
+| ------------------------- | ----------------- | ------------------------------------------------------------ | ---------------------------------------------- | ------------------------------------- |
+| **Google Authentication** | 🚧 In Development | [Requirements](.kiro/specs/google-auth/requirements.md)      | [Tasks](.kiro/specs/google-auth/tasks.md)      | Replaces draft mode for films & books |
+| **Films**                 | 🚧 In Development | [Requirements](.kiro/specs/films/requirements.md)            | [Tasks](.kiro/specs/films/tasks.md)            | Cinema tracking with OMDb API         |
+| **Leadership Books**      | ✅ Complete       | [Requirements](.kiro/specs/leadership-books/requirements.md) | [Tasks](.kiro/specs/leadership-books/tasks.md) | Book summaries with chapters          |
+| **Articles**              | ✅ Complete       | [Requirements](.kiro/specs/articles/requirements.md)         | [Tasks](.kiro/specs/articles/tasks.md)         | Blog-style content                    |
+| **Google Analytics**      | ✅ Complete       | [Requirements](.kiro/specs/google-analytics/requirements.md) | [Tasks](.kiro/specs/google-analytics/tasks.md) | Privacy-compliant analytics           |
 
 ### Technical Standards
 
 All features must follow: [Technical Standards](.kiro/specs/technical-standards.md)
 
 **Key Standards:**
+
 - 80% minimum test coverage for new features
 - British English spelling and terminology
 - ESLint compliance with project configuration
@@ -116,6 +117,7 @@ All features must follow: [Technical Standards](.kiro/specs/technical-standards.
 ### Superseded Specifications
 
 **Google Authentication supersedes Films specification for authentication:**
+
 - Films specification remains valid for OMDb integration, data structure, and wrapped statistics
 - Authentication method changed from Sanity draft mode to Google OAuth
 - See [Google Auth Requirements](.kiro/specs/google-auth/requirements.md) for details
@@ -157,6 +159,7 @@ When adding new features:
 **Supersession Template:**
 
 New specification:
+
 ```markdown
 ## Supersession Notice
 
@@ -171,29 +174,30 @@ This specification supersedes `<old-spec-path>` for <scope>.
 ```
 
 Old specification:
+
 ```markdown
 ## ⚠️ Supersession Notice
 
-**<Scope> requirements superseded by**: [<New Spec>](<path>)
+**<Scope> requirements superseded by**: [<New Spec>](path)
 
 **Still Valid**: ✅ <list what's still valid>
 **Superseded**: ❌ <list what's replaced>
 **Effective**: <date>
 
-For <scope> implementation, see [<New Spec>](<path>).
+For <scope> implementation, see [<New Spec>](path).
 
 ---
 ```
 
 ### Specification Status Guide
 
-| Status | Meaning | Action Required |
-|--------|---------|-----------------|
-| 🚧 In Development | Active work in progress | Implement according to tasks |
-| ✅ Complete | Fully implemented | Maintain and update as needed |
-| ⚠️ Partially Superseded | Some parts replaced | Check supersession notice |
-| 🔄 Fully Superseded | Entirely replaced | Use new specification |
-| 📝 Draft | Under review | Do not implement yet |
+| Status                  | Meaning                 | Action Required               |
+| ----------------------- | ----------------------- | ----------------------------- |
+| 🚧 In Development       | Active work in progress | Implement according to tasks  |
+| ✅ Complete             | Fully implemented       | Maintain and update as needed |
+| ⚠️ Partially Superseded | Some parts replaced     | Check supersession notice     |
+| 🔄 Fully Superseded     | Entirely replaced       | Use new specification         |
+| 📝 Draft                | Under review            | Do not implement yet          |
 
 ## Testing
 
@@ -304,15 +308,18 @@ npm run dev
 ### Troubleshooting
 
 **"Unauthorised" error after sign-in:**
+
 - Verify your email is in `AUTHORIZED_EMAILS`
 - Check email matches exactly (case-insensitive)
 - Ensure no extra spaces in environment variable
 
 **"Invalid client" error:**
+
 - Verify `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` are correct
 - Check redirect URI matches in Google Console
 
 **Session not persisting:**
+
 - Verify `BETTER_AUTH_SECRET` is set
 - Check `BETTER_AUTH_URL` matches your domain
 

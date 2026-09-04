@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 import Link from "next/link";
 
-import { isAuthorisedUser } from "@/lib/server-auth";
 import AddFilmForm from "@/app/(site)/components/add-film-form";
 import WishlistContent from "@/app/(site)/components/wishlist-content";
+import { isAuthorisedUser } from "@/lib/server-auth";
 import { sanityFetch } from "@/sanity/lib/live";
 import { wishlistFilmsQuery } from "@/sanity/lib/queries";
 

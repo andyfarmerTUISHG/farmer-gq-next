@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import { SearchIcon } from "@sanity/icons";
+import { SearchIcon } from "@sanity/icons/Search";
 import { useDocumentOperation } from "sanity";
 
 export default function FetchOMDbAction(props) {
