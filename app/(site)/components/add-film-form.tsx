@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import type { FilmSearchResult } from "@/lib/film-api/types";
 
-import { addFilmAsWatchedAction, addFilmToWishlistAction, getFilmDetailsAction, searchFilmsAction } from "@/app/(site)/actions/film-actions";
+import { addFilmAsWatchedAction, addFilmToWishlistAction, searchFilmsAction } from "@/app/(site)/actions/film-actions";
 
 type AddFilmFormProps = {
   onSuccess?: () => void;
@@ -13,8 +13,8 @@ type AddFilmFormProps = {
 export default function AddFilmForm({ onSuccess }: AddFilmFormProps) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<FilmSearchResult[]>([]);
-  const [plots, setPlots] = useState<Record<string, string>>({});
-  const [loadingPlot, setLoadingPlot] = useState<string | null>(null);
+  const [_plots, _setPlots] = useState<Record<string, string>>({});
+  const [_loadingPlot, _setLoadingPlot] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState<string | null>(null);
   const [selectedFilm, setSelectedFilm] = useState<FilmSearchResult | null>(null);

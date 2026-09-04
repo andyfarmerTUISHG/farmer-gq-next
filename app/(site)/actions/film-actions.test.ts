@@ -1,4 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import { filmService } from "@/lib/film-api/film-service";
+import { isAuthorisedUser } from "@/lib/server-auth";
+import { writeClient } from "@/sanity/lib/write-client";
+
 import {
   addFilmAsWatchedAction,
   addFilmToWishlistAction,
@@ -7,8 +12,6 @@ import {
   markFilmAsWatchedAction,
   searchFilmsAction,
 } from "./film-actions";
-
-import { writeClient } from "@/sanity/lib/write-client";
 
 vi.mock("@/sanity/lib/write-client", () => ({
   writeClient: {
@@ -33,9 +36,6 @@ vi.mock("@/lib/film-api/film-service", () => ({
 vi.mock("next/cache", () => ({
   revalidatePath: vi.fn(),
 }));
-
-import { isAuthorisedUser } from "@/lib/server-auth";
-import { filmService } from "@/lib/film-api/film-service";
 
 const mockFilm = {
   imdbId: "tt1234567",
@@ -218,7 +218,13 @@ describe("addFilmAsWatchedAction", () => {
     vi.mocked(writeClient.create).mockResolvedValueOnce({ _id: "new-id" } as any);
 
     const result = await addFilmAsWatchedAction(
-      "tt1234567", "Test Film", 2026, "2026-04-08", "Cineworld Birmingham", 5, "Great film",
+      "tt1234567",
+      "Test Film",
+      2026,
+      "2026-04-08",
+      "Cineworld Birmingham",
+      5,
+      "Great film",
     );
 
     expect(writeClient.create).toHaveBeenCalledWith(expect.objectContaining({
@@ -233,7 +239,12 @@ describe("addFilmAsWatchedAction", () => {
     vi.mocked(filmService!.getFilmDetails).mockResolvedValueOnce({ film: null, error: "Not found" } as any);
 
     const result = await addFilmAsWatchedAction(
-      "tt1234567", "Test Film", 2026, "2026-04-08", "Cineworld Birmingham", 5,
+      "tt1234567",
+      "Test Film",
+      2026,
+      "2026-04-08",
+      "Cineworld Birmingham",
+      5,
     );
 
     expect(result.success).toBe(false);
@@ -242,14 +253,24 @@ describe("addFilmAsWatchedAction", () => {
 
   it("should return error for invalid IMDB ID", async () => {
     const result = await addFilmAsWatchedAction(
-      "bad-id", "Test Film", 2026, "2026-04-08", "Cineworld Birmingham", 5,
+      "bad-id",
+      "Test Film",
+      2026,
+      "2026-04-08",
+      "Cineworld Birmingham",
+      5,
     );
     expect(result.success).toBe(false);
   });
 
   it("should return error for invalid rating", async () => {
     const result = await addFilmAsWatchedAction(
-      "tt1234567", "Test Film", 2026, "2026-04-08", "Cineworld Birmingham", 10,
+      "tt1234567",
+      "Test Film",
+      2026,
+      "2026-04-08",
+      "Cineworld Birmingham",
+      10,
     );
     expect(result.success).toBe(false);
   });
@@ -259,7 +280,12 @@ describe("addFilmAsWatchedAction", () => {
     vi.mocked(writeClient.create).mockRejectedValueOnce(new Error("Sanity error"));
 
     const result = await addFilmAsWatchedAction(
-      "tt1234567", "Test Film", 2026, "2026-04-08", "Cineworld Birmingham", 4,
+      "tt1234567",
+      "Test Film",
+      2026,
+      "2026-04-08",
+      "Cineworld Birmingham",
+      4,
     );
 
     expect(result.success).toBe(false);
@@ -277,7 +303,10 @@ describe("markFilmAsWatchedAction", () => {
     vi.mocked(isAuthorisedUser).mockResolvedValueOnce(false);
 
     const result = await markFilmAsWatchedAction(
-      "film-id-123", "2026-03-15", "Cineworld Birmingham", 5,
+      "film-id-123",
+      "2026-03-15",
+      "Cineworld Birmingham",
+      5,
     );
 
     expect(result.success).toBe(false);
@@ -290,7 +319,12 @@ describe("markFilmAsWatchedAction", () => {
     vi.mocked(writeClient.getDocument).mockResolvedValueOnce({ _id: "film-id-123", _type: "film" } as any);
 
     const result = await markFilmAsWatchedAction(
-      "film-id-123", "2026-03-15", "Cineworld Birmingham", 5, "Great film", "2026-03-01",
+      "film-id-123",
+      "2026-03-15",
+      "Cineworld Birmingham",
+      5,
+      "Great film",
+      "2026-03-01",
     );
 
     expect(writeClient.patch).toHaveBeenCalledWith("film-id-123");
@@ -306,7 +340,10 @@ describe("markFilmAsWatchedAction", () => {
     vi.mocked(writeClient.getDocument).mockResolvedValueOnce({ _id: "film-id-123", _type: "article" } as any);
 
     const result = await markFilmAsWatchedAction(
-      "film-id-123", "2026-03-15", "Cineworld Birmingham", 5,
+      "film-id-123",
+      "2026-03-15",
+      "Cineworld Birmingham",
+      5,
     );
 
     expect(result.success).toBe(false);
@@ -319,7 +356,10 @@ describe("markFilmAsWatchedAction", () => {
     vi.mocked(writeClient.getDocument).mockResolvedValueOnce(null as any);
 
     const result = await markFilmAsWatchedAction(
-      "film-id-123", "2026-03-15", "Cineworld Birmingham", 5,
+      "film-id-123",
+      "2026-03-15",
+      "Cineworld Birmingham",
+      5,
     );
 
     expect(result.success).toBe(false);
@@ -329,7 +369,10 @@ describe("markFilmAsWatchedAction", () => {
     vi.mocked(isAuthorisedUser).mockResolvedValueOnce(true);
 
     const result = await markFilmAsWatchedAction(
-      "film-id-123", "2026-03-15", "Cineworld Birmingham", 10,
+      "film-id-123",
+      "2026-03-15",
+      "Cineworld Birmingham",
+      10,
     );
 
     expect(result.success).toBe(false);
@@ -342,7 +385,10 @@ describe("markFilmAsWatchedAction", () => {
     mockCommit.mockRejectedValueOnce(new Error("Sanity error"));
 
     const result = await markFilmAsWatchedAction(
-      "film-id-123", "2026-03-15", "Cineworld Birmingham", 5,
+      "film-id-123",
+      "2026-03-15",
+      "Cineworld Birmingham",
+      5,
     );
 
     expect(result.success).toBe(false);
@@ -358,5 +404,3 @@ describe("markFilmAsWatchedAction", () => {
     expect(mockPatch.set).toHaveBeenCalledWith(expect.not.objectContaining({ dateAddedToWishlist: expect.anything() }));
   });
 });
-
-

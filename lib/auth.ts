@@ -1,4 +1,5 @@
 import { betterAuth } from "better-auth";
+
 import { getAuthorizedEmails, isEmailAuthorized } from "./auth-helpers";
 
 export const auth = betterAuth({

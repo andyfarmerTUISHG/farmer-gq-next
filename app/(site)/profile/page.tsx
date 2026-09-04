@@ -12,7 +12,12 @@ export default function ProfilePage() {
   if (!session?.user) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <p>Please <a href="/api/auth/signin" className="text-blue-600 underline">sign in</a> to view your profile.</p>
+        <p>
+          Please
+          <a href="/api/auth/signin" className="text-blue-600 underline">sign in</a>
+          {" "}
+          to view your profile.
+        </p>
       </div>
     );
   }

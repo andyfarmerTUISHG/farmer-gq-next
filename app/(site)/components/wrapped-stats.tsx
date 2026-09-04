@@ -33,11 +33,11 @@ export default function WrappedStats({ films }: WrappedStatsProps) {
   const secretScreenings = films.filter(f => f.isSecretScreening).length;
 
   // Cinema statistics - sanitize to remove stega-encoded invisible characters
-  const sanitizeCinema = (cinema?: string) => cinema?.replace(/[\u200B-\u200D\uFEFF]/g, '').trim();
-  
+  const sanitizeCinema = (cinema?: string) => cinema?.replace(/[\u200B-\u200D\uFEFF]/g, "").trim();
+
   const cinemaVisits = films.filter(f => f.cinemaLocation);
   const uniqueCinemas = [...new Set(cinemaVisits.map(f => sanitizeCinema(f.cinemaLocation)))];
-  
+
   const cinemaFrequency = cinemaVisits.reduce((acc: Record<string, number>, film) => {
     const cinema = sanitizeCinema(film.cinemaLocation);
     if (cinema) {
@@ -114,7 +114,11 @@ export default function WrappedStats({ films }: WrappedStatsProps) {
               .map(([cinema, count]) => (
                 <div key={cinema} className="flex justify-between">
                   <span className="truncate">{cinema}</span>
-                  <span className="text-gray-600 font-semibold">{count} visits</span>
+                  <span className="text-gray-600 font-semibold">
+                    {count}
+                    {" "}
+                    visits
+                  </span>
                 </div>
               ))}
           </div>

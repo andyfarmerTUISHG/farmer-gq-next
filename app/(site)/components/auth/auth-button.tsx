@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+
 import { signIn, signOut, useSession } from "@/lib/auth-client";
 
 export default function AuthButton() {

@@ -18,7 +18,8 @@ export async function getServerSession() {
  */
 export async function isAuthorisedUser(): Promise<boolean> {
   const session = await getServerSession();
-  if (!session?.user?.email) return false;
+  if (!session?.user?.email)
+    return false;
   const authorisedEmails = getAuthorizedEmails(process.env.AUTHORIZED_EMAILS || "");
   return isEmailAuthorized(session.user.email, authorisedEmails);
 }

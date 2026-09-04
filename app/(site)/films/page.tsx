@@ -1,5 +1,5 @@
-import { isAuthorisedUser } from "@/lib/server-auth";
 import FilmsPageClient from "@/app/(site)/components/films-page-client";
+import { isAuthorisedUser } from "@/lib/server-auth";
 import { sanityFetch } from "@/sanity/lib/live";
 import { watchedFilmsQuery, wishlistFilmsQuery } from "@/sanity/lib/queries";
 

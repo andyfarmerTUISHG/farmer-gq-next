@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-describe("Vitest Setup", () => {
+describe("vitest Setup", () => {
   it("should run tests successfully", () => {
     expect(true).toBe(true);
   });
