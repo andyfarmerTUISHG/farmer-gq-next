@@ -14,7 +14,7 @@
     "lint:dry-run": "eslint . --fix-dry-run",
     "start": "next start",
     "type-check": "tsc --noEmit",
-    "typegen": "sanity schema extract && sanity typegen generate",
+    "typegen": "sanity schema extract --force && sanity typegen generate",
     "sanity-build": "sanity build",
     "sanity-deploy": "sanity deploy",
     "test": "vitest --run",
